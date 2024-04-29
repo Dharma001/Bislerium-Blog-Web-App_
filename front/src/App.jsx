@@ -7,6 +7,7 @@ import AdminDashboard from "./pages/Admin/AdminDashboard";
 import HomePage from "./pages/HomePage";
 import UserDashboard from "./pages/Users/UserDashboard";
 import AdminLayout from "./pages/Admin/Layouts/AdminLayout";
+import CreatePost from "./components/CreatePost";
 
 function isAuthenticated() {
   const token = Cookies.get("token");
@@ -46,6 +47,7 @@ function App() {
       {location.pathname !== "/login" && location.pathname !== "/register"}
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/createPost" element={<CreatePost />} />
         <Route
           path="/login"
           element={
@@ -99,6 +101,7 @@ function App() {
           }
         />
       </Routes>
+      
     </>
   );
 }
