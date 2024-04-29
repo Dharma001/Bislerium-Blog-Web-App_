@@ -15,6 +15,7 @@ builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IRegisterService, RegisterService>();
 builder.Services.AddScoped<IBlogService, BlogService>();
+builder.Services.AddScoped<IHomeService, HomeService>();
 
 builder.Services.AddControllers();
 builder.Services.AddAuthentication(cfg => {
