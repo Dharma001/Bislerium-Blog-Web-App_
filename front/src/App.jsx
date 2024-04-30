@@ -4,10 +4,18 @@ import Cookies from "js-cookie";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
+
 import HomePage from "./pages/HomePage";
 import UserDashboard from "./pages/Users/UserDashboard";
 import AdminLayout from "./pages/Admin/Layouts/AdminLayout";
 import CreatePost from "./components/CreatePost";
+import CreateRole from "./pages/Admin/Role/CreateRole";
+import RoleList from "./pages/Admin/Role/Index";
+
+
+
+
+
 
 function isAuthenticated() {
   const token = Cookies.get("token");
@@ -48,6 +56,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/createPost" element={<CreatePost />} />
+       
         <Route
           path="/login"
           element={
@@ -90,7 +99,37 @@ function App() {
               />
             }
           />
+          <Route
+            path="createRole"
+            element={
+              <PrivateAdminRoute
+                element={<CreateRole />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+
+<Route
+            path="roleList"
+            element={
+              <PrivateAdminRoute
+                element={<RoleList />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+
+          
+
+          
         </Route>
+
+        
+        
         <Route
           path="/user"
           element={
