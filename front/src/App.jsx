@@ -9,8 +9,14 @@ import HomePage from "./pages/HomePage";
 import UserDashboard from "./pages/Users/UserDashboard";
 import AdminLayout from "./pages/Admin/Layouts/AdminLayout";
 import CreatePost from "./components/CreatePost";
-import CreateRole from "./pages/Admin/Role/CreateRole";
-import RoleList from "./pages/Admin/Role/Index";
+import RoleIndex from "./pages/Admin/Role/Index";
+import UserIndex from "./pages/Admin/User/Index";
+import UserCreate from "./pages/Admin/User/Create";
+import UserEdit from "./pages/Admin/User/Edit";
+import RoleCreate from "./pages/Admin/Role/Create";
+import RoleEdit from "./pages/Admin/Role/Edit";
+
+
 
 
 
@@ -103,7 +109,18 @@ function App() {
             path="createRole"
             element={
               <PrivateAdminRoute
-                element={<CreateRole />}
+                element={<RoleCreate />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+                    <Route
+            path="editRole"
+            element={
+              <PrivateAdminRoute
+                element={<RoleEdit/>}
                 authenticated={isAuthenticated()}
                 isAdmin={isAdmin()}
                 redirectTo="/login"
@@ -115,7 +132,7 @@ function App() {
             path="roleList"
             element={
               <PrivateAdminRoute
-                element={<RoleList />}
+                element={<RoleIndex/>}
                 authenticated={isAuthenticated()}
                 isAdmin={isAdmin()}
                 redirectTo="/login"
@@ -123,7 +140,41 @@ function App() {
             }
           />
 
-          
+<Route
+            path="createUser"
+            element={
+              <PrivateAdminRoute
+                element={<UserCreate />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+                    <Route
+            path="editUser"
+            element={
+              <PrivateAdminRoute
+                element={<UserEdit />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+
+<Route
+            path="userList"
+            element={
+              <PrivateAdminRoute
+                element={<UserIndex/>}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+
 
           
         </Route>

@@ -3,7 +3,7 @@
 // import { toast } from "react-toastify";
 // import { fetchWithAuth } from "../../../auth/api";
 
-// function CreateRole() {
+// function Create() {
 //   const navigate = useNavigate();
 //   const [formData, setFormData] = useState({
 //     name: "",
@@ -18,7 +18,7 @@
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
 //     try {
-//       const response = await fetchWithAuth("POST", "createRole", formData);
+//       const response = await fetchWithAuth("POST", "Create", formData);
 
 //       if (response.status === 201) {
 //       navigate("/admin/roles");
@@ -79,13 +79,13 @@
 //   );
 // }
 
-// export default CreateRole;
+// export default Create;
 
 
 
 import React from "react";
 
-function CreateRole() {
+function Create() {
   return (
     <div className="container  mx-auto px-4 my-6">
       <div className="bg-white rounded-lg p-6">
@@ -136,4 +136,4 @@ function CreateRole() {
    
   );
 }
-export default CreateRole;
+export default Create;
