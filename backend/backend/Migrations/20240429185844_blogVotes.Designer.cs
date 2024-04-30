@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend.appDbContext;
 
@@ -11,9 +12,11 @@ using backend.appDbContext;
 namespace backend.Migrations
 {
     [DbContext(typeof(applicationContext))]
-    partial class applicationContextModelSnapshot : ModelSnapshot
+    [Migration("20240429185844_blogVotes")]
+    partial class blogVotes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,39 +61,6 @@ namespace backend.Migrations
                     b.ToTable("Blogs");
                 });
 
-            modelBuilder.Entity("Comment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BlogId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BlogId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Comments");
-                });
-
             modelBuilder.Entity("backend.Models.BlogVote", b =>
                 {
                     b.Property<int>("UserId")
@@ -113,35 +83,6 @@ namespace backend.Migrations
                     b.HasIndex("BlogId");
 
                     b.ToTable("BlogVotes");
-                });
-
-            modelBuilder.Entity("backend.Models.CommentVote", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BlogId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CommentId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsUpvote")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("UserId", "BlogId", "CommentId");
-
-                    b.HasIndex("BlogId");
-
-                    b.HasIndex("CommentId");
-
-                    b.ToTable("CommentVotes");
                 });
 
             modelBuilder.Entity("backend.Models.Role", b =>
@@ -224,25 +165,6 @@ namespace backend.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Comment", b =>
-                {
-                    b.HasOne("Blog", "Blog")
-                        .WithMany("Comments")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("backend.Models.User", "User")
-                        .WithMany("Comments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("backend.Models.BlogVote", b =>
                 {
                     b.HasOne("Blog", "Blog")
@@ -262,33 +184,6 @@ namespace backend.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("backend.Models.CommentVote", b =>
-                {
-                    b.HasOne("Blog", "Blog")
-                        .WithMany("CommentVotes")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Comment", "Comment")
-                        .WithMany("CommentVotes")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("backend.Models.User", "User")
-                        .WithMany("CommentVotes")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
-
-                    b.Navigation("Comment");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("backend.Models.User", b =>
                 {
                     b.HasOne("backend.Models.Role", "Role")
@@ -303,15 +198,6 @@ namespace backend.Migrations
             modelBuilder.Entity("Blog", b =>
                 {
                     b.Navigation("BlogVotes");
-
-                    b.Navigation("CommentVotes");
-
-                    b.Navigation("Comments");
-                });
-
-            modelBuilder.Entity("Comment", b =>
-                {
-                    b.Navigation("CommentVotes");
                 });
 
             modelBuilder.Entity("backend.Models.Role", b =>
@@ -324,10 +210,6 @@ namespace backend.Migrations
                     b.Navigation("BlogVotes");
 
                     b.Navigation("Blogs");
-
-                    b.Navigation("CommentVotes");
-
-                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }
