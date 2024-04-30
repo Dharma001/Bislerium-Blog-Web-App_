@@ -30,6 +30,7 @@ namespace backend.Services
                 Phone = request.Phone,
                 Address = request.Address,
                 Password = hashedPassword,
+                RoleId = 2,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };

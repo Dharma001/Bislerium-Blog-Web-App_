@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 function AdminLayout() {
   return ( 
     <>
-      <div className='main bg-gradient-darker h-screen border w-full flex justify-between'>
+      <div className='main bg-gradient-darker h-fit border w-full flex justify-between'>
       <div className='nav text-white max-w-[60%] md:max-w-[30%] max-h-screen lg:max-w-[25%] px-4 pt-8 pb-4 flex flex-col h-screen'>
         <h2 className='text-white font-bold tracking-wider text-2xl'>AeuxGlobal</h2>
         <hr className='mt-5 w-52'/>

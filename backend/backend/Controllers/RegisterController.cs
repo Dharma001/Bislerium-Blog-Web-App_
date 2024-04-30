@@ -22,9 +22,12 @@ namespace backend.Controllers
         {
             var success = await _registerService.Register(request);
             if (!success)
-                return Conflict("Email already exists");
+            {
+                return StatusCode(500, "An error occurred during registration.");
+            }
 
             return Ok("Registration successful");
         }
+
     }
 }
