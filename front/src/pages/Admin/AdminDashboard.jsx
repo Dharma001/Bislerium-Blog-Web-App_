@@ -15,7 +15,7 @@ function AdminDashboard() {
       </div>
 
       <section className='content-1 mt-6'>
-        <div className='content-list gap-6 grid grid-cols-3'>
+        <div className='content-list gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
           <div className='grid grid-cols-2 px-4 py-6 bg-gray-100 rounded-lg hover:scale-105'>
           <div className='list-1 space-y-5'>
             <p className='capitalize font-thin'>All population level</p>
@@ -51,8 +51,8 @@ function AdminDashboard() {
       </section>
 
       <section className='body mt-6'>
-        <div className='grid grid-cols-2 gap-6'>
-          <div className='grid grid-cols-2 gap-4'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+          <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
             <div className='content bg-gray-100 rounded-lg hover:scale-105 py-4 px-4  h-80 grid place-items-center'>
               <p className='font-bold text-xl'>Waste Processing Level</p>
               <h1 className='text-5xl font-bold'>72%</h1>
@@ -64,7 +64,7 @@ function AdminDashboard() {
             <div className='content bg-gray-100 rounded-lg hover:scale-105 py-4 px-4  h-80 grid place-items-center'>
               <p className='font-bold text-xl'>Waste Processing Level</p>
               <h1 className='text-5xl font-bold'>72%</h1>
-              <div className='flex justify-between space-x-32'>
+              <div className='flex  justify-between space-x-32'>
                 <div>
                 <p className='font-semibold'>Solar Energy</p>
                 </div>
@@ -119,7 +119,7 @@ function AdminDashboard() {
       </section>
 
       <section className='last'>
-        <div className='grid grid-cols-2 gap-6 mt-6 '>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 '>
           <div className='space-y-4'>
             <div className='first-times text-white bg-slate-950 rounded-full text-center'>
               <div className='py-6'>
