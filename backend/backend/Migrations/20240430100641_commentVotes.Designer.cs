@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend.appDbContext;
 
@@ -11,9 +12,11 @@ using backend.appDbContext;
 namespace backend.Migrations
 {
     [DbContext(typeof(applicationContext))]
-    partial class applicationContextModelSnapshot : ModelSnapshot
+    [Migration("20240430100641_commentVotes")]
+    partial class commentVotes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

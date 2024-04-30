@@ -27,6 +27,37 @@ namespace backend.Services
         {
             return await _context.Blogs.ToListAsync();
         }
+        public async Task<User> GetUserById(int id)
+        {
+            return await _context.Users.FindAsync(id);
+        }
 
+        public async Task<User> UpdateUserProfile(int id, ProfileUserRequest userRequest)
+        {
+            var existingUser = await _context.Users.FindAsync(id);
+
+            if (existingUser != null)
+            {
+                if (userRequest.FirstName != null)
+                    existingUser.FirstName = userRequest.FirstName;
+
+                if (userRequest.LastName != null)
+                    existingUser.LastName = userRequest.LastName;
+
+                if (userRequest.Email != null)
+                    existingUser.Email = userRequest.Email;
+
+                if (userRequest.Phone != null)
+                    existingUser.Phone = userRequest.Phone;
+
+                if (userRequest.Address != null)
+                    existingUser.Address = userRequest.Address;
+
+                await _context.SaveChangesAsync();
+                return existingUser;
+            }
+
+            return null;
+        }
     }
 }
