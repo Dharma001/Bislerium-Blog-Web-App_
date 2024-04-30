@@ -1,13 +1,19 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
 
-const Post = ({ title, author, subreddit, upvotes, downvotes, comments, userId }) => {
+const Post = () => {
   const [commentList, setCommentList] = useState([]);
   const [showCommentForm, setShowCommentForm] = useState(false);
   const [editingComment, setEditingComment] = useState(null);
   const [deletingComment, setDeletingComment] = useState(null);
   const [userUpvoted, setUserUpvoted] = useState(false);
   const [userDownvoted, setUserDownvoted] = useState(false);
+
+  const title = "Hello World";
+  const author = "John Doe";
+  const subreddit = "r/reactjs";
+  const upvotes = 10;
+  const downvotes = 5;
+  const userId = "123";
 
   const handleUpvote = () => {
     setUserUpvoted(!userUpvoted);
@@ -60,13 +66,13 @@ const Post = ({ title, author, subreddit, upvotes, downvotes, comments, userId }
       <div className="bg-white p-4 rounded-md shadow-md mt-4">
         <div className="flex justify-between items-center">
           <div>
-            <h2 className="text-xl font-bold">{title}</h2>
+            <h2 className="text-xl font-bold">hello</h2>
             <img src="https://via.placeholder.com/50" alt="Profile Image" className="w-10 h-10 rounded-full" />
-            <p className="text-gray-600">Posted by {author} in {subreddit}</p>
+            <p className="text-gray-600">Posted by Dharma in hello</p>
           </div>
         </div>
 
-        <p className="text-gray-600 mt-4">Comments: {comments}</p>
+        <p className="text-gray-600 mt-4">Comments: hello how are you </p>
 
         <div className="mt-4">
           <img src="https://via.placeholder.com/150" alt="Post Image" className="w-full h-64 object-cover rounded-md" />
@@ -133,16 +139,6 @@ const Post = ({ title, author, subreddit, upvotes, downvotes, comments, userId }
       </div>
     </div>
   );
-};
-
-Post.propTypes = {
-  title: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  subreddit: PropTypes.string.isRequired,
-  upvotes: PropTypes.number.isRequired,
-  downvotes: PropTypes.number.isRequired,
-  comments: PropTypes.number.isRequired,
-  userId: PropTypes.string.isRequired,
 };
 
 export default Post;
