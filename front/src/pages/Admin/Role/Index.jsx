@@ -100,7 +100,7 @@ const Index = () => {
     return (
         <div className="container mx-auto px-5 overflow-y-auto h-[100dvh] my-6">
             
-          <button className='text-white w-20 md:w-fit mr-6 md:mr-auto text-[9px] md:text-[14px] font-semibold px-4 py-2 rounded-md hover:bg-green-800 border hover:border-green-800 bg-green-700 my-6'>
+          <button className='text-white w-24 md:w-fit mr-6 md:mr-auto text-[9px] md:text-[14px] font-semibold px-4 py-2 rounded-md hover:bg-green-800 border hover:border-green-800 bg-green-700 my-6'>
             {/* <Link to="/admin/createRole">Create</Link> */}
             Create
           </button>
