@@ -15,7 +15,7 @@ const Sidebar = () => {
                         <label htmlFor="category" className="text-black mb-2">Category</label>
                         <select
                             id="category"
-                            className="w-full p-2 border border-gray-700 rounded-md text-black bg-gray-50"
+                            className="w-full p-2 rounded-md text-black bg-gray-50"
                         >
                             {categories.map((category) => (
                                 <option key={category} value={category}>
@@ -25,16 +25,18 @@ const Sidebar = () => {
                         </select>
                     </div>
                     <div>
-                        <h3 className="text-xl font-bold text-black mb-2">Tags</h3>
-                        <div className="space-y-2">
-                            {tags.map((tag) => (
-                                <button
-                                    key={tag}
-                                    className="flex items-center space-x-2 p-2 rounded-md text-black bg-gray-50 hover:bg-gray-100"
-                                >
-                                    <span>{tag}</span>
-                                </button>
-                            ))}
+                        <div className="mb-4">
+                            <label htmlFor="category" className="text-black mb-2">Tags</label>
+                            <select
+                                id="Tags"
+                                className="w-full p-2  rounded-md text-black bg-gray-50"
+                            >
+                                {tags.map((tag) => (
+                                    <option key={tag} value={tag}>
+                                        {tag}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                     </div>
                 </div>
