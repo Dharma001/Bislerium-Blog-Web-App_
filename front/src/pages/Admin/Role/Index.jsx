@@ -94,7 +94,7 @@
 // export default RoleList;
 
 import React from "react";
-const RoleList = () => {
+const Index = () => {
 
     
     return (
@@ -178,4 +178,4 @@ const RoleList = () => {
     );
 
 }
-export default RoleList;
+export default Index;
