@@ -10,7 +10,7 @@ function AdminLayout() {
       <div className='nav text-white max-w-[60%] md:max-w-[30%] max-h-screen lg:max-w-[25%] px-4 pt-8 pb-4 flex flex-col h-screen'>
         <div className="flex justify-normal lg:gap-12 gap-10">
           <div className="">
-            <img src="./aarkoname.png"  className="w-16"  alt="image is not loading"></img>
+            <img src="./logo"  className="w-16"  alt="image is not loading"/>
           </div>
           <div className="lg:-ml-10 -ml-6 md:-ml-6 "><h2 className='text-white font-bold tracking-wider text-xl'>Bislerium Blog</h2></div>
 
