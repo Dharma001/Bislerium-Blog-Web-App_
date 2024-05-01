@@ -25,7 +25,7 @@ namespace backend.Services
 
         public async Task<IEnumerable<Blog>> GetAllBlogsAsync()
         {
-            return await _context.Blogs.ToListAsync();
+            return await _context.Blogs.OrderByDescending(b => b.CreatedAt).ToListAsync();
         }
 
         public async Task<Blog> GetBlogByIdAsync(int id)

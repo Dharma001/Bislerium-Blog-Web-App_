@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace backend.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class BlogController : ControllerBase
     {
@@ -18,14 +17,14 @@ namespace backend.Controllers
             _blogService = blogService;
         }
 
-        [HttpGet]
+        [HttpGet("api/[controller]")]
         public async Task<ActionResult<IEnumerable<Blog>>> GetAllBlogs()
         {
             var blogs = await _blogService.GetAllBlogsAsync();
             return Ok(blogs);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("api/[controller]/{id}")]
         public async Task<ActionResult<Blog>> GetBlog(int id)
         {
             var blog = await _blogService.GetBlogByIdAsync(id);
@@ -36,21 +35,21 @@ namespace backend.Controllers
             return Ok(blog);
         }
 
-        [HttpPost]
+        [HttpPost("user/api/[controller]")]
         public async Task<ActionResult<Blog>> CreateBlog([FromForm] BlogRequest blogRequest, [FromForm] IFormFile imageFile)
         {
             var blog = await _blogService.CreateBlogAsync(blogRequest, imageFile);
             return CreatedAtAction(nameof(GetBlog), new { id = blog.Id }, blog);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("user/api/[controller]/{id}")]
         public async Task<IActionResult> UpdateBlog(int id, [FromForm] BlogRequest blogRequest, [FromForm] IFormFile imageFile)
         {
             await _blogService.UpdateBlogAsync(id, blogRequest, imageFile);
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("user/api/[controller]/{id}")]
         public async Task<IActionResult> DeleteBlog(int id)
         {
             await _blogService.DeleteBlogAsync(id);
