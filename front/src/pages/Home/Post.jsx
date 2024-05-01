@@ -1,13 +1,38 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { fetchApi } from '../../Auths/apiWithoutAuth';
 
-const Post = ({ title, author, subreddit, upvotes, downvotes, comments, userId }) => {
+const Post = () => {
   const [commentList, setCommentList] = useState([]);
+  const [Posts, setPosts] = useState([]);
   const [showCommentForm, setShowCommentForm] = useState(false);
   const [editingComment, setEditingComment] = useState(null);
   const [deletingComment, setDeletingComment] = useState(null);
   const [userUpvoted, setUserUpvoted] = useState(false);
   const [userDownvoted, setUserDownvoted] = useState(false);
+
+  const title = "Hello World";
+  const author = "John Doe";
+  const subreddit = "r/reactjs";
+  const upvotes = 10;
+  const downvotes = 5;
+  const userId = "123";
+  const [error, setError] = useState(null);
+  const itemsPerRow = 5;
+  const URL = "https://localhost:7189/";
+
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetchApi('get', 'Blog');
+        setPosts(response.data);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchPosts();
+  }, []);
 
   const handleUpvote = () => {
     setUserUpvoted(!userUpvoted);
@@ -56,20 +81,19 @@ const Post = ({ title, author, subreddit, upvotes, downvotes, comments, userId }
   };
 
   return (
-    <div className=" flex-col items-center justify-center min-h-screen overflow-hidden w-4/5 mx-auto">
+    <div className="flex-col items-center justify-center min-h-screen overflow-hidden w-4/5 mx-auto">
+      {Posts.map((post, index) => (
       <div className="bg-white p-4 rounded-md shadow-md mt-4">
-        <div className="flex justify-between items-center">
-          <div>
-            <h2 className="text-xl font-bold">{title}</h2>
-            <img src="https://via.placeholder.com/50" alt="Profile Image" className="w-10 h-10 rounded-full" />
-            <p className="text-gray-600">Posted by {author} in {subreddit}</p>
-          </div>
+        <div className="flex flex-col">
+            <h2 className="text-lg font-bold">{post.title}</h2>
+        <p className="text-gray-500 font-medium">{post.content}</p>
         </div>
-
-        <p className="text-gray-600 mt-4">Comments: {comments}</p>
-
         <div className="mt-4">
-          <img src="https://via.placeholder.com/150" alt="Post Image" className="w-full h-64 object-cover rounded-md" />
+        <img
+              src={`${URL}${post.image}`}
+              alt="Blog Image"
+              title={post.title}
+             className="w-full h-[450px] object-cover rounded-md" />
         </div>
 
         <div className="flex justify-start items-center mt-4">
@@ -131,18 +155,9 @@ const Post = ({ title, author, subreddit, upvotes, downvotes, comments, userId }
           ))}
         </div>
       </div>
+    ))}
     </div>
   );
-};
-
-Post.propTypes = {
-  title: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  subreddit: PropTypes.string.isRequired,
-  upvotes: PropTypes.number.isRequired,
-  downvotes: PropTypes.number.isRequired,
-  comments: PropTypes.number.isRequired,
-  userId: PropTypes.string.isRequired,
 };
 
 export default Post;

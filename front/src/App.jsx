@@ -5,7 +5,6 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 
-import HomePage from "./pages/HomePage";
 import UserDashboard from "./pages/Users/UserDashboard";
 import AdminLayout from "./pages/Admin/Layouts/AdminLayout";
 import CreatePost from "./components/CreatePost";
@@ -15,6 +14,8 @@ import UserCreate from "./pages/Admin/User/Create";
 import UserEdit from "./pages/Admin/User/Edit";
 import RoleCreate from "./pages/Admin/Role/Create";
 import RoleEdit from "./pages/Admin/Role/Edit";
+import HomePageLayout from "./pages/Home/Layouts/HomePageLayout";
+import Post from "./pages/Home/Post";
 
 
 
@@ -60,9 +61,10 @@ function App() {
     <>
       {location.pathname !== "/login" && location.pathname !== "/register"}
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePageLayout />}>
+        <Route path="/" element={<Post />} />
         <Route path="/createPost" element={<CreatePost />} />
-       
+        </Route>
         <Route
           path="/login"
           element={

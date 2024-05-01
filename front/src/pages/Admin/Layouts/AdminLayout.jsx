@@ -10,7 +10,6 @@ function AdminLayout() {
       <div className='nav text-white max-w-[60%] md:max-w-[30%] max-h-screen lg:max-w-[25%] px-4 pt-8 pb-4 flex flex-col h-screen'>
         <h2 className='text-white font-bold tracking-wider text-2xl'>AeuxGlobal</h2>
         <hr className='mt-5 w-52'/>
-
         <h3 className='font-thin tracking-wide capitalize mt-10'>Navigation</h3>
         <ul>
         <Link to="dashboard">
