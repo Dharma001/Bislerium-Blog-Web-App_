@@ -17,13 +17,6 @@ import RoleEdit from "./pages/Admin/Role/Edit";
 import HomePageLayout from "./pages/Home/Layouts/HomePageLayout";
 import Post from "./pages/Home/Post";
 
-
-
-
-
-
-
-
 function isAuthenticated() {
   const token = Cookies.get("token");
   return token !== undefined && token !== null;
@@ -96,7 +89,7 @@ function App() {
             />
           }
         >
-                    <Route
+          <Route
             path="dashboard"
             element={
               <PrivateAdminRoute
