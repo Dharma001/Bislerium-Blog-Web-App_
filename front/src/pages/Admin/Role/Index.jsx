@@ -150,10 +150,10 @@ const Index = () => {
                         <i className="fa-regular fa-pen-to-square"></i>
                       </Link> */}
                       <div className="grid grid-cols-2 w-fit">
-                      <div className="text-white bg-green-700 px-3 py-2 rounded-md hover:bg-green-800 mr-2">
+                      <div className="text-white text-center cursor-pointer bg-green-700 px-3 py-2 rounded-md hover:bg-green-800 mr-2">
                         <i className="">Edit</i>
                       </div>
-                      <div className="text-white bg-red-700 px-3 py-2 rounded-md hover:bg-green-800 mr-2">
+                      <div className="text-white text-center cursor-pointer bg-red-700 px-3 py-2 rounded-md hover:bg-green-800 mr-2">
                         <i className="">Delete</i>
                       </div>
                       </div>
