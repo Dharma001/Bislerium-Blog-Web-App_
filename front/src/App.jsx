@@ -64,7 +64,6 @@ function App() {
         <Route path="/" element={<HomePageLayout />}>
         <Route path="/" element={<Post />} />
         <Route path="/createPost" element={<CreatePost />} />
-        </Route>
         <Route
           path="/login"
           element={
@@ -85,6 +84,7 @@ function App() {
             />
           }
         />
+        </Route>
         <Route
           path="/admin"
           element={
