@@ -32,7 +32,8 @@ const Navbar = () => {
         <div className="lg:flex space-x-4">
 
           {isLoggedIn() ? (
-            <><button className="w-20 rounded-3xl bg-gray-600 px-2 py-2">
+            <>
+            <button className="w-20 rounded-3xl bg-gray-600 px-2 py-2">
               <a href="/create" className="text-gray-50">+ Create</a>
             </button>
               <button onClick={handleLogout}
