@@ -1,16 +1,16 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const BASE_URL = "https://localhost:7189/api/";
+const BASE_URL = "https://localhost:7189/admin/api/";
 
 export const fetchWithAuth = async (method, url, data = null) => {
-  let accessToken = Cookies.get('accessToken');
-  while (!accessToken) {
+  let token = Cookies.get('token');
+  while (!token) {
     await new Promise(resolve => setTimeout(resolve, 100));
-    accessToken = Cookies.get('accessToken');
+    token = Cookies.get('token');
   }
   const headers = {
-    "Authorization": `Bearer ${accessToken}`,
+    "Authorization": `Bearer ${token}`,
   };
 
   if (method.toUpperCase() !== 'DELETE') {

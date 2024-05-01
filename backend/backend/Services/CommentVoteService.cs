@@ -50,7 +50,6 @@ namespace backend.Services
                 return false;
             }
         }
-
         public async Task<bool> RemoveVote(int userId, int blogId, int commentId)
         {
             try

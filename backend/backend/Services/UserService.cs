@@ -8,6 +8,7 @@ using BCrypt.Net;
 using backend.appDbContext;
 using Microsoft.CodeAnalysis.Scripting;
 using backend.Models.Requests;
+using backend.Models.Requests.Users;
 
 namespace backend.Services
 {
@@ -20,10 +21,23 @@ namespace backend.Services
             _context = context;
         }
 
-        public async Task<List<User>> GetAllUsers()
+        public async Task<List<UserWithRole>> GetAllUsers()
         {
-            return await _context.Users.ToListAsync();
+            var usersWithRoles = await _context.Users
+                .Select(user => new UserWithRole
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Phone = user.Phone,
+                    RoleName = user.Role.Name
+                })
+                .ToListAsync();
+
+            return usersWithRoles;
         }
+
 
         public async Task<User> GetUserById(int id)
         {
@@ -49,7 +63,7 @@ namespace backend.Services
         }
 
 
-        public async Task<User> UpdateUser(int id, UserRequest userRequest)
+        public async Task<User> UpdateUser(int id, UpdateUserRequest userRequest)
         {
             var existingUser = await _context.Users.FindAsync(id);
             if (existingUser != null)

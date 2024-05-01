@@ -12,8 +12,8 @@ using backend.appDbContext;
 namespace backend.Migrations
 {
     [DbContext(typeof(applicationContext))]
-    [Migration("20240429193936_comment")]
-    partial class comment
+    [Migration("20240501093533_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -116,6 +116,35 @@ namespace backend.Migrations
                     b.HasIndex("BlogId");
 
                     b.ToTable("BlogVotes");
+                });
+
+            modelBuilder.Entity("backend.Models.CommentVote", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BlogId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsUpvote")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("UserId", "BlogId", "CommentId");
+
+                    b.HasIndex("BlogId");
+
+                    b.HasIndex("CommentId");
+
+                    b.ToTable("CommentVotes");
                 });
 
             modelBuilder.Entity("backend.Models.Role", b =>
@@ -236,6 +265,33 @@ namespace backend.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("backend.Models.CommentVote", b =>
+                {
+                    b.HasOne("Blog", "Blog")
+                        .WithMany("CommentVotes")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Comment", "Comment")
+                        .WithMany("CommentVotes")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("backend.Models.User", "User")
+                        .WithMany("CommentVotes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Blog");
+
+                    b.Navigation("Comment");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("backend.Models.User", b =>
                 {
                     b.HasOne("backend.Models.Role", "Role")
@@ -251,7 +307,14 @@ namespace backend.Migrations
                 {
                     b.Navigation("BlogVotes");
 
+                    b.Navigation("CommentVotes");
+
                     b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("Comment", b =>
+                {
+                    b.Navigation("CommentVotes");
                 });
 
             modelBuilder.Entity("backend.Models.Role", b =>
@@ -264,6 +327,8 @@ namespace backend.Migrations
                     b.Navigation("BlogVotes");
 
                     b.Navigation("Blogs");
+
+                    b.Navigation("CommentVotes");
 
                     b.Navigation("Comments");
                 });

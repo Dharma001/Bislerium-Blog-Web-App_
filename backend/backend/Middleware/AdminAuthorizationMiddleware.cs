@@ -24,7 +24,7 @@ public class AdminAuthorizationMiddleware
         var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
         if (ValidateTokenAndGetRole(token, out var roleId))
         {
-            if (roleId == "2")
+            if (roleId == "1")
             {
                 _logger?.LogInformation("AdminAuthorizationMiddleware: Admin authorized");
                 await _next(context);

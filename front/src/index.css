@@ -7,11 +7,6 @@ body{
   font-family: 'Inika', serif;
 }
 
-/* .bg-gradient-darker {
-  background-image: linear-gradient(to right, #047857, #065f46, #ffffff, #065f46, #047857);
-} */
-
-
 .bg-gradient-orange {
   background-image: linear-gradient(to right, #FFA500, #FF7F00, #FFD700, #FF7F00, #FFA500);
 }

@@ -9,6 +9,5 @@ namespace backend.Models.Requests
 
         [Column(TypeName = "text")]
         public string Content { get; set; }
-        public string Image { get; set; }
     }
 }

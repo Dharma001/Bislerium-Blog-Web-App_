@@ -78,7 +78,7 @@ function Register() {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="bg-opacity-10 backdrop-blur-md rounded-xl border border-gray-200 p-6 bg-slate-0">
+      <div className="bg-opacity-10 backdrop-blur-md rounded-xl border border-gray-200 p-6 max-w-sm w-full bg-slate-0">
         <img src="./newlogo.png" className="mx-auto w-16 " alt="" />
         <p className="text-orange-400 text-center text-sm font-light">Bislerium Blog</p>
         <h2 className="font-serif text-4xl font-bold text-center text-black">
