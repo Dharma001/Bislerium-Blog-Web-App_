@@ -3,13 +3,13 @@ import React from 'react'
 function AdminDashboard() {
   return (
     <>
-    <main className='main py-6 px-4 bg-green-100 rounded-3xl overflow-y-auto h-[95dvh]'>
+    <main className='main py-6 px-4 bg-white rounded-3xl overflow-y-auto h-[95dvh]'>
       <div className='flex justify-between'>
-      <div className='head text-green-800 tracking-wider font-extrabold text-3xl'>Dashboard</div>
+      <div className='head text-slate-800 tracking-wider font-extrabold text-3xl'>Dashboard</div>
       {/* <Link> */}
-      <div>
-      <button className='bg-slate-900 text-white py-2 px-4 rounded-lg hover:bg-green-800'>Add Custom</button>
-      </div>
+      {/* <div>
+      <button className='bg-slate-900 text-white py-2 px-4 rounded-lg hover:bg-orange-500'>Add Custom</button>
+      </div> */}
 
       {/* </Link> */}
       </div>

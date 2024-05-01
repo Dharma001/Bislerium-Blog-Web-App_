@@ -152,7 +152,7 @@ function Edit() {
     // value={formData.name}
     // onChange={handleChange}
     required
-    className="border  h-12 focus:ring-2 outline-none focus:ring-green-700 rounded-md px-4 py-2 w-full pl-12"
+    className="border  h-12 focus:ring-2 outline-none focus:ring-slate-700 rounded-md px-4 py-2 w-full pl-12"
     autoFocus="on"
   />
   <div className="absolute top-8 left-2 z-10 pointer-events-none text-gray-700">
@@ -174,13 +174,13 @@ function Edit() {
               // value={formData.description}
               required
               // onChange={handleChange}
-              className="w-full border outline-none h-64 focus:ring-2 focus:ring-green-700 border-gray-300 rounded-md  p-2"
+              className="w-full border outline-none h-64 focus:ring-2 focus:ring-slate-700 border-gray-300 rounded-md  p-2"
             />
           </div>
           <div className="grid place-items-end">
             <button
               type="submit"
-              className="bg-green-700 text-white rounded-md py-2 w-24 px-4  hover:bg-green-800 mt-4 mb-6"
+              className="bg-slate-700 text-white rounded-md py-2 w-24 px-4  hover:bg-slate-800 mt-4 mb-6"
             >
               Update
             </button>

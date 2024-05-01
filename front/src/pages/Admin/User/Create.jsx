@@ -34,7 +34,7 @@ function Create() {
     // value={formData.name}
     // onChange={handleChange}
     required
-    className="border  h-12 focus:ring-2 outline-none focus:ring-green-700 rounded-md px-4 py-2 w-full pl-12"
+    className="border  h-12 focus:ring-2 outline-none focus:ring-slate-700 rounded-md px-4 py-2 w-full pl-12"
     autoFocus="on"
   />
   <div className="absolute top-8 left-2 z-10 pointer-events-none text-gray-700">
@@ -60,7 +60,7 @@ function Create() {
               // value={formData.email}
               // onChange={handleChange}
               required
-              className="border pl-12 h-12 focus:ring-2 outline-none focus:ring-green-700 rounded-md px-4 py-2 w-full"
+              className="border pl-12 h-12 focus:ring-2 outline-none focus:ring-slate-700 rounded-md px-4 py-2 w-full"
             />
                <div className="absolute top-8 text-[1rem] left-2 z-10 pointer-events-none text-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.7rem" height="1.7rem" viewBox="0 0 24 24">
@@ -73,7 +73,7 @@ function Create() {
                   name="phone"
                   // value={formData.phone}
                   // onChange={handleChange}
-                  className="border pl-12  h-12 focus:ring-2 rounded-md outline-none focus:ring-green-700 px-4 py-2 "
+                  className="border pl-12  h-12 focus:ring-2 rounded-md outline-none focus:ring-slate-700 px-4 py-2 "
                   autoComplete="off"
                   placeholder="Enter phone number"
                   required
@@ -100,7 +100,7 @@ function Create() {
               // value={formData.password}
               // onChange={handleChange}
               required
-              className="border pl-12 h-12 focus:ring-2 outline-none focus:ring-green-700 rounded-md px-4 py-2 w-full"
+              className="border pl-12 h-12 focus:ring-2 outline-none focus:ring-slate-700 rounded-md px-4 py-2 w-full"
             />
             <div className="absolute top-8 text-[1rem] left-2 z-10 pointer-events-none text-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.7rem" height="1.7rem" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M24 25.28a3.26 3.26 0 0 0-1.64 6.07V36h3.32v-4.65a3.28 3.28 0 0 0 1.61-2.8v0A3.27 3.27 0 0 0 24 25.28"/><rect width="33.23" height="25.73" x="7.38" y="17.77" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" rx="4.32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M13.35 17.77v-2.61a10.66 10.66 0 0 1 21.32 0v2.61"/></svg>
@@ -149,7 +149,7 @@ function Create() {
               // value={formData.confPassword}
               // onChange={handleChange}
               required
-              className="border pl-12 h-12 focus:ring-2 outline-none focus:ring-green-700 rounded-md px-4 py-2 w-full"
+              className="border pl-12 h-12 focus:ring-2 outline-none focus:ring-slate-700 rounded-md px-4 py-2 w-full"
             />
             <div className="absolute top-8 text-[1rem] left-2 z-10 pointer-events-none text-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.7rem" height="1.7rem" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M24 25.28a3.26 3.26 0 0 0-1.64 6.07V36h3.32v-4.65a3.28 3.28 0 0 0 1.61-2.8v0A3.27 3.27 0 0 0 24 25.28"/><rect width="33.23" height="25.73" x="7.38" y="17.77" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" rx="4.32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M13.35 17.77v-2.61a10.66 10.66 0 0 1 21.32 0v2.61"/></svg>
@@ -200,7 +200,7 @@ function Create() {
             // value={formData.role_id}
             // onChange={handleChange}
             required
-            className="border h-12 focus:ring-2 outline-none focus:ring-green-700 rounded-md px-4 py-2 w-full"
+            className="border h-12 focus:ring-2 outline-none focus:ring-slate-700 rounded-md px-4 py-2 w-full"
           >
             <option value="">Select Role</option>
             {/* {roles.map((role) => (
@@ -214,7 +214,7 @@ function Create() {
         <div className="grid place-items-end">
         <button
           type="submit"
-          className="bg-green-700 w-24 focus:ring-2 outline-none focus:ring-green-700 text-white px-4 my-6 py-2 rounded-md hover:bg-green-800 items-center justify-center place-items-center"
+          className="bg-slate-700 w-24 focus:ring-2 outline-none focus:ring-slate-700 text-white px-4 my-6 py-2 rounded-md hover:bg-slate-800 items-center justify-center place-items-center"
         >
           Create
         </button>
