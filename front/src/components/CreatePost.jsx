@@ -67,7 +67,7 @@ const CreatePost = () => {
                             value={formData.title}
                             onChange={handleChange}
                             autoFocus="on"
-                            className="border-2 py-4 px-2 outline-none focus:ring-2 focus:ring-orange-500 p-2 w-full cursor-pointer rounded-3xl w-full"
+                            className="border-2 py-4 px-2 outline-none focus:ring-2 focus:ring-orange-500 p-2 w-full cursor-pointer rounded w-full"
                             placeholder="Title*"
                         />
                         <textarea
@@ -76,7 +76,7 @@ const CreatePost = () => {
                             value={formData.content}
                             onChange={handleChange}
                             type="description"
-                            className="border-2 py-4 px-2 outline-none focus:ring-2 focus:ring-orange-500 p-2 w-full cursor-pointer rounded-3xl w-full"
+                            className="border-2 py-4 px-2 outline-none focus:ring-2 focus:ring-orange-500 p-2 w-full cursor-pointer rounded w-full"
                             placeholder="Description*"
                         ></textarea>
                         <div>
@@ -85,7 +85,7 @@ const CreatePost = () => {
                                 type="file"
                                 name="imageFile"
                                 onChange={handleChange}
-                                className="border border-gray-300 mt-1 rounded-md outline-none focus:ring-2 focus:ring-orange-500 p-2 w-full cursor-pointer"
+                                className=" mt-1 rounded-md outline-none focus:ring-2 focus:ring-orange-500 p-2 w-full cursor-pointer"
                             />
                         </div>
                         <div className="grid place-content-end">
