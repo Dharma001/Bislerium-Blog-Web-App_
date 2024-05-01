@@ -7,7 +7,7 @@ using System.Data;
 
 namespace backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("admin/api/[controller]")]
     [ApiController]
     public class RolesController : ControllerBase
     {

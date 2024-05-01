@@ -4,7 +4,6 @@ using backend.Models;
 using backend.appDbContext;
 using Microsoft.EntityFrameworkCore;
 using backend.Models.Requests;
-using backend.Migrations;
 
 namespace backend.Services
 {

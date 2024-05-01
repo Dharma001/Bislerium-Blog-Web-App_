@@ -24,7 +24,7 @@ public class UserAuthorizationMiddleware
         if (ValidateTokenAndGetRole(token, out var roleId))
         {
 
-            if (roleId == "1")
+            if (roleId == "2")
             {
 
                 await _next(context);

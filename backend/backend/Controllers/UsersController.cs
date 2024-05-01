@@ -3,7 +3,7 @@ using backend.Models;
 using backend.Models.Requests;
 using Microsoft.AspNetCore.Mvc;
 
-[Route("api/[controller]")]
+[Route("admin/api/[controller]")]
 [ApiController]
 public class UsersController : ControllerBase
 {
@@ -41,7 +41,7 @@ public class UsersController : ControllerBase
 
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateUser(int id, UserRequest userRequest)
+    public async Task<IActionResult> UpdateUser(int id, UpdateUserRequest userRequest)
     {
         try
         {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const BASE_URL = "https://localhost:7189/admin/api/";
+const BASE_URL = "https://localhost:7189/user/api/";
 
 export const fetchWithAuth = async (method, url, data = null) => {
   let token = Cookies.get('token');

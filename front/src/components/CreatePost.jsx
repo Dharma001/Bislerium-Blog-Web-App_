@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { fetchApi } from '../Auths/apiWithoutAuth';
+import { fetchWithAuth } from '../Auths/userAuth';
 import Cookies from 'js-cookie';
 
 const CreatePost = () => {
@@ -38,7 +38,7 @@ const CreatePost = () => {
                 formDataToSend.append(key, formData[key]);
             }
             
-            const response = await fetchApi("post", "Blog", formDataToSend);
+            const response = await fetchWithAuth("post", "Blog", formDataToSend);
             if (response.status === 201) {
                 navigate("/");
                 toast.success("Blog Created successfully");

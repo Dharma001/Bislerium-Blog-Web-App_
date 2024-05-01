@@ -112,7 +112,7 @@ function App() {
             }
           />
                     <Route
-            path="editRole"
+            path="editRole/:id"
             element={
               <PrivateAdminRoute
                 element={<RoleEdit/>}
@@ -147,7 +147,7 @@ function App() {
             }
           />
                     <Route
-            path="editUser"
+            path="editUser/:id"
             element={
               <PrivateAdminRoute
                 element={<UserEdit />}
