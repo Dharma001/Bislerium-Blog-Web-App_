@@ -123,7 +123,7 @@ import React from 'react'
 
 function Edit() {
   return (
-    <div className="container bg-white rounded-3xl  mx-auto px-4 py-6">
+    <div className="container bg-white rounded-3xl overflow-hidden h-[90dvh] mx-auto px-4 py-6">
       <div className=" p-6">
       <div className='relative'>
       <h2 className="text-xl text-gray-700 font-semibold my-6 ml-8 mb-8 text-start">Edit Role</h2>

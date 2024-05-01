@@ -87,7 +87,7 @@ import React from "react";
 
 function Create() {
   return (
-    <div className="container bg-white rounded-3xl  mx-auto px-4 py-6">
+    <div className="container bg-white rounded-3xl h-[90dvh] overflow-hidden mx-auto px-4 py-6">
       <div className=" p-6">
       <div className='relative'>
       <h2 className="text-xl text-gray-700 font-semibold my-6 ml-8 mb-8 text-start">Create Role</h2>

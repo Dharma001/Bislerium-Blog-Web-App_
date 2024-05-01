@@ -7,7 +7,7 @@ function Edit() {
   return (
     <>
     <div className="px-4">
-    <div className="container  px-5 mx-auto overflow-hidden   my-6">
+    <div className="container  px-5 mx-auto overflow-hidden h-[90dvh]   my-6">
       <div className='relative'>
       <h2 className="text-xl text-gray-700 font-semibold my-6 ml-8 mb-8 text-start">Edit User</h2>
       <div className="absolute top-0   z-10 pointer-events-none text-gray-700">
