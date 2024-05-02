@@ -99,7 +99,7 @@ const Edit = () => {
               </svg>
             </div>
           </div>
-          <hr className="border-2-black" />
+          <hr className="border-black" />
           <form
             onSubmit={handleSubmit}
             className="space-y-4 mt-8 h-[80dvh]"

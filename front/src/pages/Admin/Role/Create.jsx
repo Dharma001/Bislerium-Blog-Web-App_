@@ -33,8 +33,8 @@ function Create() {
   };
 
   return (
-    <div className="container bg-white rounded-3xl h-[90dvh] overflow-hidden mx-auto px-4 py-6">
-      <div className=" p-6">
+    <div className="container bg-white rounded-3xl h-[90dvh] overflow-hidden mx-auto px-4 ">
+      <div className="">
       <div className='relative'>
       <h2 className="text-xl text-gray-600 font-semibold my-6 ml-8 mb-8 text-start">Create Role</h2>
       <div className="absolute top-0   z-10 pointer-events-none text-gray-600">
@@ -50,7 +50,7 @@ function Create() {
   <hr className='border-black'/>
 
   <form onSubmit={handleSubmit} >
-        <div className='relative space-y-2'>
+        <div className='relative space-y-2 mt-6'>
       <label>
               Role Name:
             </label>
@@ -74,8 +74,8 @@ function Create() {
     </svg>
   </div>
 </div>
-          <div>
-            <label htmlFor="description" className="block mb-2">
+          <div className="space-y-2">
+            <label htmlFor="description" className="block mt-2">
               Description
             </label>
             <textarea

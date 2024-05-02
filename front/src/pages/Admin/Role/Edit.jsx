@@ -51,8 +51,8 @@ function Edit() {
   };
 
   return (
-    <div className="container bg-white rounded-3xl overflow-hidden h-[90dvh] mx-auto px-4 py-6">
-      <div className=" p-6">
+    <div className="container bg-white rounded-3xl px-4 overflow-hidden h-[90dvh] mx-auto ">
+      <div className=" ">
       <div className='relative'>
       <h2 className="text-xl text-gray-600 font-semibold my-6 ml-8 mb-8 text-start">Edit Role</h2>
       <div className="absolute top-0   z-10 pointer-events-none text-gray-600">
@@ -68,7 +68,7 @@ function Edit() {
   <hr className='border-black'/>
 
   <form onSubmit={handleSubmit} >
-        <div className='relative space-y-2'>
+        <div className='relative mt-6 space-y-2'>
       <label>
               Role Name:
             </label>
@@ -92,8 +92,8 @@ function Edit() {
     </svg>
   </div>
 </div>
-          <div>
-            <label htmlFor="description" className="block mb-2">
+          <div className="space-y-2">
+            <label htmlFor="description" className="block mt-4">
               Description
             </label>
             <textarea
