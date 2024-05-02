@@ -16,6 +16,7 @@ import RoleCreate from "./pages/Admin/Role/Create";
 import RoleEdit from "./pages/Admin/Role/Edit";
 import HomePageLayout from "./pages/Home/Layouts/HomePageLayout";
 import Post from "./pages/Home/Post";
+import UserProfile from "./pages/Users/Profile/UserProfile";
 
 function isAuthenticated() {
   const token = Cookies.get("token");
@@ -56,7 +57,6 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePageLayout />}>
         <Route path="/" element={<Post />} />
-        <Route path="/createPost" element={<CreatePost />} />
         <Route
           path="/login"
           element={
@@ -185,6 +185,32 @@ function App() {
             />
           }
         />
+        <Route path="/" element={<HomePageLayout />}>
+
+                  <Route
+            path="createPost"
+            element={
+              <PrivateUserRoute
+                element={<CreatePost/>}
+                authenticated={isAuthenticated()}
+                isAuthUser={isAuthUser()}
+                redirectTo="/login"
+              />
+            }
+          />
+
+  <Route
+            path="profile"
+            element={
+              <PrivateUserRoute
+                element={<UserProfile/>}
+                authenticated={isAuthenticated()}
+                isAuthUser={isAuthUser()}
+                redirectTo="/login"
+              />
+            }
+          />
+          </Route>
       </Routes>
       
     </>
