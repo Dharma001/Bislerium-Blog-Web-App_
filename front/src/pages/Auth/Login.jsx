@@ -76,41 +76,44 @@ function Login() {
         <p className="mt-2 text-pretty text-center text-gray-500">Welcome To Bislerium Blog</p>
         <form onSubmit={handleLogin} className="mt-6">
           <div>
-            <label className="block px-1">Email</label>
             <div className="relative">
               <input
                 type="text"
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                placeholder="Enter Your Email"
-                className="w-full px-12 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-200 focus:border-transparent"
+                placeholder=" "
+                className="block pl-12 pb-2.5 pt-4 w-full text-sm text-gray-900 border  rounded border-1 border-gray-300 appearance-none  dark:focus:border-orange-500 focus:outline-none focus:ring-0 focus:border-orange-600 peer"
                 autoComplete="off"
                 autoFocus="on"
               />
-              <div className="absolute inset-y-0 pl-2 ml-3 flex items-center">
+              <label htmlFor="email" className="absolute bg-transparent text-sm  duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-2 mx-10 peer-focus:px-2 peer-focus:text-orange-600 peer-focus:dark:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4">Email</label>
+            
+              <div className="absolute inset-y-0 pl-2 ml-2 flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="2rem" viewBox="0 0 24 24">
-                  <path fill="currentColor" d="m15.489 21.27l-3.558-3.558l.708-.708l2.85 2.85l5.688-5.688l.708.707zM12 11l7.692-5H4.308zm0 1.116L4 6.885v10.5q0 .269.173.442t.443.173H9.4l1 1H3V5h18v6.542l-1 1V6.885zm0 0" /></svg>
+                  <path fill="currentColor" d="m15.489 21.27l-3.558-3.558l.708-.708l2.85 2.85l5.688-5.688l.708.707zM12 11l7.692-5H4.308zm0 1.116L4 6.885v10.5q0 .269.173.442t.443.173H9.4l1 1H3V5h18v6.542l-1 1V6.885zm0 0" />
+                </svg>
               </div>
-            </div>
+              </div>
             {errors.email && (
               <p className="mt-1 text-xs text-red-500">{errors.email}</p>
             )}
+
           </div>
           <div className="mt-4">
-            <label className="block px-1">Password</label>
             <div className="relative">
               <input
                 type={showpassword ? "text" : "password"}
                 name="password"
-                placeholder="Enter Your Password"
+                placeholder=""
                 value={formData.password}
                 onChange={handleInputChange}
-                className="w-full px-12 py-3 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-200 focus:border-transparent"
+                className="block pl-12 pb-2.5 pt-4 w-full text-sm text-gray-900 border  rounded border-1 border-gray-300 appearance-none  dark:focus:border-orange-500 focus:outline-none focus:ring-0 focus:border-orange-600 peer"
                 autoComplete="off"
-                autoFocus="off"
+                autoFocus="on"
               />
-              <div className="absolute pl-2 mx-2 inset-y-4 transform -translate-y-1/2">
+              <label htmlFor="email" className="absolute bg-transparent text-sm  duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-2 mx-10 peer-focus:px-2 peer-focus:text-orange-600 peer-focus:dark:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4">Password</label>
+              <div className="absolute pl-2 ml-2 inset-y-4 transform -translate-y-1/2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="2rem" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M24 25.28a3.26 3.26 0 0 0-1.64 6.07V36h3.32v-4.65a3.28 3.28 0 0 0 1.61-2.8v0A3.27 3.27 0 0 0 24 25.28" /><rect width="33.23" height="25.73" x="7.38" y="17.77" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" rx="4.32" /><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M13.35 17.77v-2.61a10.66 10.66 0 0 1 21.32 0v2.61" /></svg>
 
               </div>
