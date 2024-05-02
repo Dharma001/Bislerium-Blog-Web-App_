@@ -17,8 +17,8 @@ function AdminLayout() {
   };
   return ( 
     <>
-      <div className='h-fit border w-full flex justify-between'>
-      <div className='NavLink max-w-[60%] md:max-w-[30%] max-h-screen lg:w-[17%] px-4 mt-2 pb-4 flex flex-col h-screen border-r-2'>
+      <div className='h-[90vh] border w-full flex justify-between'>
+      <div className='max-w-[60%] md:max-w-[30%] max-h-screen lg:w-[17%] px-4 pb-4 flex flex-col h-screen border-r-2'>
         <div className="justify-normal lg:gap-2 flex items-end">
           <div className="">
             <img src="https://media.discordapp.net/attachments/1217051055301328896/1234965093712920735/newlogo.png?ex=66334f1e&is=6631fd9e&hm=a2bcc20bd5f6c57b99a0a5f537c2f32f7fe7abf849f18152174cf97759d3dd61&=&format=webp&quality=lossless&width=612&height=417"  className="w-16"  alt="image is not loading"/>
