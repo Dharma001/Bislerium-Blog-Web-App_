@@ -77,8 +77,8 @@ const Index = () => {
       <div className="float-right">
         <Link
           to="/admin/createrole"
-          className="bg-gradient-to-br from-orange-500 to-yellow-500 hover:bg-slate-600 text-white px-7 py-2 rounded-sm text-md transition duration-300 ease-in-out flex items-center"
-        >
+          className="bg-orange-600 hover:bg-orange-700 text-white px-7 py-2 rounded-sm text-md transition duration-300 ease-in-out flex items-center"
+        > 
           <i className="fa-solid fa-plus mr-2"></i> Create role
         </Link>
       </div>
@@ -104,7 +104,7 @@ const Index = () => {
           placeholder="Search by name"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="border-none rounded-sm px-3 py-3 w-full focus:outline-none focus:border-blue-500"
+          className="border-none rounded-sm px-3 py-3 w-full focus:outline-none focus:border-green-500"
         />
       </div>
       <div className="">
@@ -145,7 +145,7 @@ const Index = () => {
                     <td className="px-4 py-4 whitespace-nowrap text-md text-center">
                       {role.description}
                     </td>
-                    <td className="px-4 py-4 whitespace-nowrap text-md mt-6 text-center grid grid-cols-2 gap-4">
+                    <td className="px-4 py-4 whitespace-nowrap text-md mt-6 text-center justify-center flex gap-4">
                     <Link to={`/admin/editRole/${role.id}`}>
                       <button className="bg-green-500 hover:bg-green-700 justify-center text-white px-3 py-2 rounded-sm transition duration-300 ease-in-out flex items-center">
                           <svg
@@ -161,7 +161,7 @@ const Index = () => {
                       </Link>
                       <button
                         onClick={toggleModal}
-                        className="bg-orange-600 hover:bg-orange-700 text-white px-3 py-2 rounded-sm transition duration-300 ease-in-out flex items-center justify-center"
+                        className="bg-orange-600 hover:bg-orange-700 w-fit text-white px-3 py-2 rounded-sm transition duration-300 ease-in-out flex items-center justify-center"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -178,8 +178,8 @@ const Index = () => {
                     </td>
                     <td>
                       {isOpen && (
-                        <div className="fixed z-10 inset-0 overflow-y-auto ">
-                          <div className="flex items-center justify-center min-h-screen bg-slate-900 opacity-20">
+                        <div className="fixed z-50 inset-0 overflow-y-auto ">
+                          <div className="flex items-center justify-center min-h-screen bg-gray-500 opacity-50">
                             <div className="relative bg-white  p-12 rounded-sm max-w-lg mx-auto">
                               <div className="flex justify-between items-center">
                                 <h2 className="text-lg font-semibold">
@@ -236,19 +236,19 @@ const Index = () => {
             <div className="flex justify-center py-4">
   <ul className="pagination flex gap-2">
     <li className="page-item">
-      <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} className="page-link bg-orange-500 text-white px-4 py-2 rounded-sm">
+      <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} className="page-link bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-sm">
         Previous
       </button>
     </li>
     {Array.from({ length: Math.ceil(filteorangeroles.length / rolesPerPage) }, (_, i) => (
       <li key={i} className="page-item">
-        <button onClick={() => paginate(i + 1)} className={`page-link ${currentPage === i + 1 ? 'bg-orange-500 text-white' : 'bg-orange-200 text-white'} px-4 py-2 rounded-sm`}>
+        <button onClick={() => paginate(i + 1)} className={`page-link ${currentPage === i + 1 ? 'bg-orange-500 hover:bg-orange-600 text-white' : 'bg-orange-200 text-white'} px-4 py-2 rounded-sm`}>
           {i + 1}
         </button>
       </li>
     ))}
     <li className="page-item">
-      <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === Math.ceil(filteorangeroles.length / rolesPerPage)} className="page-link bg-orange-500 text-white px-4 py-2 rounded-sm">
+      <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === Math.ceil(filteorangeroles.length / rolesPerPage)} className="page-link bg-orange-500  hover:bg-orange-600 text-white px-4 py-2 rounded-sm">
         Next
       </button>
     </li>

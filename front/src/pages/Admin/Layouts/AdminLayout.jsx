@@ -1,10 +1,20 @@
 import React, { useState } from "react";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Cookies from 'js-cookie';
 
+
 function AdminLayout() {
+  const navigate = useNavigate();
   const location = useLocation();
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    Cookies.remove('token');
+    Cookies.remove('roleId');
+    Cookies.remove('userId');
+    navigate("/");
+    toast.success('Logout successfull');
+  };
   return ( 
     <>
       <div className='h-fit border w-full flex justify-between'>
@@ -60,19 +70,16 @@ function AdminLayout() {
         </ul>
         </div>
         <div className='user-account flex  items-end h-full w-full'>
-          <button className=' font-semibold  rounded-sm w-52 mb-4'>
-            <div className='flex justify-normal items-center'>
-              <div className='rounded-full h-14 w-14 mr-4'>
-                <img src='https://imgs.search.brave.com/PVUfYH0LXpx98boFnkR0syDr25RdoSWaF0paHQfs2ms/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9o/YXBweS1yZWQtaGFp/cmVkLW1hbi10YWtp/bmctc2VsZmllLXBo/b3RvXzEyNjItNTEx/OC5qcGc_c2l6ZT02/MjYmZXh0PWpwZw' className='rounded-[50%] h-14 w-14'></img>
-              </div>
-              <div className="">
-                <p className="text-sm">Yogesh @gmail.com</p>
-                <p className="text-sm">Other details</p>
-              </div>
-            </div>
-          </button>
+        <button
+                    onClick={handleLogout}
+                    className="flex justify-center items-center text-[.8rem] w-full hover:bg-orange-700 font-semibold rounded-sm  bg-orange-600 text-white px-3 py-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="mr-1 " width="1.3rem" height="1.3rem" viewBox="0 0 32 32"><path fill="currentColor" d="M22 3v4c-1.848 0-3.613.332-5.266.91l-.527-1.148l.902-.403l-.812-1.828l-3.652 1.625l.812 1.828l.922-.41l.512 1.106a16.126 16.126 0 0 0-3.043 1.988l-.786-.836l.727-.668l-1.351-1.476l-2.946 2.707l1.352 1.476l.742-.684l.805.848a15.929 15.929 0 0 0-2.446 3.395l-1.082-.535l.45-.883l-1.782-.907l-1.812 3.567l1.781.906l.457-.902l1.145.57A15.912 15.912 0 0 0 6.05 22H4v6h24V3zm2 2h2v17H8.05C8.563 14.727 14.595 9 22 9h2zm-6 6.953a2.001 2.001 0 0 0-1 3.735V20h5v-2h-3v-2.316a1.998 1.998 0 0 0-1-3.73zM6 24h20v2H6z" /></svg>
+                    Logout
+                  </button>
         </div>
+     
       </div>
+      
       <main className="p-3 overflow-y-auto h-[100vh] flex justify-center items-center w-[85%]">
         <div className=" h-full bg-white w-full rounded-sm">
         <Outlet/>

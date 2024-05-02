@@ -33,11 +33,11 @@ function Create() {
   };
 
   return (
-    <div className="container bg-white rounded-3xl h-[90dvh] overflow-hidden mx-auto px-4 py-6">
-      <div className=" p-6">
+    <div className="container bg-white rounded-3xl h-[90dvh] overflow-hidden mx-auto px-4 ">
+      <div className="">
       <div className='relative'>
-      <h2 className="text-xl text-gray-700 font-semibold my-6 ml-8 mb-8 text-start">Create Role</h2>
-      <div className="absolute top-0   z-10 pointer-events-none text-gray-700">
+      <h2 className="text-xl text-gray-600 font-semibold my-6 ml-8 mb-8 text-start">Create Role</h2>
+      <div className="absolute top-0   z-10 pointer-events-none text-gray-600">
     <svg xmlns="http://www.w3.org/2000/svg" width="1.7rem" height="1.7rem" viewBox="0 0 24 24">
       <g fill="none" stroke="currentColor" stroke-linecap="round">
         <path d="M19.727 20.447c-.455-1.276-1.46-2.403-2.857-3.207C15.473 16.436 13.761 16 12 16c-1.761 0-3.473.436-4.87 1.24c-1.397.804-2.402 1.931-2.857 3.207"/>
@@ -50,7 +50,7 @@ function Create() {
   <hr className='border-black'/>
 
   <form onSubmit={handleSubmit} >
-        <div className='relative space-y-2'>
+        <div className='relative space-y-2 mt-6'>
       <label>
               Role Name:
             </label>
@@ -62,10 +62,10 @@ function Create() {
         value={formData.name}
         onChange={handleChange}
         required
-        className="border  h-12 focus:ring-2 outline-none focus:ring-slate-700 rounded-md px-4 py-2 w-full pl-12"
+        className="border  h-12 focus:ring-2 outline-none focus:ring-orange-600 rounded-md px-4 py-2 w-full pl-12"
         autoFocus="on"
       />
-  <div className="absolute top-8 left-2 z-10 pointer-events-none text-gray-700">
+  <div className="absolute top-8 left-2 z-10 pointer-events-none text-gray-600">
     <svg xmlns="http://www.w3.org/2000/svg" width="1.7rem" height="1.7rem" viewBox="0 0 24 24">
       <g fill="none" stroke="currentColor" stroke-linecap="round">
         <path d="M19.727 20.447c-.455-1.276-1.46-2.403-2.857-3.207C15.473 16.436 13.761 16 12 16c-1.761 0-3.473.436-4.87 1.24c-1.397.804-2.402 1.931-2.857 3.207"/>
@@ -74,8 +74,8 @@ function Create() {
     </svg>
   </div>
 </div>
-          <div>
-            <label htmlFor="description" className="block mb-2">
+          <div className="space-y-2">
+            <label htmlFor="description" className="block mt-2">
               Description
             </label>
             <textarea
@@ -84,13 +84,13 @@ function Create() {
               value={formData.description}
               required
               onChange={handleChange}
-              className="w-full border outline-none h-64 focus:ring-2 focus:ring-slate-700 border-gray-300 rounded-md  p-2"
+              className="w-full border outline-none h-64 focus:ring-2 focus:ring-orange-600 border-gray-300 rounded-md  p-2"
             />
           </div>
           <div className="grid place-items-end">
             <button
               type="submit"
-              className="bg-slate-700 text-white rounded-md py-2 w-24 px-4  hover:bg-slate-800 mt-4 mb-6"
+              className="bg-orange-600 text-white rounded-md py-2 w-24 px-4  hover:bg-orange-800 mt-4 mb-6"
             >
               Create
             </button>
