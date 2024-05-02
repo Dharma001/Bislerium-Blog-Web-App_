@@ -37,7 +37,7 @@ function HomePageLayout() {
               </nav>
             </div>
           </div>
-          <div className="col-span-7">
+          <div className="col-span-10">
             <Outlet />
           </div>
         </div>
