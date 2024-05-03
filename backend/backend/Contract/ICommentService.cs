@@ -10,5 +10,6 @@ namespace backend.Services
         Task<Comment> UpdateComment(int commentId, int userId, int blogId, CommentRequest commentRequest);
         Task<Comment> DeleteComment(int commentId, int userId, int blogId);
         Task<Comment> GetComment(int commentId, int userId, int blogId);
+        Task<List<Comment>> GetCommentsByBlogId(int blogId);
     }
 }

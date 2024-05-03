@@ -50,7 +50,12 @@ namespace backend.Services
             await _context.SaveChangesAsync();
             return comment;
         }
-
+        public async Task<List<Comment>> GetCommentsByBlogId(int blogId)
+        {
+            return await _context.Comments
+                .Where(c => c.BlogId == blogId)
+                .ToListAsync();
+        }
         public async Task<Comment> GetComment(int commentId, int userId, int blogId)
         {
             var comment = await _context.Comments.FindAsync(commentId);
