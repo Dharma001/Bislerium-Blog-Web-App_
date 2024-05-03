@@ -82,7 +82,16 @@ namespace backend.Services
         {
             return await _context.BlogVotes.CountAsync(v => v.BlogId == blogId && !v.IsUpvote);
         }
-
+        public async Task<bool?> IsUpvoted(int userId, int blogId)
+        {
+            var existingVote = await _context.BlogVotes.FindAsync(userId, blogId);
+            return existingVote?.IsUpvote;
+        }
+        public async Task<bool?> IsDownvoted(int userId, int blogId)
+        {
+            var existingVote = await _context.BlogVotes.FindAsync(userId, blogId);
+            return existingVote?.IsUpvote;
+        }
         public async Task<bool> RemoveVote(int userId, int blogId)
         {
             var existingVote = await _context.BlogVotes.FindAsync(userId, blogId);
