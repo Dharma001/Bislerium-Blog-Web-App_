@@ -95,6 +95,36 @@ const Post = () => {
       toast.error('Failed to delete comment.');
     }
   };
+  function getTimeElapsed(createdAt) {
+    const createdDate = new Date(createdAt);
+    const currentDate = new Date();
+
+    const timeDifference = Math.abs(currentDate - createdDate) / 1000; // Convert to seconds
+
+    const yearsElapsed = Math.floor(timeDifference / (60 * 60 * 24 * 365));
+    const monthsElapsed = Math.floor(timeDifference / (60 * 60 * 24 * 30));
+    const daysElapsed = Math.floor(timeDifference / (60 * 60 * 24));
+    const hoursElapsed = Math.floor(timeDifference / (60 * 60));
+    const minutesElapsed = Math.floor(timeDifference / 60);
+    const secondsElapsed = Math.floor(timeDifference);
+
+    if (yearsElapsed > 0) {
+        return `${yearsElapsed} year${yearsElapsed > 1 ? 's' : ''} ago`;
+    } else if (monthsElapsed > 0) {
+        return `${monthsElapsed} month${monthsElapsed > 1 ? 's' : ''} ago`;
+    } else if (daysElapsed > 0) {
+        return `${daysElapsed} day${daysElapsed > 1 ? 's' : ''} ago`;
+    } else if (hoursElapsed > 0) {
+        return `${hoursElapsed} hour${hoursElapsed > 1 ? 's' : ''} ago`;
+    } else if (minutesElapsed > 0) {
+        return `${minutesElapsed} minute${minutesElapsed > 1 ? 's' : ''} ago`;
+    } else {
+        return `${secondsElapsed} second${secondsElapsed > 1 ? 's' : ''} ago`;
+    }
+}
+
+const createdAt = "2022-05-04T10:00:00Z"; 
+console.log(getTimeElapsed(createdAt));
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
@@ -116,8 +146,10 @@ const Post = () => {
       {currentPosts.map((post, index) => (
         <div key={index} className="bg-white p-4 rounded-md shadow-md mt-4">
           <div className="flex flex-col">
+            <h2 className="text-lg font-bold">{post.userFirstName}{post.userLastName}</h2>
             <h2 className="text-lg font-bold">{post.title}</h2>
             <p className="text-gray-500 font-medium">{post.content}</p>
+            <p className="text-gray-500 font-medium">{getTimeElapsed(post.createdAt)}</p>
           </div>
           <div className="mt-4">
             <img src={`${URL}${post.image}`} alt="Blog Image" title={post.title} className="w-full h-full object-cover rounded-md" />
