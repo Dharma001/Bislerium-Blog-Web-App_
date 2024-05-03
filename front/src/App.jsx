@@ -17,6 +17,8 @@ import RoleEdit from "./pages/Admin/Role/Edit";
 import HomePageLayout from "./pages/Home/Layouts/HomePageLayout";
 import Post from "./pages/Home/Post";
 import UserProfile from "./pages/Users/Profile/UserProfile";
+import SmallNav from "./components/SmallNav";
+import UserUpdate from "./pages/Users/Profile/UserUpdate";
 
 function isAuthenticated() {
   const token = Cookies.get("token");
@@ -30,7 +32,7 @@ function isAdmin() {
 
 function isAuthUser() {
   const roleId = Cookies.get("roleId");
-  return roleId === "2"; 
+  return roleId === "2";
 }
 
 function PrivateUserRoute({ element, authenticated }) {
@@ -56,27 +58,27 @@ function App() {
       {location.pathname !== "/login" && location.pathname !== "/register"}
       <Routes>
         <Route path="/" element={<HomePageLayout />}>
-        <Route path="/" element={<Post />} />
-        <Route
-          path="/login"
-          element={
-            <PrivateRoute
-              element={<Login />}
-              authenticated={!authenticated}
-              redirectTo="/admin"
-            />
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <PrivateRoute
-              element={<Register />}
-              authenticated={!authenticated}
-              redirectTo="/admin"
-            />
-          }
-        />
+          <Route path="/" element={<Post />} />
+          <Route
+            path="/login"
+            element={
+              <PrivateRoute
+                element={<Login />}
+                authenticated={!authenticated}
+                redirectTo="/admin"
+              />
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <PrivateRoute
+                element={<Register />}
+                authenticated={!authenticated}
+                redirectTo="/admin"
+              />
+            }
+          />
         </Route>
         <Route
           path="/admin"
@@ -111,11 +113,11 @@ function App() {
               />
             }
           />
-                    <Route
+          <Route
             path="editRole/:id"
             element={
               <PrivateAdminRoute
-                element={<RoleEdit/>}
+                element={<RoleEdit />}
                 authenticated={isAuthenticated()}
                 isAdmin={isAdmin()}
                 redirectTo="/login"
@@ -123,11 +125,11 @@ function App() {
             }
           />
 
-<Route
+          <Route
             path="roleList"
             element={
               <PrivateAdminRoute
-                element={<RoleIndex/>}
+                element={<RoleIndex />}
                 authenticated={isAuthenticated()}
                 isAdmin={isAdmin()}
                 redirectTo="/login"
@@ -135,7 +137,7 @@ function App() {
             }
           />
 
-<Route
+          <Route
             path="createUser"
             element={
               <PrivateAdminRoute
@@ -146,7 +148,7 @@ function App() {
               />
             }
           />
-                    <Route
+          <Route
             path="editUser/:id"
             element={
               <PrivateAdminRoute
@@ -158,11 +160,11 @@ function App() {
             }
           />
 
-<Route
+          <Route
             path="userList"
             element={
               <PrivateAdminRoute
-                element={<UserIndex/>}
+                element={<UserIndex />}
                 authenticated={isAuthenticated()}
                 isAdmin={isAdmin()}
                 redirectTo="/login"
@@ -171,11 +173,11 @@ function App() {
           />
 
 
-          
+
         </Route>
 
-        
-        
+
+
         <Route
           path="/user"
           element={
@@ -187,11 +189,11 @@ function App() {
         />
         <Route path="/" element={<HomePageLayout />}>
 
-                  <Route
+          <Route
             path="createPost"
             element={
               <PrivateUserRoute
-                element={<CreatePost/>}
+                element={<CreatePost />}
                 authenticated={isAuthenticated()}
                 isAuthUser={isAuthUser()}
                 redirectTo="/login"
@@ -199,20 +201,31 @@ function App() {
             }
           />
 
-  <Route
+          <Route
             path="profile"
             element={
               <PrivateUserRoute
-                element={<UserProfile/>}
+                element={<UserProfile />}
                 authenticated={isAuthenticated()}
                 isAuthUser={isAuthUser()}
                 redirectTo="/login"
               />
             }
           />
-          </Route>
+        </Route>
+
+        <Route path="/smallnav" element={
+          <PrivateUserRoute
+            element={<SmallNav />}
+            authenticated={isAuthenticated()}
+            isAuthUser={isAuthUser()}
+            redirectTo="/login"
+          />}
+        />
+
+
       </Routes>
-      
+
     </>
   );
 }
