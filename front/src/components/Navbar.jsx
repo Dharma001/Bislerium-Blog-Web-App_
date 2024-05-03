@@ -142,7 +142,7 @@ const Navbar = () => {
                     >
                       <button className="w-full text-start py-2 px-4 hover:bg-gray-300 ">
                         <a
-                          href="profile"
+                          href="profile/userProfile"
                           className="text-gray-800 pl-6 text-sm  flex  "
                         >
                           Update Profile

@@ -1,10 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import {  Outlet, Link} from "react-router-dom";
 import { useState } from 'react';
-import '../index.css';
 
-export default function SmallNav() {
-
+function ProfileLayouts() {
     const toggleMenu = () => {
         setTimeout(() => {
             setIsOpen(!isOpen);
@@ -12,14 +10,13 @@ export default function SmallNav() {
     };
     const [isOpen, setIsOpen] = useState(false);
     return (
-
-        <div className="w-full">
-
-            <h2 className='font-semibold text-xl pl-[32rem] mt-6 hidden md:block'>User Settings</h2>
+        <div className="w-full flex flex-col justify-center items-center">
+            <div className="w-[70%] mt-4">
+            <h2 className='font-semibold text-xl mt-6 hidden md:block'>User Settings</h2>
             <div className="sticky top-0 z-10  bg-white">
-                <div className="main border-b-2 w-full lg:w-4/5 mx-auto">
+                <div className="main border-b-2 w-full">
                     <nav className="w-full transition-opacity duration-500 ">
-                        <div className="px-4 md:flex md:justify-between md:items-center">
+                        <div className="px-4">
                             <div className="flex justify-between items-center ">
                                 <button
                                     onClick={toggleMenu}
@@ -66,7 +63,7 @@ export default function SmallNav() {
                                 </li>
                                 <li className=" pr-[15px] py-[17px]">
                                     <Link
-                                        to="/homeServices"
+                                        to="userProfile"
                                         className="nav md:text-[14px] lg:text-[17px] font-semibold text-black transition-colors duration-300 "
                                     >
                                         Profile
@@ -97,15 +94,16 @@ export default function SmallNav() {
                                     </Link>
                                 </li>
                             </ul>
-
-                            <div className="p-4 hidden md:block">
-
-                            </div>
                         </div>
                     </nav>
                 </div>
             </div>
+            <div className="p-4 hidden md:block">
+            <Outlet />
+            </div>
+        </div>
         </div>
     );
 
 }
+export default ProfileLayouts
