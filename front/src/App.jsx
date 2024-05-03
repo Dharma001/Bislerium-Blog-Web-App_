@@ -18,6 +18,8 @@ import HomePageLayout from "./pages/Home/Layouts/HomePageLayout";
 import Post from "./pages/Home/Post";
 import UserProfile from "./pages/Users/Profile/UserProfile";
 import ProfileLayouts from "./pages/Users/Layouts/ProfileLayouts";
+import UserUpdateLayouts from "./pages/Users/Layouts/UserUpdateLayouts";
+import PostHistory from "./pages/Users/PostHistory";
 
 function isAuthenticated() {
   const token = Cookies.get("token");
@@ -204,6 +206,20 @@ function App() {
             element={
               <PrivateUserRoute
                 element={<UserProfile />}
+                authenticated={isAuthenticated()}
+                isAuthUser={isAuthUser()}
+                redirectTo="/login"
+              />
+            }
+          />
+        </Route>
+        
+        <Route path="/history" element={<UserUpdateLayouts />}>
+        <Route
+            path="postHistory"
+            element={
+              <PrivateUserRoute
+                element={<PostHistory />}
                 authenticated={isAuthenticated()}
                 isAuthUser={isAuthUser()}
                 redirectTo="/login"
