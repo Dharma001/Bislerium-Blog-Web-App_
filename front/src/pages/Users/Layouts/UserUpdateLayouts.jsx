@@ -1,15 +1,33 @@
-import React from 'react'
-import Navbar from '../../../components/Navbar'
-import Footer from '../../../components/Footer'
-import { Link, Outlet, useLocation } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { fetchWithAuth } from '../../../Auths/userAuth';
+import Cookies from 'js-cookie';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 
 function UserUpdateLayouts() {
+    const [userData, setUserData] = useState(null);
+
+    const userId = Cookies.get('userId');
+    
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const userResponse = await fetchWithAuth('get', `Profile/${userId}`);
+                setUserData(userResponse.data);
+            } catch (error) {
+                console.error('Failed to fetch user data:', error);
+            }
+        };
+        
+        if (userId) {
+            fetchUserData();
+        }
+    }, [userId]);
     return (
         <>
             <div className="flex ml-[20%] my-6  items-center space-x-4">
             <img src="https://cdn.discordapp.com/attachments/1217051055301328896/1235834773969174538/ads.png?ex=6635d052&is=66347ed2&hm=99c09d7825cfee1d000b3e77157d6dfdcfd5b84b86bb1cba9edc0606fa5fecf2&" alt="" className=" w-20 shadow-2xl rounded-full" />
             <div>
-                <p className='text-xl font-semibold tracking-wider'>IllustratorOK6208</p>
+            <p className='text-xl font-semibold tracking-wider'>{userData ? `${userData.firstName} ${userData.lastName}` : ''}</p>
                 <p className='text-gray-600 text-sm'>U/IllustratorOK6208</p>
             </div>
             <div>
@@ -58,7 +76,7 @@ function UserUpdateLayouts() {
                     </ul>
                     <button className="ml-[20%] border-2 border-gray-400  px-2 py-1 rounded-3xl">
                       <a
-                        href="createPost"
+                        href="/createPost"
                         className="text-gray-800 flex justify-center items-center"
                       >
                         <svg

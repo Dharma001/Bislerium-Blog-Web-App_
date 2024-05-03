@@ -86,7 +86,44 @@ namespace backend.Services
             }
             return null;
         }
+        public async Task<User> UpdateUserProfile(int id, UpdateProfileRequest userRequest)
+        {
+            var existingUser = await _context.Users.FindAsync(id);
+            if (existingUser != null)
+            {
+                existingUser.FirstName = userRequest.FirstName ?? existingUser.FirstName;
+                existingUser.LastName = userRequest.LastName ?? existingUser.LastName;
+                existingUser.Email = userRequest.Email ?? existingUser.Email;
+                existingUser.Phone = userRequest.Phone ?? existingUser.Phone;
+                existingUser.Address = userRequest.Address ?? existingUser.Address;
 
+                await _context.SaveChangesAsync();
+                return existingUser;
+            }
+            return null;
+        }
+
+        public async Task<User> UpdateUserProfilePassword(int id, UpdateProfilePasswordRequest request)
+        {
+            var existingUser = await _context.Users.FindAsync(id);
+            if (existingUser != null)
+            {
+                if (BCrypt.Net.BCrypt.Verify(request.CurrentPassword, existingUser.Password))
+                {
+                    string hashedNewPassword = BCrypt.Net.BCrypt.HashPassword(request.NewPassword);
+                    existingUser.Password = hashedNewPassword;
+
+                    await _context.SaveChangesAsync();
+                    return existingUser;
+                }
+                else
+                {
+                    // Current password is incorrect
+                    throw new Exception("Current password is incorrect.");
+                }
+            }
+            return null; // Or throw NotFoundException if user not found
+        }
 
         public async Task<bool> DeleteUser(int id)
         {

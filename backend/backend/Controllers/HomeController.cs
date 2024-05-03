@@ -32,16 +32,6 @@ namespace backend.Controllers
             var blogs = await _blogService.GetAllBlogsAsync();
             return Ok(blogs);
         }
-        [HttpGet("users/{id}")]
-        public async Task<IActionResult> GetUserById(int id)
-        {
-            var user = await _homeService.GetUserById(id);
-
-            if (user == null)
-                return NotFound();
-
-            return Ok(user);
-        }
 
         [HttpGet("{blogId}/upvotes")]
         public async Task<ActionResult<int>> GetUpvoteCount(int blogId)
