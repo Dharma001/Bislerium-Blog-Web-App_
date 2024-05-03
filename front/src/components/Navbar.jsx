@@ -1,12 +1,31 @@
 import { Link, useNavigate, useNavigation, Outlet } from "react-router-dom";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import { fetchWithAuth } from '../Auths/userAuth';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileOpen, setProfileIsOpen] = useState(false);
 
+  const [userData, setUserData] = useState(null);
+
+  const userId = Cookies.get('userId');
+  
+  useEffect(() => {
+      const fetchUserData = async () => {
+          try {
+              const userResponse = await fetchWithAuth('get', `Profile/${userId}`);
+              setUserData(userResponse.data);
+          } catch (error) {
+              console.error('Failed to fetch user data:', error);
+          }
+      };
+      
+      if (userId) {
+          fetchUserData();
+      }
+  }, [userId]);
   const toggleMenu = () => {
     setTimeout(() => {
       setIsOpen(!isOpen);
@@ -81,7 +100,7 @@ const Navbar = () => {
                   <div className="flex">
                     <button className="">
                       <a
-                        href="createPost"
+                        href="/createPost"
                         className="text-gray-800 flex justify-center items-center"
                       >
                         <svg
@@ -148,7 +167,7 @@ const Navbar = () => {
                         >
                           <div>
                           <p>View Profile</p>
-                         <p className="text-[10px] text-gray-500">Sumit Hacker</p> 
+                         <p className="text-[10px] text-gray-500">{userData ? `${userData.firstName} ${userData.lastName}` : ''}</p> 
                           </div>
                         
                         </a>
@@ -165,7 +184,7 @@ const Navbar = () => {
 
                       <button className="w-full text-start py-2 px-4 hover:bg-gray-100 ">
                         <a
-                          href="profile/userProfile"
+                          href="/profile/userProfile"
                           className="text-gray-800 pl-8 text-xs  flex  "
                         >
                           Update Profile
@@ -186,7 +205,7 @@ const Navbar = () => {
                       </button>
                       <button className="w-full text-start px-4 py-2  hover:bg-gray-100">
                         <a
-                          href="#"
+                          href="/profile/changePassword"
                           className=" pl-8  text-xs flex text-black  hover:text-slate-900"
                         >
                           Change Password
