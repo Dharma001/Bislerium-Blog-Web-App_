@@ -5,6 +5,7 @@ using backend.Contract;
 using backend.Models.Requests;
 using Microsoft.AspNetCore.Http;
 using backend.Services;
+using backend.Services.Interfaces;
 
 namespace backend.Controllers
 {
@@ -14,11 +15,15 @@ namespace backend.Controllers
     {
         private readonly IBlogService _blogService;
         private readonly IHomeService _homeService;
+        private readonly IBlogVoteService _blogVoteService;
+        private readonly ICommentService _commentService;
 
-        public HomeController(IBlogService blogService, IHomeService homeService)
+        public HomeController(IBlogService blogService, IHomeService homeService, IBlogVoteService blogVoteService, ICommentService commentService)
         {
             _blogService = blogService;
             _homeService = homeService;
+            _blogVoteService = blogVoteService;
+            _commentService = commentService;
         }
 
         [HttpGet]
@@ -38,6 +43,30 @@ namespace backend.Controllers
             return Ok(user);
         }
 
+        [HttpGet("{blogId}/upvotes")]
+        public async Task<ActionResult<int>> GetUpvoteCount(int blogId)
+        {
+            var upvoteCount = await _blogVoteService.GetUpvoteCount(blogId);
+            return Ok(upvoteCount);
+        }
+
+        [HttpGet("comment/{blogId}")]
+        public async Task<ActionResult<List<Comment>>> GetCommentsByBlogId(int blogId)
+        {
+            var comments = await _commentService.GetCommentsByBlogId(blogId);
+            if (comments == null || comments.Count == 0)
+            {
+                return NotFound("No comments found for this blog.");
+            }
+            return Ok(comments);
+        }
+
+        [HttpGet("{blogId}/downvotes")]
+        public async Task<ActionResult<int>> GetDownvoteCount(int blogId)
+        {
+            var downvoteCount = await _blogVoteService.GetDownvoteCount(blogId);
+            return Ok(downvoteCount);
+        }
         [HttpPatch("users/{id}")]
         public async Task<IActionResult> UpdateUserProfile(int id, ProfileUserRequest profileUserRequest)
         {

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using backend.appDbContext;
 using backend.Models;
 using backend.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Services
 {
@@ -15,14 +16,17 @@ namespace backend.Services
             _context = context;
         }
 
-        public async Task<bool> AddVote(int userId, int blogId, bool isUpvote)
+        public async Task<bool> AddUpvote(int userId, int blogId)
         {
             var existingVote = await _context.BlogVotes.FindAsync(userId, blogId);
 
             if (existingVote != null)
             {
-                existingVote.IsUpvote = isUpvote;
-                existingVote.UpdatedAt = DateTime.UtcNow;
+                if (!existingVote.IsUpvote) 
+                {
+                    existingVote.IsUpvote = true;
+                    existingVote.UpdatedAt = DateTime.UtcNow;
+                }
             }
             else
             {
@@ -30,7 +34,7 @@ namespace backend.Services
                 {
                     UserId = userId,
                     BlogId = blogId,
-                    IsUpvote = isUpvote,
+                    IsUpvote = true,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
                 };
@@ -40,19 +44,43 @@ namespace backend.Services
             await _context.SaveChangesAsync();
             return true;
         }
-
-        public async Task<bool> UpdateVote(int userId, int blogId, bool isUpvote)
+        public async Task<bool> AddDownvote(int userId, int blogId)
         {
             var existingVote = await _context.BlogVotes.FindAsync(userId, blogId);
 
-            if (existingVote == null)
-                return false;
+            if (existingVote != null)
+            {
+                if (existingVote.IsUpvote) 
+                {
+                    existingVote.IsUpvote = false;
+                    existingVote.UpdatedAt = DateTime.UtcNow;
+                }
 
-            existingVote.IsUpvote = isUpvote;
-            existingVote.UpdatedAt = DateTime.UtcNow;
+            }
+            else
+            {
+                var newVote = new BlogVote
+                {
+                    UserId = userId,
+                    BlogId = blogId,
+                    IsUpvote = false,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
+                };
+                await _context.BlogVotes.AddAsync(newVote);
+            }
 
             await _context.SaveChangesAsync();
             return true;
+        }
+        public async Task<int> GetUpvoteCount(int blogId)
+        {
+            return await _context.BlogVotes.CountAsync(v => v.BlogId == blogId && v.IsUpvote);
+        }
+
+        public async Task<int> GetDownvoteCount(int blogId)
+        {
+            return await _context.BlogVotes.CountAsync(v => v.BlogId == blogId && !v.IsUpvote);
         }
 
         public async Task<bool> RemoveVote(int userId, int blogId)

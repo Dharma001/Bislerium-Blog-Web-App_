@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace backend.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("user/api/[controller]")]
     public class BlogVotesController : ControllerBase
     {
         private readonly IBlogVoteService _blogVoteService;
@@ -15,10 +15,17 @@ namespace backend.Controllers
             _blogVoteService = blogVoteService;
         }
 
-        [HttpPost("{userId}/{blogId}/{isUpvote}")]
-        public async Task<IActionResult> AddOrUpdateVote(int userId, int blogId, bool isUpvote)
+        [HttpPost("{userId}/{blogId}/upvote")]
+        public async Task<IActionResult> AddUpvote(int userId, int blogId)
         {
-            var success = await _blogVoteService.AddVote(userId, blogId, isUpvote);
+            var success = await _blogVoteService.AddUpvote(userId, blogId);
+            return success ? Ok() : BadRequest();
+        }
+
+        [HttpPost("{userId}/{blogId}/downvote")]
+        public async Task<IActionResult> AddDownvote(int userId, int blogId)
+        {
+            var success = await _blogVoteService.AddDownvote(userId, blogId);
             return success ? Ok() : BadRequest();
         }
 
