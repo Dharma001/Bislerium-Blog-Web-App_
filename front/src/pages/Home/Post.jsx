@@ -142,7 +142,37 @@ console.log(getTimeElapsed(createdAt));
 
   return (
     <div className="flex-col items-center justify-center min-h-screen overflow-hidden w-[50%] mx-auto">
-      <input type="text" placeholder="Search..." onChange={handleSearch} className="w-full p-2 rounded-md border border-gray-300 mb-4" />
+                  <div className="relative rounded-xl mt-8">
+              <input
+                type="text"
+                onChange={handleSearch} 
+                name="search"
+                placeholder="Search Blogs"
+                className="h-[3rem] pl-12 text-[.8rem] 2xl:text-[.9rem] bg-gray-100 rounded-3xl w-full"
+                autoComplete="off"
+                autoFocus
+              />
+              <div className="absolute top-[.4rem] text-[1rem] left-2 z-10 pointer-events-none text-gray-700">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1.4rem"
+                  height="1.4rem"
+                  className="2xl:w-[1.7rem] 2xl:h-[1.7rem]"
+                  viewBox="0 0 50 50"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M23 36c-7.2 0-13-5.8-13-13s5.8-13 13-13s13 5.8 13 13s-5.8 13-13 13m0-24c-6.1 0-11 4.9-11 11s4.9 11 11 11s11-4.9 11-11s-4.9-11-11-11"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="m32.682 31.267l8.98 8.98l-1.414 1.414l-8.98-8.98z"
+                  />
+                </svg>
+              </div>
+            </div>
+            filtes code here 
+            <hr />
       {currentPosts.map((post, index) => (
         <div key={index} className="bg-white p-4 rounded-md shadow-md mt-4">
           <div className="flex flex-col">

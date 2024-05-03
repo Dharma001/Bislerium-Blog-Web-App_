@@ -65,35 +65,7 @@ const Navbar = () => {
           </a>
         </div>
         <div className="col-span-4">
-          <div className="flex justify-between items-center">
-            <div className="relative bg-gray-200 rounded-3xl  w-[50%] ">
-              <input
-                type="text"
-                name="search"
-                placeholder="Search Blogs"
-                className="2xl:h-10 h-9 pl-12 text-[.8rem] 2xl:text-[.9rem] bg-gray-100 rounded-3xl w-full"
-                autoComplete="off"
-                autoFocus
-              />
-              <div className="absolute top-[.4rem] text-[1rem] left-2 z-10 pointer-events-none text-gray-700">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1.4rem"
-                  height="1.4rem"
-                  className="2xl:w-[1.7rem] 2xl:h-[1.7rem]"
-                  viewBox="0 0 50 50"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M23 36c-7.2 0-13-5.8-13-13s5.8-13 13-13s13 5.8 13 13s-5.8 13-13 13m0-24c-6.1 0-11 4.9-11 11s4.9 11 11 11s11-4.9 11-11s-4.9-11-11-11"
-                  />
-                  <path
-                    fill="currentColor"
-                    d="m32.682 31.267l8.98 8.98l-1.414 1.414l-8.98-8.98z"
-                  />
-                </svg>
-              </div>
-            </div>
+          <div className="flex justify-between float-right">
             <div className="lg:flex">
               {isLoggedIn() ? (
                 <div className="relative flex justify-between space-x-4">
