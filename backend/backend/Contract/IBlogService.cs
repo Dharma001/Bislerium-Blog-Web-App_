@@ -7,7 +7,7 @@ namespace backend.Contract
 {
     public interface IBlogService
     {
-        Task<IEnumerable<Blog>> GetAllBlogsAsync();
+        Task<IEnumerable<BlogWithUserRequest>> GetAllBlogsAsync();
         Task<Blog> GetBlogByIdAsync(int id);
         Task<Blog> CreateBlogAsync(BlogRequest blogRequest, IFormFile imageFile);
         Task UpdateBlogAsync(int id, BlogRequest blogRequest, IFormFile imageFile);

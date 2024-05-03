@@ -23,11 +23,24 @@ namespace backend.Services
             _configuration = configuration;
         }
 
-        public async Task<IEnumerable<Blog>> GetAllBlogsAsync()
+        public async Task<IEnumerable<BlogWithUserRequest>> GetAllBlogsAsync()
         {
-            return await _context.Blogs.OrderByDescending(b => b.CreatedAt).ToListAsync();
+            return await _context.Blogs
+                .Include(b => b.User)
+                .OrderByDescending(b => b.CreatedAt)
+                .Select(b => new BlogWithUserRequest
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Content = b.Content,
+                    CreatedAt = b.CreatedAt,
+                    Image = b.Image,
+                    UserId = b.UserId,
+                    UserFirstName = b.User.FirstName,
+                    UserLastName = b.User.LastName
+                })
+                .ToListAsync();
         }
-
         public async Task<Blog> GetBlogByIdAsync(int id)
         {
             return await _context.Blogs.FindAsync(id);
