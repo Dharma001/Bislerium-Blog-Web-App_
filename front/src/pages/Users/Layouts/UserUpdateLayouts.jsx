@@ -76,6 +76,7 @@ function UserUpdateLayouts() {
                       </a>
                     </button>
             </div >
+            <hr className='mt-4'/>
 
           
             {/* <div className="grid grid-cols-12 gap-2 mb-80">
