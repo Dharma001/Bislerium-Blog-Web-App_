@@ -55,7 +55,7 @@ function Login() {
           navigate("/admin/dashboard");
           toast.success("Admin!");
         } else if (roleId === 2) {
-          navigate("/user");
+          navigate("/");
           toast.success("Login!");
         } else {
           navigate("/");

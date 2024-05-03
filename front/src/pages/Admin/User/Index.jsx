@@ -32,7 +32,7 @@ const Users = () => {
   useEffect(() => {
     const filteorangeResults = users.filter(
       (user) =>
-        (user.name &&
+        (user.firstName &&
           user.firstName.toLowerCase().includes(searchQuery.toLowerCase())) ||
         (user.email &&
           user.email.toLowerCase().includes(searchQuery.toLowerCase())) ||
@@ -283,7 +283,7 @@ const Users = () => {
           </div>
         ) : (
           <p className="text-center">
-            No Members found with the provided search criteria.
+            No Users found with the provided search criteria.
           </p>
         )}
       </div>
