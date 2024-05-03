@@ -3,80 +3,50 @@ import Cookies from 'js-cookie';
 import { fetchApi } from '../../Auths/apiWithoutAuth';
 import { fetchWithAuth } from '../../Auths/userAuth';
 import { toast } from 'react-toastify';
+import Votes from '../../components/Votes'
 import 'react-toastify/dist/ReactToastify.css';
 
 const Post = () => {
   const [comments, setComments] = useState({});
   const [posts, setPosts] = useState([]);
+  const [isUpvoted, setIsUpvoted] = useState(null);
   const [showCommentForm, setShowCommentForm] = useState(false);
   const [editingCommentIndex, setEditingCommentIndex] = useState(null);
   const [deletingCommentId, setDeletingCommentId] = useState(null);
-  const [upvoteCounts, setUpvoteCounts] = useState({});
-  const [downvoteCounts, setDownvoteCounts] = useState({});
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [blogsPerPage] = useState(5);
   const [searchQuery, setSearchQuery] = useState('');
   const URL = 'https://localhost:7189/';
   const userId = Cookies.get('userId');
+  
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchPostsAndUpvoteStatus = async () => {
       try {
-        const response = await fetchApi('get', 'Blog');
-        setPosts(response.data);
+        // Fetch posts
+        const postsResponse = await fetchApi('get', 'Blog');
+        const fetchedPosts = postsResponse.data;
+        setPosts(fetchedPosts);
+  
+        // Fetch upvote status for each post
+        for (const post of fetchedPosts) {
+          const response = await fetchApi('get', `home/${userId}/${post.id}/IsUpvoted`);
+          setIsUpvoted(prevState => ({
+            ...prevState,
+            [post.id]: response.data.isUpvoted
+          }));
+          console.log(response.data);
+        }
       } catch (error) {
         setError(error.message);
       }
     };
-
-    fetchPosts();
-  }, []);
   
-  const handleUpvote = async (blogId) => {
-    try {
-      await fetchWithAuth('post', `BlogVotes/${userId}/${blogId}/upvote`, {
-        headers: {
-          'User-Id': userId,
-        }
-      });
-      toast.success('Post upvoted successfully.');
-    } catch (error) {
-      toast.error('Failed to upvote post.');
-    }
-  };
-
-  const handleDownvote = async (blogId) => {
-    try {
-      await fetchWithAuth('post', `BlogVotes/${userId}/${blogId}/downvote`, {
-        headers: {
-          'User-Id': userId,
-        }
-      });
-      toast.success('Post downvoted successfully.');
-    } catch (error) {
-      toast.error('Failed to downvote post.');
-    }
-  };
-
-  const fetchVoteCounts = async (blogId) => {
-    try {
-      const upvoteCountsResponse = await fetchApi('get', `home/${blogId}/upvotes`);
-      const upvoteCount = upvoteCountsResponse.data;
-
-      const downvoteCountsResponse = await fetchApi('get', `home/${blogId}/downvotes`);
-      const downvoteCount = downvoteCountsResponse.data;
-
-      setUpvoteCounts(prevCounts => ({ ...prevCounts, [blogId]: upvoteCount }));
-      setDownvoteCounts(prevCounts => ({ ...prevCounts, [blogId]: downvoteCount }));
-    } catch (error) {
-      setError(error.message);
-    }
-  };
-
-  useEffect(() => {
-    posts.forEach(post => fetchVoteCounts(post.id));
-  }, [posts]);
+    fetchPostsAndUpvoteStatus();
+  }, [userId]); // Only re-run the effect when userId changes
+  
+  
 
   const fetchCommentsForPost = async (postId) => {
     try {
@@ -141,26 +111,19 @@ const Post = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="flex-col items-center justify-center min-h-screen overflow-hidden w-4/5 mx-auto">
+    <div className="flex-col items-center justify-center min-h-screen overflow-hidden w-[50%] mx-auto">
       <input type="text" placeholder="Search..." onChange={handleSearch} className="w-full p-2 rounded-md border border-gray-300 mb-4" />
       {currentPosts.map((post, index) => (
         <div key={index} className="bg-white p-4 rounded-md shadow-md mt-4">
           <div className="flex flex-col">
             <h2 className="text-lg font-bold">{post.title}</h2>
             <p className="text-gray-500 font-medium">{post.content}</p>
-            {upvoteCounts[post.id] && <div>Upvotes: {upvoteCounts[post.id]}</div>}
-            {downvoteCounts[post.id] && <div>Downvotes: {downvoteCounts[post.id]}</div>}
           </div>
           <div className="mt-4">
-            <img src={`${URL}${post.image}`} alt="Blog Image" title={post.title} className="w-full h-[450px] object-cover rounded-md" />
+            <img src={`${URL}${post.image}`} alt="Blog Image" title={post.title} className="w-full h-full object-cover rounded-md" />
           </div>
           <div className="flex justify-start items-center mt-4">
-            <button className="flex items-center space-x-2 bg-gray-100 p-2 rounded-3xl" onClick={() => handleUpvote(post.id)}>
-              Upvote
-            </button>
-            <button className="flex items-center space-x-2 ml-4 bg-gray-100 p-2 rounded-3xl" onClick={() => handleDownvote(post.id)}>
-              Downvote
-            </button>
+            <Votes blogId={post.id}/>
             <button className="flex items-center space-x-2 ml-4 bg-gray-100 p-2 rounded-3xl" onClick={() => setShowCommentForm(!showCommentForm)}>
               Comment
             </button>

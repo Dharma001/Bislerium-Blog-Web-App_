@@ -16,37 +16,12 @@ function UserUpdateLayouts() {
                     <ul className="flex flex-wrap mb-4"> 
                         <li className="py-2 border-b border-gray-200 mr-2"> 
                             <Link href="postHistory" className="text-black rounded-2xl hover:border-4 hover:bg-gray-200">
-                                PostHistory
+                                Post
                             </Link>
                         </li>
                         <li className="py-2 border-b  mr-2"> 
-                            <a href="#" className="text-black rounded-2xl hover:border-4 hover:bg-gray-200">
-                                Posts
-                            </a>
-                        </li>
-                        <li className="py-2 border-b  mr-2"> 
-                            <a href="#" className="text-black rounded-2xl hover:border-4 hover:bg-gray-200">
+                            <a href="commentHistory" className="text-black rounded-2xl hover:border-4 hover:bg-gray-200">
                                 Comments
-                            </a>
-                        </li>
-                        <li className="py-2 border-b mr-2"> 
-                            <a href="#" className="text-black rounded-2xl hover:border-4 hover:bg-gray-200">
-                                Saved
-                            </a>
-                        </li>
-                        <li className="py-2 border-b  mr-2"> 
-                            <a href="#" className="text-black rounded-2xl hover:border-4 hover:bg-gray-200">
-                                Hidden
-                            </a>
-                        </li>
-                        <li className="py-2 border-b  mr-2"> 
-                            <a href="#" className="text-black rounded-2xl hover:border-4 hover:bg-gray-200">
-                                Upvoted
-                            </a>
-                        </li>
-                        <li className="py-2 mr-2"> 
-                            <a href="#" className="text-black rounded-2xl hover:border-4 hover:bg-gray-200">
-                                Downvoted
                             </a>
                         </li>
                     </ul>

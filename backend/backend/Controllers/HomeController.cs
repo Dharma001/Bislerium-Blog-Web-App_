@@ -60,6 +60,27 @@ namespace backend.Controllers
             }
             return Ok(comments);
         }
+        [HttpGet("{userId}/{blogId}/IsUpvoted")]
+        public async Task<IActionResult> IsUpvoted(int userId, int blogId)
+        {
+            var isUpvoted = await _blogVoteService.IsUpvoted(userId, blogId);
+            if (isUpvoted.HasValue)
+            {
+                return Ok(isUpvoted.Value);
+            }
+            return NotFound();
+        }
+
+        [HttpGet("{userId}/{blogId}/IsDownvoted")]
+        public async Task<IActionResult> IsDownvoted(int userId, int blogId)
+        {
+            var isDownvoted = await _blogVoteService.IsDownvoted(userId, blogId);
+            if (isDownvoted.HasValue)
+            {
+                return Ok(isDownvoted.Value);
+            }
+            return NotFound();
+        }
 
         [HttpGet("{blogId}/downvotes")]
         public async Task<ActionResult<int>> GetDownvoteCount(int blogId)
