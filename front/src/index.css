@@ -3,10 +3,35 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+body {
   font-family: 'Inika', serif;
 }
 
 .bg-gradient-orange {
   background-image: linear-gradient(to right, #FFA500, #FF7F00, #FFD700, #FF7F00, #FFA500);
+}
+
+@layer components {
+  .nav {
+    @apply relative;
+  }
+
+  .nav:hover {
+    @apply text-black;
+  }
+
+  .nav::after {
+    @apply block content-[''];
+    background-color: #3b82f6;
+    height: 4px;
+    width: 0%;
+    left: 0;
+    top: 36px;
+    position: absolute;
+    transition-duration: 0.2s;
+  }
+
+  .nav:hover::after {
+    @apply w-full;
+  }
 }
