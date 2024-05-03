@@ -37,10 +37,10 @@ const Navbar = () => {
   return (
     <nav className=" border-gray-300 p-2 border-b">
       <div className="grid grid-cols-6 gap-4 justify-between w-full">
-        <div className="text-lg font-bold col-span-2 ">
-          <a href="/" className="flex items-end">
-            <img src="./logo.png" className="w-[3.5rem] mr-1" alt="" />
-            <span className="text-orange-500 text-[1.4rem] font-semibold">
+        <div className=" font-bold col-span-2 ">
+          <a href="/" className="flex justify-start items-end">
+            <img src="./logo.png" className="w-12  mr-1" alt="" />
+            <span className="text-orange-500 text-lg font-semibold">
               Bislerium Blog
             </span>
           </a>
@@ -86,9 +86,9 @@ const Navbar = () => {
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          width="2rem"
+                          width="1.5rem"
                           className="mr-1"
-                          height="2rem"
+                         
                           viewBox="0 0 16 16"
                         >
                           <path
@@ -96,14 +96,14 @@ const Navbar = () => {
                             d="M8 2.5a.5.5 0 0 0-1 0V7H2.5a.5.5 0 0 0 0 1H7v4.5a.5.5 0 0 0 1 0V8h4.5a.5.5 0 0 0 0-1H8z"
                           />
                         </svg>
-                        Create
+                        <p className="text-sm">Create</p>
                       </a>
                     </button>
                     <button className="ml-4">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="2rem"
-                        height="2rem"
+                        width="1.5rem"
+                       
                         viewBox="0 0 24 24"
                       >
                         <g
@@ -125,55 +125,130 @@ const Navbar = () => {
                     className="focus:outline-none"
                   >
                     <img
-                      src="https://img.freepik.com/free-vector/user-circles-set_78370-4704.jpg?t=st=1711861254~exp=1711864854~hmac=ebe6d6f8247b131892eced4153914b2cc9c740ddad891206e7bcfe4788be65c7&w=740"
+                      src="https://cdn.discordapp.com/attachments/1217051055301328896/1235834773969174538/ads.png?ex=6635d052&is=66347ed2&hm=99c09d7825cfee1d000b3e77157d6dfdcfd5b84b86bb1cba9edc0606fa5fecf2&"
                       alt="Profile"
-                      className="w-12 h-12  rounded-full"
+                      className="w-8   rounded-full"
                     />
                   </button>
                   {isProfileOpen && (
                     <div
-                      className="absolute bg-gray-100 z-999   overflow-y-auto rounded-sm "
+                      className="absolute bg-white shadow-md z-999 space-y-1   overflow-y-auto rounded-sm "
                       style={{
-                        top: "118%",
-                        right: "2%",
-                        width: "100%"
+                        top: "130%",
+                        right: "0%",
+                        width: "120%",
+                        padding: "6% 6%"
                       }}
                       onClick={closeDropdown}
                     >
-                      <button className="w-full text-start py-2 px-4 hover:bg-gray-300 ">
+                      <button className="w-full text-start  py-2 px-4 hover:bg-gray-100 ">
+                        <a
+                          href="/history/posthistory"
+                          className="text-gray-800 pl-8 text-xs  flex  "
+                        >
+                          <div>
+                          <p>View Profile</p>
+                         <p className="text-[10px] text-gray-500">Sumit Hacker</p> 
+                          </div>
+                        
+                        </a>
+                        
+                        <div className="absolute top-4 pl-2 text-[1rem] left-2 z-10 pointer-events-none text-gray-600">
+                          {/* <svg xmlns="http://www.w3.org/2000/svg" width="1.7em" height="1.7em" viewBox="0 0 20 20"><path fill="currentColor" d="M10 2a4 4 0 1 0 0 8a4 4 0 0 0 0-8M7 6a3 3 0 1 1 6 0a3 3 0 0 1-6 0m-1.991 5A2 2 0 0 0 3 13c0 1.691.833 2.966 2.135 3.797c1.05.669 2.398 1.049 3.87 1.165q.014-.153.052-.309l.17-.678c-1.413-.093-2.646-.442-3.554-1.022C4.623 15.283 4 14.31 4 13c0-.553.448-1 1.009-1h7.934l1-1zm5.97 4.377l4.83-4.83a1.87 1.87 0 1 1 2.645 2.646l-4.83 4.829a2.2 2.2 0 0 1-1.02.578l-1.498.374a.89.89 0 0 1-1.079-1.078l.375-1.498a2.2 2.2 0 0 1 .578-1.02"/></svg> */}
+                          <img
+                            src="https://cdn.discordapp.com/attachments/1217051055301328896/1235834773969174538/ads.png?ex=6635d052&is=66347ed2&hm=99c09d7825cfee1d000b3e77157d6dfdcfd5b84b86bb1cba9edc0606fa5fecf2&"
+                            className="w-8  rounded-full"
+                          />
+                        </div>
+                      </button>
+                      <hr className="m-2"/>
+
+                      <button className="w-full text-start py-2 px-4 hover:bg-gray-100 ">
                         <a
                           href="profile/userProfile"
-                          className="text-gray-800 pl-6 text-sm  flex  "
+                          className="text-gray-800 pl-8 text-xs  flex  "
                         >
                           Update Profile
                         </a>
-                        <div className="absolute top-1 text-[1rem] left-2 z-10 pointer-events-none text-gray-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1.7em" height="1.7em" viewBox="0 0 20 20"><path fill="currentColor" d="M10 2a4 4 0 1 0 0 8a4 4 0 0 0 0-8M7 6a3 3 0 1 1 6 0a3 3 0 0 1-6 0m-1.991 5A2 2 0 0 0 3 13c0 1.691.833 2.966 2.135 3.797c1.05.669 2.398 1.049 3.87 1.165q.014-.153.052-.309l.17-.678c-1.413-.093-2.646-.442-3.554-1.022C4.623 15.283 4 14.31 4 13c0-.553.448-1 1.009-1h7.934l1-1zm5.97 4.377l4.83-4.83a1.87 1.87 0 1 1 2.645 2.646l-4.83 4.829a2.2 2.2 0 0 1-1.02.578l-1.498.374a.89.89 0 0 1-1.079-1.078l.375-1.498a2.2 2.2 0 0 1 .578-1.02"/></svg>
+                        <div className="absolute pl-2 top-[37%] text-[1rem] left-2 z-10 pointer-events-none text-gray-600">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="1.7em"
+                            height="1.7em"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M10 2a4 4 0 1 0 0 8a4 4 0 0 0 0-8M7 6a3 3 0 1 1 6 0a3 3 0 0 1-6 0m-1.991 5A2 2 0 0 0 3 13c0 1.691.833 2.966 2.135 3.797c1.05.669 2.398 1.049 3.87 1.165q.014-.153.052-.309l.17-.678c-1.413-.093-2.646-.442-3.554-1.022C4.623 15.283 4 14.31 4 13c0-.553.448-1 1.009-1h7.934l1-1zm5.97 4.377l4.83-4.83a1.87 1.87 0 1 1 2.645 2.646l-4.83 4.829a2.2 2.2 0 0 1-1.02.578l-1.498.374a.89.89 0 0 1-1.079-1.078l.375-1.498a2.2 2.2 0 0 1 .578-1.02"
+                            />
+                          </svg>
                         </div>
                       </button>
-                      <button className="w-full text-start px-4 py-2  hover:bg-gray-300">
+                      <button className="w-full text-start px-4 py-2  hover:bg-gray-100">
                         <a
                           href="#"
-                          className=" pl-6  text-sm text-black  hover:text-slate-900"
+                          className=" pl-8  text-xs flex text-black  hover:text-slate-900"
                         >
                           Change Password
                         </a>
-                        <div className="absolute top-10 text-[1rem] left-2 z-10 pointer-events-none text-gray-600">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1.7rem" height="1.7rem" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M24 25.28a3.26 3.26 0 0 0-1.64 6.07V36h3.32v-4.65a3.28 3.28 0 0 0 1.61-2.8v0A3.27 3.27 0 0 0 24 25.28"/><rect width="33.23" height="25.73" x="7.38" y="17.77" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" rx="4.32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M13.35 17.77v-2.61a10.66 10.66 0 0 1 21.32 0v2.61"/></svg>
-                  </div>
+                        <div className="absolute pl-2 top-[56%] text-[1rem] left-2 z-10 pointer-events-none text-gray-600">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="1.7rem"
+                            height="1.7rem"
+                            viewBox="0 0 48 48"
+                          >
+                            <path
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M24 25.28a3.26 3.26 0 0 0-1.64 6.07V36h3.32v-4.65a3.28 3.28 0 0 0 1.61-2.8v0A3.27 3.27 0 0 0 24 25.28"
+                            />
+                            <rect
+                              width="33.23"
+                              height="25.73"
+                              x="7.38"
+                              y="17.77"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              rx="4.32"
+                            />
+                            <path
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M13.35 17.77v-2.61a10.66 10.66 0 0 1 21.32 0v2.61"
+                            />
+                          </svg>
+                        </div>
                       </button>
-                      <button className="w-full text-start  py-2 px-4  hover:bg-gray-300">
 
-                      <a
-                        href="#"
-                        className=" text-sm pl-6 text-black  hover:text-slate-900"
-                        onClick={handleLogout}
-                      >
-                        Log Out
-                      </a>
-                      <div className="absolute top-[72%] text-[1rem] left-2 z-10 pointer-events-none text-gray-600">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="1.7em" height="1.7em" viewBox="0 0 24 24"><path fill="currentColor" d="M5.616 20q-.691 0-1.153-.462T4 18.384V5.616q0-.691.463-1.153T5.616 4h5.903q.214 0 .357.143t.143.357t-.143.357t-.357.143H5.616q-.231 0-.424.192T5 5.616v12.769q0 .23.192.423t.423.192h5.904q.214 0 .357.143t.143.357t-.143.357t-.357.143zm12.444-7.5H9.692q-.213 0-.356-.143T9.192 12t.143-.357t.357-.143h8.368l-1.971-1.971q-.141-.14-.15-.338q-.01-.199.15-.364q.159-.165.353-.168q.195-.003.36.162l2.614 2.613q.242.243.242.566t-.243.566l-2.613 2.613q-.146.146-.347.153t-.366-.159q-.16-.165-.157-.357t.162-.35z"/></svg>
-                      </div>
+                      <hr className="m-2"/>
+                      <button className="w-full text-start  py-2 px-4  hover:bg-gray-100 flex">
+                        <a
+                          href="#"
+                          className=" text-xs pl-8 text-black  hover:text-slate-900"
+                          onClick={handleLogout}
+                        >
+                          Log Out
+                        </a>
+                        <div className="absolute pl-2 top-[81%]  text-[1rem] left-2 z-10 pointer-events-none text-gray-600">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="1.3em"
+                            height="1.3em"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M5.616 20q-.691 0-1.153-.462T4 18.384V5.616q0-.691.463-1.153T5.616 4h5.903q.214 0 .357.143t.143.357t-.143.357t-.357.143H5.616q-.231 0-.424.192T5 5.616v12.769q0 .23.192.423t.423.192h5.904q.214 0 .357.143t.143.357t-.143.357t-.357.143zm12.444-7.5H9.692q-.213 0-.356-.143T9.192 12t.143-.357t.357-.143h8.368l-1.971-1.971q-.141-.14-.15-.338q-.01-.199.15-.364q.159-.165.353-.168q.195-.003.36.162l2.614 2.613q.242.243.242.566t-.243.566l-2.613 2.613q-.146.146-.347.153t-.366-.159q-.16-.165-.157-.357t.162-.35z"
+                            />
+                          </svg>
+                        </div>
                       </button>
 
                       {/* {isStaff() && (

@@ -6,9 +6,9 @@ function UserProfile() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   return (
-    <div className="flex items-center justify-start ml-6 h-screen">
-      <div className="bg-opacity-10 backdrop-blur-md rounded-xl  max-w-xl w-full bg-slate-0">
-        <p className="mt-2 text-pretty font-semibold tracking-wider text-xl text-start text-gray-700">
+    <div className=" flex justify-start">
+      <div className="bg-opacity-10  rounded-xl flex flex-col justify-start  w-full bg-slate-0">
+        <p className="mt-2 text-pretty font-semibold tracking-wider  text-start text-gray-700">
           Customize profile
         </p>
         <p className="capitalize text-sm mt-6 text-gray-500 font-black">Profile information</p>
