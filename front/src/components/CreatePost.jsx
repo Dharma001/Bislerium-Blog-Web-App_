@@ -99,7 +99,7 @@ const CreatePost = () => {
                                 value={formData.content}
                                 onChange={handleChange}
                                 type="text"
-                                className="block pl-4 pb-2 pt-4 w-full text-sm text-gray-900 border rounded border-gray-300 appearance-none dark:focus:border-orange-500 focus:outline-none focus:ring-0 focus:border-orange-600 peer h-12 max-h-32 overflow-y-auto"
+                                className="block pl-4 pb-2 h-[200px] pt-4 w-full text-sm text-gray-900 border rounded border-gray-300 appearance-none dark:focus:border-orange-500 focus:outline-none focus:ring-0 focus:border-orange-600 peer overflow-y-auto"
                                 placeholder=""
                             ></textarea>
 
