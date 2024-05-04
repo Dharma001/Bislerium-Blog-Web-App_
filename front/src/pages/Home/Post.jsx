@@ -141,7 +141,8 @@ console.log(getTimeElapsed(createdAt));
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="flex-col items-center justify-center min-h-screen overflow-hidden w-[50%] mx-auto">
+    <div className="grid grid-cols-5 gap-4">
+    <div className="flex-col items-center justify-center min-h-screen overflow-hidden w-[70%] mx-auto col-span-3">
                   <div className="relative rounded-xl mt-8">
               <input
                 type="text"
@@ -250,6 +251,15 @@ console.log(getTimeElapsed(createdAt));
           </li>
         </ul>
       </div>
+    </div>
+    <div className="col-span-2 flex justify-center my-5">
+      <div className=" w-[50%] flex justify-center h-full bg-gray-200 rounded-md">
+        <div className="">
+        <h1>most popular blogs</h1>
+        </div>
+      </div>
+
+    </div>
     </div>
   );
 };

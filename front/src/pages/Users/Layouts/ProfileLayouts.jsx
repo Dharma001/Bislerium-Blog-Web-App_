@@ -13,15 +13,13 @@ function ProfileLayouts() {
                     <nav className="w-full transition-opacity duration-500 ">
                         <div className="px-4 ">
                             
-                            <ul className='flex space-x-4 items-center '
-                                
-                            >
+                            <ul className='flex space-x-4 items-center'>
                                 <li className="pr-[15px] py-[17px]">
                                     <Link
                                         to="/"
                                         className="nav text-[10px] md:text-[10px] lg:text-[14px] font-semibold hover:text-black text-gray-500 transition-colors duration-300 "
                                     >
-                                        Account
+                                        Home
                                     </Link>
                                 </li>
                                 <li className=" pr-[15px] py-[17px]">
@@ -34,10 +32,10 @@ function ProfileLayouts() {
                                 </li>
                                 <li className=" pr-[15px] py-[17px]">
                                     <Link
-                                        to="/guide"
+                                        to="deleteAccount"
                                         className="nav text-[10px] md:text-[12px] lg:text-[14px] font-semibold hover:text-black text-gray-500 transition-colors duration-300 "
                                     >
-                                        Blogs
+                                        DeleteAccount
                                     </Link>
                                 </li>
                                 <li className="pr-[15px] py-[17px]">
