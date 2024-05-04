@@ -367,11 +367,13 @@ const Post = () => {
       </div>
     </div>
     <div className="col-span-2 flex justify-center my-6">
-      <div className=" w-[62%] px-3 py-4 flex justify-center h-full bg-gray-200 rounded-lg">
-        <div className="">
+      <div className=" w-[62%] px-3 py-4 flex justify-center h-[88dvh] sticky top-20  overflow-y-auto bg-gray-50 rounded-lg scrollbar-w-2 scrollbar-track-gray-100 scrollbar-thumb-gray-300">
+        <div className="text-sm text-gray-500 capitalize">
         <h1>most popular blogs</h1>
         <PopularBlog/>
+
         </div>
+       
       </div>
 
     </div>
