@@ -24,6 +24,8 @@ import CommentHistory from "./pages/Users/CommentHistory";
 import ChangePassword from "./pages/Users/ChangePassword";
 import DeleteAccount from "./pages/Users/DeleteAccount";
 import AllUsersBlogs from "./pages/Users/AllUsersBlogs";
+import CreatePostProfile from "./components/CreatePostProfile";
+import EditPostProfile from "./components/EditPostProfile";
 
 function isAuthenticated() {
   const token = Cookies.get("token");
@@ -246,6 +248,28 @@ function App() {
             element={
               <PrivateUserRoute
                 element={<AllUsersBlogs />}
+                authenticated={isAuthenticated()}
+                isAuthUser={isAuthUser()}
+                redirectTo="/login"
+              />
+            }
+          />
+           <Route
+            path="CreateBlogProfile"
+            element={
+              <PrivateUserRoute
+                element={<CreatePostProfile />}
+                authenticated={isAuthenticated()}
+                isAuthUser={isAuthUser()}
+                redirectTo="/login"
+              />
+            }
+          />
+                     <Route
+            path="EditBlogProfile/:id"
+            element={
+              <PrivateUserRoute
+                element={<EditPostProfile />}
                 authenticated={isAuthenticated()}
                 isAuthUser={isAuthUser()}
                 redirectTo="/login"

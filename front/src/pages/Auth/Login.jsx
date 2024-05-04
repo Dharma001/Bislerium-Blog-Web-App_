@@ -56,11 +56,10 @@ function Login() {
           toast.success("Admin!");
         } else if (roleId === 2) {
           navigate("/");
-          toast.success("Login!");
+          toast.success("Login successful welcome to Bislerium!");
         } else {
           navigate("/");
         }
-        toast.success("Login successful!");
       } else {
         const errorData = await response.json();
         toast.error(errorData.message || "Invalid Username or Password");
