@@ -21,6 +21,7 @@ builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<IBlogVoteService, BlogVoteService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IPasswordResetService, PasswordResetService>();
+builder.Services.AddScoped<IBlogHistoryService, BlogHistoryService>();
 builder.Services.AddScoped<ICommentVoteService, CommentVoteService>();
 
 builder.Services.AddControllers();

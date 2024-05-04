@@ -15,6 +15,7 @@ namespace backend.appDbContext
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<BlogVote> BlogVotes { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<BlogHistory> BlogHistory { get; set; }
         public DbSet<CommentVote> CommentVotes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -69,6 +70,15 @@ namespace backend.appDbContext
                 .WithMany(c => c.CommentVotes)
                 .HasForeignKey(cv => cv.CommentId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.BlogHistory)
+                .WithOne(bh => bh.User)
+                .HasForeignKey(bh => bh.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<BlogHistory>()
+                .HasKey(bh => bh.Id);
 
             modelBuilder.Entity<Comment>()
                 .HasOne(c => c.User)

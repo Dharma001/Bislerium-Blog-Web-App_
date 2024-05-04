@@ -15,6 +15,7 @@
         public DateTime UpdatedAt { get; set; }
         public Role Role { get; set; }
         public ICollection<Blog> Blogs { get; set; }
+        public ICollection<BlogHistory> BlogHistory { get; set; }
         public ICollection<BlogVote> BlogVotes { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<CommentVote> CommentVotes { get; set; }

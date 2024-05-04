@@ -77,6 +77,36 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BlogHistory",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    BlogHistoryImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BlogTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BlogContent = table.Column<string>(type: "text", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BlogId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BlogHistory", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BlogHistory_Blogs_BlogId",
+                        column: x => x.BlogId,
+                        principalTable: "Blogs",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_BlogHistory_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "BlogVotes",
                 columns: table => new
                 {
@@ -162,6 +192,16 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_BlogHistory_BlogId",
+                table: "BlogHistory",
+                column: "BlogId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BlogHistory_UserId",
+                table: "BlogHistory",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Blogs_UserId",
                 table: "Blogs",
                 column: "UserId");
@@ -200,6 +240,9 @@ namespace backend.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "BlogHistory");
+
             migrationBuilder.DropTable(
                 name: "BlogVotes");
 
