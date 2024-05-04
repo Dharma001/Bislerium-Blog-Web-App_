@@ -34,4 +34,20 @@ body {
   .nav:hover::after {
     @apply w-full;
   }
+
+
+.scrollbar-w-2::-webkit-scrollbar {
+  width: 2px;
+}
+
+
+.scrollbar-w-2::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+
+.scrollbar-w-2::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
 }

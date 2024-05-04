@@ -9,7 +9,7 @@ const PopularBlog = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const fetchPosts= async () => {
+    const fetchPosts = async () => {
       try {
         const postsResponse = await fetchApi("get", "Home/recent");
         const fetchedPosts = postsResponse.data;
@@ -20,22 +20,28 @@ const PopularBlog = () => {
     };
 
     fetchPosts();
-  }, []); 
+  }, []);
 
   return (
     <>
-      <div className="flex flex-col">
+      {/* <div className="flex mt-4 flex-col">
         {posts.map((post, index) => (
-          <div key={index} className="w-full flex justify-between">
+          <div key={index} className="w-full flex mb-6 justify-between">
             <div className="">
+              <div className="flex text-xs">
                 <p>{post.userFirstName}</p>
                 <p> {post.userLastName}</p>
-                <h2 className="text-2xl  tracking-wider mt-2 mb-1 ">{post.title}</h2>
-            <p className="text-gray-500 text-md tracking-wide">{post.content}</p>
-            <p className="text-gray-500 w-full font-medium">
-  {new Date(post.createdAt).toLocaleDateString()}
-</p>
-</div>
+              </div>
+              <h2 className="text-md font-semibold text-black  tracking-wider mt-2 mb-1 ">
+                {post.title}
+              </h2>
+              <p className="text-gray-500 w-52 text-md tracking-wide">
+                {post.content}
+              </p>
+              <p className="text-gray-500 w-full font-medium">
+                {new Date(post.createdAt).toLocaleDateString()}
+              </p>
+            </div>
 
             <div>
               <img
@@ -46,8 +52,44 @@ const PopularBlog = () => {
               />
             </div>
           </div>
+        
         ))}
       </div>
+      */}
+
+<div className="flex mt-4  flex-col">
+  {posts.map((post, index) => (
+    <div key={index} className="w-full  flex mb-6 border-b hover:scale-105 rounded-lg bg-gray-100 p-2 justify-between">
+      <div className="">
+        <div className="flex text-xs">
+          <p>{post.userFirstName}</p>
+          <p> {post.userLastName}</p>
+        </div>
+        <h2 className="text-md font-semibold text-black  tracking-wider mt-2 mb-1 ">
+          {post.title}
+        </h2>
+        <p className="text-gray-500 w-52 text-md tracking-wide">
+          {post.content}
+        </p>
+        
+        <p className="text-gray-500 mt-2 w-full font-medium">
+          {new Date(post.createdAt).toLocaleDateString()}
+        </p>
+      
+      </div>
+
+      <div>
+        <img
+          className="h-[82px] w-[82px] rounded-lg"
+          src={`${URL}${post.image}`}
+          alt="Blog Image"
+          title={post.title}
+        />
+      </div>
+    </div>
+  ))}
+</div>
+
     </>
   );
 };

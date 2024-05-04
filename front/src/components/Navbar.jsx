@@ -54,7 +54,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className=" border-gray-300 p-2 border-b">
+    <nav className=" border-gray-300 sticky z-50 top-0 bg-white p-2 border-b">
       <div className="grid grid-cols-6 gap-4 justify-between w-full">
         <div className=" font-bold col-span-2 ">
           <a href="/" className="flex justify-start items-end">
@@ -123,7 +123,7 @@ const Navbar = () => {
                   </button>
                   {isProfileOpen && (
                     <div
-                      className="absolute bg-white shadow-md z-999 space-y-1   overflow-y-auto rounded-sm "
+                      className="absolute bg-white shadow-md z-999 space-y-1 z-50  overflow-y-auto rounded-sm "
                       style={{
                         top: "130%",
                         right: "0%",
@@ -242,14 +242,7 @@ const Navbar = () => {
                         </div>
                       </button>
 
-                      {/* {isStaff() && (
-                      <Link
-                        to={"/staffs"}
-                        className="block w-full px-4 py-2 text-black hover:bg-gray-200 hover:text-slate-900"
-                      >
-                        Dashboard
-                      </Link>
-                    )} */}
+                  
                     </div>
                   )}
                 </div>
