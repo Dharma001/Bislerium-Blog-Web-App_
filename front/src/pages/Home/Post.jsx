@@ -259,8 +259,8 @@ const Post = () => {
     //         </ul>
     //       </div>
     //     </div>
-
-    <div className="flex-col items-center justify-center min-h-screen overflow-hidden w-[65%] mx-auto">
+    <div className="grid grid-cols-5 gap-4">
+    <div className="flex-col items-center justify-center min-h-screen overflow-hidden w-[70%] mx-auto col-span-3">
       <div className="relative rounded-xl mt-2">
         <input
           type="text"
@@ -475,6 +475,15 @@ const Post = () => {
         </ul>
       </div>
     </div>
+    <div className="col-span-2 flex justify-center my-5">
+      <div className=" w-[50%] flex justify-center h-full bg-gray-200 rounded-md">
+        <div className="">
+        <h1>most popular blogs</h1>
+        </div>
+      </div>
+
+    </div>
+    </div>   
   );
 };
 
