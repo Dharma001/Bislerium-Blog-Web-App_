@@ -38,14 +38,14 @@ function UserUpdateLayouts() {
             <div>
             <ul className="flex ml-[20%] w-4/5 mx-auto space-x-6  mb-4"> 
                         <li className="py-2  mr-2"> 
+                            <a href="allUserBlogs" className="text-gray-700 tracking-wider font-black  rounded-full hover:border-4 px-2 py-2 hover:bg-gray-200">
+                                Posts
+                            </a>
+                        </li>
+                        <li className="py-2  mr-2"> 
                             <Link href="postHistory" className="text-gray-700 tracking-wider font-black  rounded-2xl px-2 py-2 hover:border-4 hover:bg-gray-200">
                                 PostHistory
                             </Link>
-                        </li>
-                        <li className="py-2  mr-2"> 
-                            <a href="#" className="text-gray-700 tracking-wider font-black  rounded-full hover:border-4 px-2 py-2 hover:bg-gray-200">
-                                Posts
-                            </a>
                         </li>
                         <li className="py-2   mr-2"> 
                             <a href="#" className="text-gray-700 tracking-wider font-black  rounded-full hover:border-4 px-2 py-2 hover:bg-gray-200">
@@ -96,13 +96,11 @@ function UserUpdateLayouts() {
                     </button>
             </div >
             <hr className='mt-4'/>
-
-          
-            {/* <div className="grid grid-cols-12 gap-2 mb-80">
+            <div className="grid grid-cols-12 gap-2 mb-80">
                 <div className="col-span-10">
                     <Outlet />
                 </div>
-            </div> */}
+            </div>
         </>
     )
 }
