@@ -22,6 +22,7 @@ import UserUpdateLayouts from "./pages/Users/Layouts/UserUpdateLayouts";
 import PostHistory from "./pages/Users/PostHistory";
 import CommentHistory from "./pages/Users/CommentHistory";
 import ChangePassword from "./pages/Users/ChangePassword";
+import DeleteAccount from "./pages/Users/DeleteAccount";
 
 function isAuthenticated() {
   const token = Cookies.get("token");
@@ -208,6 +209,17 @@ function App() {
             element={
               <PrivateUserRoute
                 element={<UserProfile />}
+                authenticated={isAuthenticated()}
+                isAuthUser={isAuthUser()}
+                redirectTo="/login"
+              />
+            }
+          />
+                  <Route
+            path="deleteAccount"
+            element={
+              <PrivateUserRoute
+                element={<DeleteAccount />}
                 authenticated={isAuthenticated()}
                 isAuthUser={isAuthUser()}
                 redirectTo="/login"

@@ -61,6 +61,13 @@ namespace backend.Controllers
             return NotFound();
         }
 
+        [HttpGet("recent")]
+        public async Task<ActionResult<IEnumerable<BlogWithUserRequest>>> GetRecentBlogs()
+        {
+            var recentBlogs = await _blogService.GetRecentBlogsAsync();
+            return Ok(recentBlogs);
+        }
+
         [HttpGet("{userId}/{blogId}/IsDownvoted")]
         public async Task<IActionResult> IsDownvoted(int userId, int blogId)
         {
