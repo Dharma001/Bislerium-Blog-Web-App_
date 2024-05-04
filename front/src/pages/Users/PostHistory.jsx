@@ -26,24 +26,27 @@ function PostHistory() {
     <div className="container mx-auto">
       <h1 className="text-2xl font-bold mb-4">Post History</h1>
       {posts.length > 0 ? (
-        <ul className="list-none">
-          {posts.map((post) => (
-            <li key={post.id} className="mb-4">
-              <div className="bg-white shadow-md rounded-lg p-4">
-                <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-xl font-bold">{post.blogTitle}</h2>
-                  <p className="text-gray-500">
-                    {new Date(post.createdAt).toLocaleDateString()}
-                  </p>
-                </div>
-                <p className="text-gray-700 mb-4">{post.blogContent}</p>
-                <div className="flex justify-between items-center">
+        <table className="w-full text-left">
+          <thead>
+            <tr>
+              <th className="py-4 px-6 bg-gray-100 font-bold">Title</th>
+              <th className="py-4 px-6 bg-gray-100 font-bold">Content</th>
+              <th className="py-4 px-6 bg-gray-100 font-bold">Author</th>
+              <th className="py-4 px-6 bg-gray-100 font-bold">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {posts.map((post) => (
+              <tr key={post.id}>
+                <td className="py-4 px-6">{post.blogTitle}</td>
+                <td className="py-4 px-6">{post.blogContent}</td>
+                <td className="py-4 px-6">
                   <div className="flex items-center">
                     <img
                       src={`${apiUrl}${post.image}`}
                       alt="Blog Image"
                       title={post.blogTitle}
-                      className="w-32 h-32 rounded-full mr-4"
+                      className="w-12 h-12 rounded-full mr-4"
                     />
                     <div>
                       <p className="text-gray-700 font-bold">
@@ -52,11 +55,14 @@ function PostHistory() {
                       <p className="text-gray-500">Owner</p>
                     </div>
                   </div>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+                </td>
+                <td className="py-4 px-6">
+                  {new Date(post.createdAt).toLocaleDateString()}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       ) : (
         <p>No blog posts available.</p>
       )}
