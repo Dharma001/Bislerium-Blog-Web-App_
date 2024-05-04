@@ -47,7 +47,7 @@ const Post = () => {
     };
 
     fetchPostsAndUpvoteStatus();
-  }, [userId]); // Only re-run the effect when userId changes
+  }, [userId]);
 
   const fetchCommentsForPost = async (postId) => {
     try {
