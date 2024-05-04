@@ -136,6 +136,27 @@ namespace backend.Services
 
             await _context.SaveChangesAsync();
         }
+        public async Task<IEnumerable<BlogWithUserRequest>> GetRecentBlogsAsync()
+        {
+            DateTime oneWeekAgo = DateTime.UtcNow.AddDays(-7);
+
+            return await _context.Blogs
+                .Include(b => b.User)
+                .Where(b => b.CreatedAt >= oneWeekAgo)
+                .OrderByDescending(b => b.CreatedAt)
+                .Select(b => new BlogWithUserRequest
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Content = b.Content,
+                    CreatedAt = b.CreatedAt,
+                    Image = b.Image,
+                    UserId = b.UserId,
+                    UserFirstName = b.User.FirstName,
+                    UserLastName = b.User.LastName
+                })
+                .ToListAsync();
+        }
 
         public async Task DeleteBlogAsync(int id)
         {
