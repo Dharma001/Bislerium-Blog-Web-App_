@@ -23,6 +23,7 @@ import PostHistory from "./pages/Users/PostHistory";
 import CommentHistory from "./pages/Users/CommentHistory";
 import ChangePassword from "./pages/Users/ChangePassword";
 import DeleteAccount from "./pages/Users/DeleteAccount";
+import AllUsersBlogs from "./pages/Users/AllUsersBlogs";
 
 function isAuthenticated() {
   const token = Cookies.get("token");
@@ -240,6 +241,17 @@ function App() {
         </Route>
         
         <Route path="/history" element={<UserUpdateLayouts />}>
+        <Route
+            path="allUserBlogs"
+            element={
+              <PrivateUserRoute
+                element={<AllUsersBlogs />}
+                authenticated={isAuthenticated()}
+                isAuthUser={isAuthUser()}
+                redirectTo="/login"
+              />
+            }
+          />
         <Route
             path="postHistory"
             element={

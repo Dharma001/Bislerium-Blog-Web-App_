@@ -100,6 +100,25 @@ namespace backend.Services
             return blog;
         }
 
+        public async Task<IEnumerable<BlogWithUserRequest>> GetBlogsByUserIdAsync(int userId)
+        {
+            return await _context.Blogs
+                .Include(b => b.User)
+                .Where(b => b.UserId == userId)
+                .OrderByDescending(b => b.CreatedAt)
+                .Select(b => new BlogWithUserRequest
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Content = b.Content,
+                    CreatedAt = b.CreatedAt,
+                    Image = b.Image,
+                    UserId = b.UserId,
+                    UserFirstName = b.User.FirstName,
+                    UserLastName = b.User.LastName
+                })
+                .ToListAsync();
+        }
 
         public async Task UpdateBlogAsync(int id, BlogRequest blogRequest, IFormFile newImageFile)
         {

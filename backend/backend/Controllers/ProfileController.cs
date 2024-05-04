@@ -9,10 +9,19 @@ using Microsoft.AspNetCore.Mvc;
 public class ProfileController : ControllerBase
 {
     private readonly IUserService _ProfileService;
+    private readonly IBlogService _blogService;
 
-    public ProfileController(IUserService UserService)
+    public ProfileController(IUserService UserService , IBlogService blogService)
     {
         _ProfileService = UserService;
+        _blogService = blogService;
+    }
+
+    [HttpGet("blog/{userId}")]
+    public async Task<ActionResult<IEnumerable<BlogWithUserRequest>>> GetBlogsByUserId(int userId)
+    {
+        var blogs = await _blogService.GetBlogsByUserIdAsync(userId);
+        return Ok(blogs);
     }
 
     [HttpGet("{id}")]
