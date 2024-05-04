@@ -13,5 +13,6 @@ namespace backend.Contract
         Task UpdateBlogAsync(int id, BlogRequest blogRequest, IFormFile imageFile);
         Task<IEnumerable<BlogWithUserRequest>> GetRecentBlogsAsync();
         Task DeleteBlogAsync(int id);
+        Task<IEnumerable<BlogWithUserRequest>> GetBlogsByUserIdAsync(int userId);
     }
 }
