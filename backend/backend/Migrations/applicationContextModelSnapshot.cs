@@ -91,6 +91,47 @@ namespace backend.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("backend.Models.BlogHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BlogContent")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("BlogHistoryImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("BlogId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BlogTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("BlogHistory");
+                });
+
             modelBuilder.Entity("backend.Models.BlogVote", b =>
                 {
                     b.Property<int>("UserId")
@@ -243,6 +284,21 @@ namespace backend.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("backend.Models.BlogHistory", b =>
+                {
+                    b.HasOne("Blog", null)
+                        .WithMany("BlogHistory")
+                        .HasForeignKey("BlogId");
+
+                    b.HasOne("backend.Models.User", "User")
+                        .WithMany("BlogHistory")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("backend.Models.BlogVote", b =>
                 {
                     b.HasOne("Blog", "Blog")
@@ -302,6 +358,8 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Blog", b =>
                 {
+                    b.Navigation("BlogHistory");
+
                     b.Navigation("BlogVotes");
 
                     b.Navigation("CommentVotes");
@@ -321,6 +379,8 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Models.User", b =>
                 {
+                    b.Navigation("BlogHistory");
+
                     b.Navigation("BlogVotes");
 
                     b.Navigation("Blogs");

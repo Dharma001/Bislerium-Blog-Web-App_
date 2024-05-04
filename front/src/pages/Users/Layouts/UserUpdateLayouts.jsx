@@ -38,14 +38,14 @@ function UserUpdateLayouts() {
             <div>
             <ul className="flex ml-[20%] w-4/5 mx-auto space-x-6  mb-4"> 
                         <li className="py-2  mr-2"> 
-                            <a href="allUserBlogs" className="text-gray-700 tracking-wider font-black  rounded-full hover:border-4 px-2 py-2 hover:bg-gray-200">
+                            <a href="/history/allUserBlogs" className="text-gray-700 tracking-wider font-black  rounded-full hover:border-4 px-2 py-2 hover:bg-gray-200">
                                 Posts
                             </a>
                         </li>
                         <li className="py-2  mr-2"> 
-                            <Link href="postHistory" className="text-gray-700 tracking-wider font-black  rounded-2xl px-2 py-2 hover:border-4 hover:bg-gray-200">
+                            <a href="/history/postHistory" className="text-gray-700 tracking-wider font-black  rounded-2xl px-2 py-2 hover:border-4 hover:bg-gray-200">
                                 PostHistory
-                            </Link>
+                            </a>
                         </li>
                         <li className="py-2   mr-2"> 
                             <a href="#" className="text-gray-700 tracking-wider font-black  rounded-full hover:border-4 px-2 py-2 hover:bg-gray-200">
@@ -76,7 +76,7 @@ function UserUpdateLayouts() {
                     </ul>
                     <button className="ml-[20%] border-2 border-gray-400  px-2 py-1 rounded-3xl">
                       <a
-                        href="/createPost"
+                        href="CreateBlogProfile"
                         className="text-gray-800 flex justify-center items-center"
                       >
                         <svg

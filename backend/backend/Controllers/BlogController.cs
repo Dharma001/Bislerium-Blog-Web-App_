@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using backend.Contract;
 using backend.Models.Requests;
 using Microsoft.AspNetCore.Http;
+using backend.Models;
 
 namespace backend.Controllers
 {
@@ -11,10 +12,13 @@ namespace backend.Controllers
     public class BlogController : ControllerBase
     {
         private readonly IBlogService _blogService;
+        private readonly IBlogHistoryService _blogHistoryService;
 
-        public BlogController(IBlogService blogService)
+        public BlogController(IBlogService blogService, IBlogHistoryService blogHistoryService)
         {
             _blogService = blogService;
+            _blogHistoryService = blogHistoryService;
+            _blogHistoryService = blogHistoryService;
         }
 
         [HttpGet("api/[controller]")]
@@ -54,6 +58,20 @@ namespace backend.Controllers
         {
             await _blogService.DeleteBlogAsync(id);
             return NoContent();
+        }
+
+        [HttpGet("api/history/{userId}")]
+        public async Task<ActionResult<List<BlogHistory>>> GetBlogHistory(int userId)
+        {
+            try
+            {
+                var blogHistory = await _blogHistoryService.GetBlogHistoryWithUserAndBlogByUserId(userId);
+                return Ok(blogHistory);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
     }
 }
