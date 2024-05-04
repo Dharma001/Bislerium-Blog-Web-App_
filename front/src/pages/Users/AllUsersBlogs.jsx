@@ -117,7 +117,7 @@ function AllUsersBlogs() {
                     <td className="px-4 py-4 whitespace-nowrap text-md text-center">
                       {new Date(blog.createdAt).toLocaleDateString()}
                     </td>
-                    <td className="px-4 py-4 whitespace-nowrap text-md mt-6 text-center justify-center flex gap-4">
+                    <td className="px-8 py-14 whitespace-nowrap text-md mt-6 text-center justify-center flex gap-4">
                       <Link to={`/history/EditBlogProfile/${blog.id}`}>
                         <button className="bg-green-500 hover:bg-green-700 justify-center text-white px-3 py-2 rounded-sm transition duration-300 ease-in-out flex items-center">
                           <svg
