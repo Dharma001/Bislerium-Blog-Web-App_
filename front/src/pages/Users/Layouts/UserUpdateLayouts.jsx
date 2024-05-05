@@ -96,7 +96,7 @@ function UserUpdateLayouts() {
                     </button>
             </div >
             <hr className='mt-4'/>
-            <div className="grid grid-cols-12 gap-2 mb-80">
+            <div className="grid grid-cols-12 gap-2 ">
                 <div className="col-span-10">
                     <Outlet />
                 </div>
