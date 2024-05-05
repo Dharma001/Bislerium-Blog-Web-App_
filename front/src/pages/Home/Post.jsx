@@ -207,7 +207,7 @@ const Post = () => {
      
             </div>
 
-            <div className="mr-10">
+            <div className="mr-10pos">
               <button className="bg-blue-700  hover:bg-blue-800 text-sm   font-semibold rounded-3xl px-3 py-1 text-white">
                 Join
               </button>
