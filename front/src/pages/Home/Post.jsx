@@ -213,7 +213,7 @@ const Post = () => {
             </div>
           </div>
           <div>
-            <h2 className="text-2xl  tracking-wider mt-2 mb-1 ">{post.title}</h2>
+            <h2 className="text-2xl font-semibold  tracking-wider mt-2 mb-1 ">{post.title}</h2>
             <p className="text-gray-500 text-md tracking-wide">{post.content}</p>
           </div>
           <div className="mt-4">
@@ -296,8 +296,36 @@ const Post = () => {
                   className=" px-2  ml-4 m-2"
                  
                 >
-                 
-                  <p className="text-gray-600">{comment.content}</p>
+                  <div className="border border-gray-300 bg-gray-50 my-4 py-4 px-4 rounded-lg">
+                 <div className="flex space-x-4">
+                 <div className="flex space-x-1 justify-center items-center text-sm text-gray-950">
+                  <div className="">
+                 <img  className="w-6" src="https://th.bing.com/th?id=OIP.HHVUf3TYqncgpJXyCMmxyAHaHa&w=250&h=250&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2"/>
+                 </div>
+                 <div className="flex">
+                <p>{post.userFirstName}</p>
+                <p> {post.userLastName}</p>
+                </div>
+                </div>
+        
+                <div className="text-sm  flex justify-center items-center space-x-1">
+                
+                <div className="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.4em"  viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" d="M5.282 5.282A9.5 9.5 0 1 0 12 2.5m0 9.5L7 7m5-4.5V5m9 7h-2m-7 7v2m-7-9H3"/></svg>
+                </div>
+                <div>
+                <p className="text-gray-500 w-full font-medium">
+                  {getTimeElapsed(post.createdAt)}
+                </p>
+                </div>
+              </div>
+               
+                 </div>
+                 <div className=" my-4 ">
+                  
+                <p className="text-gray-600 text-sm">{comment.content}</p>
+                </div>
+                </div>  
                   <div className="w-fit">
                   <Votes/>
                   </div>
