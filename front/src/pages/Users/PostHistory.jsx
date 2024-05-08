@@ -28,8 +28,8 @@ function PostHistory() {
   }, [userId]);
 
   const TableHeader = () => (
-    <thead>
-      <tr>
+    <thead className="">
+      <tr className="w-full">
         <th className="py-4 px-6 bg-gray-100 font-bold">Blog Image</th>
         <th className="py-4 px-6 bg-gray-100 font-bold">Title</th>
         <th className="py-4 px-6 bg-gray-100 font-bold">Content</th>
@@ -45,7 +45,7 @@ function PostHistory() {
           src={`${apiUrl}${post.image}`}
           alt="Blog Image"
           title={post.blogTitle}
-          className="w-24 h-24 rounded-full" // Increased image size
+          className="w-44 h-44 rounded-lg" 
         />
       </td>
       <td className="py-4 px-6">{post.blogTitle}</td>
@@ -64,8 +64,8 @@ function PostHistory() {
   );
 
   return (
-    <div className="container mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Post History</h1>
+    <div className="container w-fit ml-[22%] px-4 ">
+      <h1 className="text-2xl font-bold  my-6">Post History</h1>
       {loading? (
         <p>Loading...</p>
       ) : error? (

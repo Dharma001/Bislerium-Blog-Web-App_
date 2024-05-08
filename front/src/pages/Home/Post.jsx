@@ -185,7 +185,7 @@ const Post = () => {
       <hr className="mt-2" />
       {currentPosts.map((post, index) => (
         <div key={index} className="bg-white p-4 rounded-md shadow-md mt-4 mb-8">
-          <div className="w-full flex justify-between items-center">
+          <div className="w-full flex  justify-normal items-center">
              <div className=" w-full flex space-x-4 ">
               <div className="flex text-sm text-gray-950">
                 <p>{post.userFirstName}</p>
@@ -198,6 +198,7 @@ const Post = () => {
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.4em"  viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" d="M5.282 5.282A9.5 9.5 0 1 0 12 2.5m0 9.5L7 7m5-4.5V5m9 7h-2m-7 7v2m-7-9H3"/></svg>
                 </div>
                 <div>
+                  
                 <p className="text-gray-500 w-full font-medium">
                   {getTimeElapsed(post.createdAt)}
                 </p>
@@ -206,8 +207,8 @@ const Post = () => {
      
             </div>
 
-            <div className="">
-              <button className="bg-blue-700  hover:bg-blue-800 text-sm  font-semibold rounded-3xl px-3 py-1 text-white">
+            <div className="mr-10pos">
+              <button className="bg-blue-700  hover:bg-blue-800 text-sm   font-semibold rounded-3xl px-3 py-1 text-white">
                 Join
               </button>
             </div>
@@ -300,9 +301,9 @@ const Post = () => {
                  <div className="flex space-x-4">
                  <div className="flex space-x-1 justify-center items-center text-sm text-gray-950">
                   <div className="">
-                 <img  className="w-6" src="https://th.bing.com/th?id=OIP.HHVUf3TYqncgpJXyCMmxyAHaHa&w=250&h=250&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2"/>
+                 <img  className="w-6 rounded-full" src="https://th.bing.com/th?id=OIP.HHVUf3TYqncgpJXyCMmxyAHaHa&w=250&h=250&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2"/>
                  </div>
-                 <div className="flex">
+                 <div className="flex text-gray-700">
                 <p>{post.userFirstName}</p>
                 <p> {post.userLastName}</p>
                 </div>
