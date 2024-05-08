@@ -227,11 +227,11 @@ const Navbar = () => {
                         >
                           Log Out
                         </a>
-                        <div className="absolute pl-2 top-[81%]  text-[1rem] left-2 z-10 pointer-events-none text-gray-600">
+                        <div className="absolute pl-2 top-[79%]  text-[1rem] left-2 z-10 pointer-events-none text-gray-600">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            width="1.3em"
-                            height="1.3em"
+                            width="1.7em"
+                            height="1.7em"
                             viewBox="0 0 24 24"
                           >
                             <path

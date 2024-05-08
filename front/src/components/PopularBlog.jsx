@@ -24,7 +24,6 @@ const PopularBlog = () => {
 
   return (
     <>
-
 <div className="flex mt-4  flex-col">
   {posts.map((post, index) => (
     <div key={index} className="w-full  flex mb-6 border-b hover:scale-105 rounded-lg bg-gray-50 p-2 justify-between">

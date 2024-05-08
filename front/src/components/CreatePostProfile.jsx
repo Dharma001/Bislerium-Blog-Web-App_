@@ -69,10 +69,13 @@ const CreatePostProfile = () => {
                                 value={formData.title}
                                 onChange={handleChange}
                                 autoFocus="on"
-                                className="block pl-4 pb-2.5 pt-4 w-full text-sm text-gray-900 border  rounded border-1 border-gray-300 appearance-none  dark:focus:border-orange-500 focus:outline-none focus:ring-0 focus:border-orange-600 peer"
+                                className="block pl-8 pb-2.5 pt-4 w-full text-sm text-gray-900 border  rounded border-1 border-gray-300 appearance-none  dark:focus:border-orange-500 focus:outline-none focus:ring-0 focus:border-orange-600 peer"
                                 placeholder=""
                             />
-                            <label htmlFor="email" className="absolute bg-transparent text-sm  duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-2 mx-1 peer-focus:px-2 peer-focus:text-orange-600 peer-focus:dark:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4">Title*</label>
+                            <label htmlFor="email" className="absolute bg-transparent text-sm  duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-6 mx-1 peer-focus:px-2 peer-focus:text-orange-600 peer-focus:dark:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4">Title*</label>
+                            <div className="absolute top-2 left-2 z-10 pointer-events-none text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="30px" viewBox="0 0 32 32"><path fill="currentColor" d="M4 24h10v2H4zm0-6h10v2H4zm22-4H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h20a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2M6 6v6h20V6zm20 22h-6a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2m-6-8v6h6v-6z" /></svg>
+                            </div>
                         </div>
                         <div className="relative">
                             <textarea
@@ -81,11 +84,14 @@ const CreatePostProfile = () => {
                                 value={formData.content}
                                 onChange={handleChange}
                                 type="text"
-                                className="block pl-4 pb-2 h-6rem pt-4 w-full text-sm text-gray-900 border rounded border-gray-300 appearance-none dark:focus:border-orange-500 focus:outline-none focus:ring-0 focus:border-orange-600 peer"
+                                className="block pl-8 pb-3 h-6rem pt-5 w-full text-sm text-gray-900 border rounded border-gray-300 appearance-none dark:focus:border-orange-500 focus:outline-none focus:ring-0 focus:border-orange-600 peer"
                                 placeholder=""
                             ></textarea>
 
-                            <label htmlFor="email" className="absolute bg-transparent text-sm  duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-2 mx-1 peer-focus:px-2 peer-focus:text-orange-600 peer-focus:dark:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4">Description*</label>
+                            <label htmlFor="email" className="absolute bg-transparent text-sm  duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-6 mx-1 peer-focus:px-2 peer-focus:text-orange-600 peer-focus:dark:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4">Description*</label>
+                            <div className="absolute  top-5 left-2 z-10 pointer-events-none text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="30px" viewBox="0 0 24 24"><path fill="currentColor" d="m18 20.289l-.708-.714l2.075-2.075H12.5v-1h6.867l-2.075-2.08l.708-.708L21.288 17zM20 10h-1V5h-3v2.23H8V5H5v14h5.5v1H4V4h6.252q.14-.586.623-.985q.483-.4 1.125-.4q.654 0 1.134.4q.48.398.62.985H20zm-7.997-4.77q.345 0 .575-.232q.23-.233.23-.578t-.233-.575t-.578-.23t-.575.234t-.23.578t.234.574t.577.23" /></svg>
+                            </div>
                         </div>
                         <div>
                             <div className="flex items-center justify-center w-full">
@@ -102,6 +108,7 @@ const CreatePostProfile = () => {
                                         name="imageFile"
                                         onChange={handleChange} />
                                 </label>
+
                             </div>
                         </div>
 

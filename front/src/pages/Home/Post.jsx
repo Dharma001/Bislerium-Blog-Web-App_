@@ -174,7 +174,7 @@ const Post = () => {
       <hr className="mt-2" />
       {currentPosts.map((post, index) => (
         <div key={index} className="bg-white p-4 rounded-md shadow-md mt-4 mb-8">
-          <div className="w-full flex justify-between items-center">
+          <div className="w-full flex  justify-normal items-center">
              <div className=" w-full flex space-x-4 ">
               <div className="flex text-sm text-gray-950">
                 <p>{post.userFirstName}</p>
@@ -187,6 +187,7 @@ const Post = () => {
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.4em"  viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" d="M5.282 5.282A9.5 9.5 0 1 0 12 2.5m0 9.5L7 7m5-4.5V5m9 7h-2m-7 7v2m-7-9H3"/></svg>
                 </div>
                 <div>
+                  
                 <p className="text-gray-500 w-full font-medium">
                   {getTimeElapsed(post.createdAt)}
                 </p>
@@ -195,14 +196,14 @@ const Post = () => {
      
             </div>
 
-            <div className="">
-              <button className="bg-blue-700  hover:bg-blue-800 text-sm  font-semibold rounded-3xl px-3 py-1 text-white">
+            <div className="mr-10pos">
+              <button className="bg-blue-700  hover:bg-blue-800 text-sm   font-semibold rounded-3xl px-3 py-1 text-white">
                 Join
               </button>
             </div>
           </div>
           <div>
-            <h2 className="text-2xl  tracking-wider mt-2 mb-1 ">{post.title}</h2>
+            <h2 className="text-2xl font-semibold  tracking-wider mt-2 mb-1 ">{post.title}</h2>
             <p className="text-gray-500 text-md tracking-wide">{post.content}</p>
           </div>
           <div className="mt-4">
@@ -285,8 +286,36 @@ const Post = () => {
                   className=" px-2  ml-4 m-2"
                  
                 >
-                 
-                  <p className="text-gray-600">{comment.content}</p>
+                  <div className="border border-gray-300 bg-gray-50 my-4 py-4 px-4 rounded-lg">
+                 <div className="flex space-x-4">
+                 <div className="flex space-x-1 justify-center items-center text-sm text-gray-950">
+                  <div className="">
+                 <img  className="w-6 rounded-full" src="https://th.bing.com/th?id=OIP.HHVUf3TYqncgpJXyCMmxyAHaHa&w=250&h=250&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2"/>
+                 </div>
+                 <div className="flex text-gray-700">
+                <p>{post.userFirstName}</p>
+                <p> {post.userLastName}</p>
+                </div>
+                </div>
+        
+                <div className="text-sm  flex justify-center items-center space-x-1">
+                
+                <div className="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.4em"  viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" d="M5.282 5.282A9.5 9.5 0 1 0 12 2.5m0 9.5L7 7m5-4.5V5m9 7h-2m-7 7v2m-7-9H3"/></svg>
+                </div>
+                <div>
+                <p className="text-gray-500 w-full font-medium">
+                  {getTimeElapsed(post.createdAt)}
+                </p>
+                </div>
+              </div>
+               
+                 </div>
+                 <div className=" my-4 ">
+                  
+                <p className="text-gray-600 text-sm">{comment.content}</p>
+                </div>
+                </div>  
                   <div className="w-fit">
                   <CommentVotes blogId={comment.blogId} commentId={comment.id}/>
                   </div>
