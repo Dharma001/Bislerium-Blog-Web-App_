@@ -5,7 +5,7 @@ import { fetchWithAuth } from "../Auths/userAuth";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const CommentVotes = ({ blogId }) => {
+const CommentVotes = ({ blogId , commentId}) => {
   const [upvoteCount, setUpvoteCount] = useState(0);
   const [downvoteCount, setDownvoteCount] = useState(0);
   const [isUpvoted, setIsUpvoted] = useState(null);
@@ -13,13 +13,13 @@ const CommentVotes = ({ blogId }) => {
 
   const handleUpvote = async () => {
     try {
-      await fetchWithAuth("post", `CommentVotes/${userId}/${blogId}/upvote`, {
+      await fetchWithAuth("post", `CommentVote/${userId}/${commentId}/${blogId}/upvote`, {
         headers: {
           "User-Id": userId,
         },
       });
       setIsUpvoted(true);
-      toast.success("Post upvoted successfully.");
+      toast.success("Post Comment upvoted successfully.");
     } catch (error) {
       toast.error("Failed to upvote post.");
     }
@@ -27,13 +27,13 @@ const CommentVotes = ({ blogId }) => {
 
   const handleDownvote = async () => {
     try {
-      await fetchWithAuth("post", `BlogVotes/${userId}/${blogId}/downvote`, {
+      await fetchWithAuth("post", `CommentVote/${userId}/${commentId}/${blogId}/downvote`, {
         headers: {
           "User-Id": userId,
         },
       });
       setIsUpvoted(false); 
-      toast.success("Post downvoted successfully.");
+      toast.success("Post Comment downvoted successfully.");
     } catch (error) {
       toast.error("Failed to downvote post.");
     }
@@ -44,11 +44,11 @@ const CommentVotes = ({ blogId }) => {
       try {
         const upvoteCountsResponse = await fetchApi(
           "get",
-          `home/${blogId}/upvotes`
+          `home/${blogId}/${commentId}/upvotes`
         );
         const downvoteCountsResponse = await fetchApi(
           "get",
-          `home/${blogId}/downvotes`
+          `home/${blogId}/${commentId}/downvotes`
         );
         setUpvoteCount(upvoteCountsResponse.data);
         setDownvoteCount(downvoteCountsResponse.data);
@@ -65,7 +65,7 @@ const CommentVotes = ({ blogId }) => {
       try {
         const response = await fetchApi(
           "get",
-          `Home/${userId}/${blogId}/IsUpvoted`
+          `Home/${userId}/${blogId}/${commentId}/IsUpvoted`
         );
         setIsUpvoted(response.data);
       } catch (error) {
