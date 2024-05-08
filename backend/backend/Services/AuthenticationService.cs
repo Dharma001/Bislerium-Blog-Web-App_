@@ -23,17 +23,17 @@ namespace backend.Services
             _context = context;
         }
 
-        public async Task<(string token, int? roleId ,int? Id)> Authenticate(string email, string password)
+        public async Task<(string token, int? roleId, int? Id)> Authenticate(string email, string password)
         {
             try
             {
                 var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
 
-                if (user == null || !VerifyPasswordHash(password, user.Password))
-                    return (null, null ,null);
+                if (user == null || !VerifyPasswordHash(password, user.Password) || user.Status != true)
+                    return (null, null, null);
 
                 var token = GenerateJwtToken(user);
-                return (token, user.RoleId , user.Id);
+                return (token, user.RoleId, user.Id);
             }
             catch (Exception ex)
             {

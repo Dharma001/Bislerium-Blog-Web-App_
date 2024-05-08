@@ -6,7 +6,7 @@ namespace backend.Models
     {
         public int Id { get; set; } 
         public int UserId { get; set; }
-        public string BlogHistoryImage { get; set; }
+        public string? BlogHistoryImage { get; set; }
         public string BlogTitle { get; set; }
 
         [Column(TypeName = "text")]

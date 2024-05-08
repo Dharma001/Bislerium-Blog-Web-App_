@@ -31,6 +31,7 @@ namespace backend.Services
                 Address = request.Address,
                 Password = hashedPassword,
                 RoleId = 2,
+                Status = true,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };

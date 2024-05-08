@@ -37,6 +37,7 @@ namespace backend.Migrations
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
                     RoleId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -61,7 +62,7 @@ namespace backend.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Content = table.Column<string>(type: "text", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -83,7 +84,7 @@ namespace backend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    BlogHistoryImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BlogHistoryImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BlogTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BlogContent = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -130,6 +131,35 @@ namespace backend.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CommentHistory",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BlogId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CommentHistory", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CommentHistory_Blogs_BlogId",
+                        column: x => x.BlogId,
+                        principalTable: "Blogs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CommentHistory_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -212,6 +242,16 @@ namespace backend.Migrations
                 column: "BlogId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CommentHistory_BlogId",
+                table: "CommentHistory",
+                column: "BlogId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CommentHistory_UserId",
+                table: "CommentHistory",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comments_BlogId",
                 table: "Comments",
                 column: "BlogId");
@@ -245,6 +285,9 @@ namespace backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "BlogVotes");
+
+            migrationBuilder.DropTable(
+                name: "CommentHistory");
 
             migrationBuilder.DropTable(
                 name: "CommentVotes");

@@ -39,6 +39,23 @@ public class UsersController : ControllerBase
         return CreatedAtAction(nameof(GetUser), new { id = createdUser.Id }, createdUser);
     }
 
+    [HttpPatch("{id}/status")]
+    public async Task<IActionResult> UpdateUserStatus(int id, [FromBody] bool status)
+    {
+        try
+        {
+            var updatedUser = await _userService.UpdateUserStatus(id, status);
+            if (updatedUser != null)
+            {
+                return Ok(updatedUser);
+            }
+            return NotFound();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateUser(int id, UpdateUserRequest userRequest)

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using backend.appDbContext;
 using backend.Models;
-using backend.Services.Interfaces;
+using backend.Contract;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Services

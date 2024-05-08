@@ -14,5 +14,7 @@ namespace backend.Contract
         Task<User> UpdateUserProfile(int id, UpdateProfileRequest userRequest);
         Task<User> UpdateUserProfilePassword(int id, UpdateProfilePasswordRequest request);
         Task<bool> DeleteUser(int id);
+        Task<User> UpdateUserStatus(int id, bool status);
+        Task<bool> RemoveUser(int id);
     }
 }

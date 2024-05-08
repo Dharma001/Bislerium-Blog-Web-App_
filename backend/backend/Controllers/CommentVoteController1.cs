@@ -1,32 +1,49 @@
 ﻿using System.Threading.Tasks;
-using backend.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using backend.Contract;
 
 namespace backend.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class CommentVotesController : ControllerBase
+    [Route("user/api/[controller]")]
+    public class CommentVoteController : ControllerBase
     {
         private readonly ICommentVoteService _commentVoteService;
 
-        public CommentVotesController(ICommentVoteService commentVoteService)
+        public CommentVoteController(ICommentVoteService commentVoteService)
         {
             _commentVoteService = commentVoteService;
         }
 
-        [HttpPost("{userId}/{blogId}/{commentId}/{isUpvote}")]
-        public async Task<IActionResult> AddOrUpdateVote(int userId, int blogId, int commentId, bool isUpvote)
+        [HttpPost("{userId}/{commentId}/{blogId}/upvote")]
+
+        public async Task<IActionResult> Upvote(int userId, int commentId, int blogId)
         {
-            var success = await _commentVoteService.AddVote(userId, blogId, commentId, isUpvote);
-            return success ? Ok() : BadRequest();
+            var success = await _commentVoteService.AddUpvote(userId, commentId, blogId);
+            if (success)
+                return Ok();
+            else
+                return BadRequest("Failed to upvote comment.");
         }
 
-        [HttpDelete("{userId}/{blogId}/{commentId}")]
-        public async Task<IActionResult> RemoveVote(int userId, int blogId, int commentId)
+        [HttpPost("{userId}/{commentId}/{blogId}/downvote")]
+        public async Task<IActionResult> Downvote(int userId, int commentId, int blogId)
         {
-            var success = await _commentVoteService.RemoveVote(userId, blogId, commentId);
-            return success ? Ok() : NotFound();
+            var success = await _commentVoteService.AddDownvote(userId, commentId, blogId);
+            if (success)
+                return Ok();
+            else
+                return BadRequest("Failed to downvote comment.");
+        }
+
+        [HttpPost("remove")]
+        public async Task<IActionResult> RemoveVote(int userId, int commentId, int blogId)
+        {
+            var success = await _commentVoteService.RemoveVote(userId, commentId, blogId);
+            if (success)
+                return Ok();
+            else
+                return BadRequest("Failed to remove vote.");
         }
     }
 }
