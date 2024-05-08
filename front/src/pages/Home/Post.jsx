@@ -4,6 +4,7 @@ import { fetchApi } from "../../Auths/apiWithoutAuth";
 import { fetchWithAuth } from "../../Auths/userAuth";
 import { toast } from "react-toastify";
 import Votes from "../../components/Votes";
+import CommentVotes from "../../components/CommentVotes";
 import "react-toastify/dist/ReactToastify.css";
 import PopularBlog from "../../components/PopularBlog";
 
@@ -24,12 +25,10 @@ const Post = () => {
   useEffect(() => {
     const fetchPostsAndUpvoteStatus = async () => {
       try {
-        // Fetch posts
         const postsResponse = await fetchApi("get", "Blog");
         const fetchedPosts = postsResponse.data;
         setPosts(fetchedPosts);
-
-        // Fetch upvote status for each post
+        
         for (const post of fetchedPosts) {
           const response = await fetchApi(
             "get",
@@ -39,10 +38,8 @@ const Post = () => {
             ...prevState,
             [post.id]: response.data.isUpvoted,
           }));
-          console.log(response.data);
         }
       } catch (error) {
-        setError(error.message);
       }
     };
 
@@ -56,10 +53,7 @@ const Post = () => {
         ...prevComments,
         [postId]: response.data,
       }));
-      toast.success("Comments loaded successfully.");
     } catch (error) {
-      setError(error.message);
-      toast.error("Failed to load comments.");
     }
   };
 
@@ -79,9 +73,7 @@ const Post = () => {
         }
       );
       fetchCommentsForPost(postId);
-      toast.success("Comment submitted successfully.");
     } catch (error) {
-      toast.error("Failed to submit comment.");
     }
   };
 
@@ -92,7 +84,6 @@ const Post = () => {
           "User-Id": userId,
         },
       });
-      toast.success("Comment deleted successfully.");
       const updatedComments = { ...comments };
       for (let key in updatedComments) {
         updatedComments[key] = updatedComments[key].filter(
@@ -101,7 +92,6 @@ const Post = () => {
       }
       setComments(updatedComments);
     } catch (error) {
-      toast.error("Failed to delete comment.");
     }
   };
   function getTimeElapsed(createdAt) {
@@ -133,7 +123,6 @@ const Post = () => {
   }
 
   const createdAt = "2022-05-04T10:00:00Z";
-  console.log(getTimeElapsed(createdAt));
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
@@ -299,7 +288,7 @@ const Post = () => {
                  
                   <p className="text-gray-600">{comment.content}</p>
                   <div className="w-fit">
-                  <Votes/>
+                  <CommentVotes blogId={comment.blogId} commentId={comment.id}/>
                   </div>
                   {comment.userId === userId && (
                     <div>
@@ -367,13 +356,11 @@ const Post = () => {
       </div>
     </div>
     <div className="col-span-2 flex justify-center my-6">
-      <div className=" w-[62%] px-3 py-4 flex justify-center h-[88dvh] sticky top-20  overflow-y-auto bg-gray-50 rounded-lg scrollbar-w-2 scrollbar-track-gray-100 scrollbar-thumb-gray-300">
-        <div className="text-sm text-gray-500 capitalize">
+      <div className=" w-[62%] px-3 py-4 flex justify-center h-full bg-gray-100 rounded-lg">
+        <div className="">
         <h1>most popular blogs</h1>
         <PopularBlog/>
-
         </div>
-       
       </div>
 
     </div>
