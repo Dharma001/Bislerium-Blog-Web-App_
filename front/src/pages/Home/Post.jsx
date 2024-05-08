@@ -275,7 +275,7 @@ const Post = () => {
                 setShowCommentForm(!showCommentForm);
               }}
             >
-              {showCommentForm ? "Hide Comments" : "Show Comments"}
+              {showCommentForm ? <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m17 14l-5-5l-5 5"/></svg> : <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m7 10l5 5l5-5"/></svg> }
             </button>
           </div>
           {showCommentForm && comments[post.id] && (
@@ -385,7 +385,7 @@ const Post = () => {
       </div>
     </div>
     <div className="col-span-2 flex justify-center my-6">
-      <div className=" w-[62%] px-3 py-4 flex justify-center h-full bg-gray-100 rounded-lg">
+      <div className=" w-[62%] px-3 py-4 flex justify-center h-full bg-gray-50 rounded-lg">
         <div className="">
         <h1>most popular blogs</h1>
         <PopularBlog/>

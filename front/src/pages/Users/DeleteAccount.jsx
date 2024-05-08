@@ -1,6 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { fetchWithAuth } from '../../Auths/userAuth';
+import Cookies from 'js-cookie';
 
-function DeleteAccount() {
+function DeleteAccount({ setUsers, setFilteredUsers }) {
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const userId = Cookies.get('userId');
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleDeleteUser = async () => {
+    try {
+      if (!userId) {
+        throw new Error("User ID not found.");
+      }
+      
+      await fetchWithAuth("delete", `Profile/${userId}`);
+      toast.success("User Deleted Successfully");
+      toggleModal();
+    } catch (error) {
+      setError(error.message);
+      toast.error("Failed to delete user.");
+    }
+  };
+
   return (
     <div className="text-start">
       <h1 className="text-2xl font-bold mb-4">Confirmation: Delete Account</h1>
@@ -19,11 +47,63 @@ function DeleteAccount() {
         <p className="text-sm">2. You will no longer be able to log in or access any features tied to your account.</p>
       </h3>
 
-      <p className="text-sm mb-4">If you're certain about deleting your account, please click the " Confirm Delete" button below.</p>
+      <p className="text-sm mb-4">If you're certain about deleting your account, please click the "Confirm Delete" button below.</p>
       
       <p className="text-sm">Are you sure you want to delete your account? (yes/no)</p><br></br>
       
-      <button className="bg-white text-red-600 border border-red-600 py-2 px-4 rounded cursor-pointer hover:bg-red-600 hover:text-white" type="submit">Confirm Delete</button>
+      <button onClick={toggleModal} className="bg-white text-red-600 border border-red-600 py-2 px-4 rounded cursor-pointer hover:bg-red-600 hover:text-white" type="button">Confirm Delete</button>
+      
+      {isOpen && (
+        <div className="fixed z-10 inset-0 overflow-y-auto ">
+          <div className="flex items-center justify-center min-h-screen bg-slate-900 opacity-90">
+            <div className="relative bg-white  p-12 rounded-sm max-w-lg mx-auto">
+              <div className="flex justify-between items-center">
+                <h2 className="text-lg font-semibold">
+                  Delete Confirmation
+                </h2>
+                <button
+                  onClick={toggleModal}
+                  className="text-gray-500 hover:text-gray-700 focus:outline-none relative top-[-15px]"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1.2rem"
+                    height="1.2rem"
+                    viewBox="0 0 15 15"
+                  >
+                    <path
+                      fill="currentColor"
+                      fillRule="evenodd"
+                      d="M11.782 4.032a.575.575 0 1 0-.813-.814L7.5 6.687L4.032 3.218a.575.575 0 0 0-.814.814L6.687 7.5l-3.469 3.468a.575.575 0 0 0 .814.814L7.5 8.313l3.469 3.469a.575.575 0 0 0 .813-.814L8.313 7.5z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div className="mt-4">
+                <p>
+                  Are you sure you want to delete this item?
+                </p>
+              </div>
+
+              <div className="mt-6 flex justify-end">
+                <button
+                  onClick={handleDeleteUser}
+                  className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded mr-4 focus:outline-none"
+                >
+                  Delete
+                </button>
+                <button
+                  onClick={toggleModal}
+                  className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

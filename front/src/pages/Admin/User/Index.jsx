@@ -8,6 +8,7 @@ const Users = () => {
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [IsOpenStatus, setIsOpenStatus] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage] = useState(5);
 
@@ -15,12 +16,18 @@ const Users = () => {
     setIsOpen(!isOpen);
   };
 
+  const toggleStatusModal = () => {
+    setIsOpenStatus(!IsOpenStatus);
+  };
+
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const response = await fetchWithAuth("get", "Users");
         setUsers(response.data);
         setFilteorangeUsers(response.data);
+        console.log(response.data)
       } catch (error) {
         setError(error.message);
       }
@@ -54,7 +61,20 @@ const Users = () => {
       setError(error.message);
     }
   };
-
+  
+  const handleUserStatus = async (userId) => {
+    console.log(userId)
+    try {
+      await fetchWithAuth("patch", `Users/${userId}/status`, true);
+      setUsers(prevUsers => prevUsers.map(user => user.id === userId ? { ...user, status: !user.status } : user));
+      setFilteorangeUsers(prevFilteredUsers => prevFilteredUsers.map(user => user.id === userId ? { ...user, status: !user.status } : user));
+      toggleStatusModal();
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+  
+  
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = filteorangeUsers.slice(indexOfFirstUser, indexOfLastUser);
@@ -169,6 +189,7 @@ const Users = () => {
                       <p className="px-3 text-sm font-semibold py-2 ">
                         {user.roleName}
                       </p>
+                      <p>{user.status ? 'Active' : 'Inactive'}</p>
                     </td>
                     <td className="px-4 py-4 whitespace-nowrap text-md mt-6 text-center flex justify-center gap-4">
                     <Link to={`/admin/editUser/${user.id}`}>
@@ -200,6 +221,12 @@ const Users = () => {
                           />
                         </svg>
                       </button>
+                      <button
+                                  onClick={() => handleUserStatus(user.id)}
+                                  className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded mr-4 focus:outline-none"
+                                >
+                                  Change
+                                </button>
                     </td>
                     <td>
                       {isOpen && (
