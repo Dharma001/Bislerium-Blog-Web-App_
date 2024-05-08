@@ -5,7 +5,7 @@ import { fetchWithAuth } from "../Auths/userAuth";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Votes = ({ blogId }) => {
+const CommentVotes = ({ blogId }) => {
   const [upvoteCount, setUpvoteCount] = useState(0);
   const [downvoteCount, setDownvoteCount] = useState(0);
   const [isUpvoted, setIsUpvoted] = useState(null);
@@ -13,12 +13,12 @@ const Votes = ({ blogId }) => {
 
   const handleUpvote = async () => {
     try {
-      await fetchWithAuth("post", `BlogVotes/${userId}/${blogId}/upvote`, {
+      await fetchWithAuth("post", `CommentVotes/${userId}/${blogId}/upvote`, {
         headers: {
           "User-Id": userId,
         },
       });
-      setIsUpvoted(true); // Update state locally
+      setIsUpvoted(true);
       toast.success("Post upvoted successfully.");
     } catch (error) {
       toast.error("Failed to upvote post.");
@@ -32,7 +32,7 @@ const Votes = ({ blogId }) => {
           "User-Id": userId,
         },
       });
-      setIsUpvoted(false); // Update state locally
+      setIsUpvoted(false); 
       toast.success("Post downvoted successfully.");
     } catch (error) {
       toast.error("Failed to downvote post.");
@@ -157,4 +157,4 @@ const Votes = ({ blogId }) => {
   );
 };
 
-export default Votes;
+export default CommentVotes;
