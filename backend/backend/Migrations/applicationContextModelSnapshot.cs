@@ -38,7 +38,6 @@ namespace backend.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -104,7 +103,6 @@ namespace backend.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("BlogHistoryImage")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("BlogId")
@@ -154,6 +152,39 @@ namespace backend.Migrations
                     b.HasIndex("BlogId");
 
                     b.ToTable("BlogVotes");
+                });
+
+            modelBuilder.Entity("backend.Models.CommentHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BlogId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CommentHistory");
                 });
 
             modelBuilder.Entity("backend.Models.CommentVote", b =>
@@ -244,6 +275,9 @@ namespace backend.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -318,6 +352,25 @@ namespace backend.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("backend.Models.CommentHistory", b =>
+                {
+                    b.HasOne("Blog", "Blog")
+                        .WithMany("CommentHistory")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("backend.Models.User", "User")
+                        .WithMany("CommentHistory")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Blog");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("backend.Models.CommentVote", b =>
                 {
                     b.HasOne("Blog", "Blog")
@@ -362,6 +415,8 @@ namespace backend.Migrations
 
                     b.Navigation("BlogVotes");
 
+                    b.Navigation("CommentHistory");
+
                     b.Navigation("CommentVotes");
 
                     b.Navigation("Comments");
@@ -384,6 +439,8 @@ namespace backend.Migrations
                     b.Navigation("BlogVotes");
 
                     b.Navigation("Blogs");
+
+                    b.Navigation("CommentHistory");
 
                     b.Navigation("CommentVotes");
 

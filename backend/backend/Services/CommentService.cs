@@ -4,6 +4,8 @@ using backend.Models;
 using backend.appDbContext;
 using Microsoft.EntityFrameworkCore;
 using backend.Models.Requests;
+using NuGet.Protocol.Plugins;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 
 namespace backend.Services
 {
@@ -28,6 +30,18 @@ namespace backend.Services
             };
 
             _context.Comments.Add(comment);
+
+            var updateHistoryEntry = new CommentHistory
+            {
+                UserId = userId,
+                BlogId = blogId,
+                Content = content,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            _context.CommentHistory.Add(updateHistoryEntry);
+
             await _context.SaveChangesAsync();
 
             return comment;
@@ -44,6 +58,17 @@ namespace backend.Services
             {
                 comment.Content = commentRequest.Content;
             }
+
+            var updateHistoryEntry = new CommentHistory
+            {
+                UserId = userId,
+                BlogId = blogId,
+                Content = commentRequest.Content,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            _context.CommentHistory.Add(updateHistoryEntry);
 
             comment.UpdatedAt = DateTime.UtcNow;
 

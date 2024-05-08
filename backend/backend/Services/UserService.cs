@@ -31,6 +31,7 @@ namespace backend.Services
                     LastName = user.LastName,
                     Email = user.Email,
                     Phone = user.Phone,
+                    Status = user.Status,
                     RoleName = user.Role.Name
                 })
                 .ToListAsync();
@@ -61,7 +62,6 @@ namespace backend.Services
             await _context.SaveChangesAsync();
             return user;
         }
-
 
         public async Task<User> UpdateUser(int id, UpdateUserRequest userRequest)
         {
@@ -118,11 +118,10 @@ namespace backend.Services
                 }
                 else
                 {
-                    // Current password is incorrect
                     throw new Exception("Current password is incorrect.");
                 }
             }
-            return null; // Or throw NotFoundException if user not found
+            return null;
         }
 
         public async Task<bool> DeleteUser(int id)
@@ -136,5 +135,32 @@ namespace backend.Services
             }
             return false;
         }
+        public async Task<bool> RemoveUser(int id)
+        {
+            var existingUser = await _context.Users.FindAsync(id);
+            if (existingUser != null)
+            {
+                existingUser.Status = false;
+
+                _context.Users.Update(existingUser);
+
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+            return false;
+        }
+        public async Task<User> UpdateUserStatus(int id, bool status)
+        {
+            var existingUser = await _context.Users.FindAsync(id);
+            if (existingUser != null)
+            {
+                existingUser.Status = !existingUser.Status;
+                await _context.SaveChangesAsync();
+                return existingUser;
+            }
+            return null;
+        }
+
     }
 }

@@ -5,7 +5,7 @@ using backend.Contract;
 using backend.Models.Requests;
 using Microsoft.AspNetCore.Http;
 using backend.Services;
-using backend.Services.Interfaces;
+using backend.Contract;
 
 namespace backend.Controllers
 {
@@ -17,13 +17,16 @@ namespace backend.Controllers
         private readonly IHomeService _homeService;
         private readonly IBlogVoteService _blogVoteService;
         private readonly ICommentService _commentService;
+        private readonly ICommentVoteService _commentVoteService;
 
-        public HomeController(IBlogService blogService, IHomeService homeService, IBlogVoteService blogVoteService, ICommentService commentService)
+        public HomeController(IBlogService blogService, ICommentVoteService commentVoteService , IHomeService homeService, IBlogVoteService blogVoteService, ICommentService commentService)
         {
             _blogService = blogService;
             _homeService = homeService;
             _blogVoteService = blogVoteService;
             _commentService = commentService;
+            _commentVoteService = commentVoteService;
+
         }
 
         [HttpGet]
@@ -50,6 +53,7 @@ namespace backend.Controllers
             }
             return Ok(comments);
         }
+
         [HttpGet("{userId}/{blogId}/IsUpvoted")]
         public async Task<IActionResult> IsUpvoted(int userId, int blogId)
         {
@@ -94,6 +98,39 @@ namespace backend.Controllers
                 return NotFound();
 
             return Ok(updatedUser);
+        }
+        [HttpGet("{blogId}/{commentId}/upvotes")]
+        public async Task<IActionResult> GetCommentUpvoteCount(int commentId, int blogId)
+        {
+            var count = await _commentVoteService.GetUpvoteCount(commentId, blogId);
+            return Ok(count);
+        }
+
+        [HttpGet("{blogId}/{commentId}/downvotes")]
+        public async Task<IActionResult> GetCommentDownvoteCount(int commentId, int blogId)
+        {
+            var count = await _commentVoteService.GetDownvoteCount(commentId, blogId);
+            return Ok(count);
+        }
+
+        [HttpGet("{userId}/{commentId}/{blogId}/IsDownvoted")]
+        public async Task<IActionResult> IsUpvoted(int userId, int commentId, int blogId)
+        {
+            var isUpvoted = await _commentVoteService.IsUpvoted(userId, commentId, blogId);
+            return Ok(isUpvoted);
+        }
+
+        [HttpGet("{userId}/{commentId}/{blogId}/IsUpvoted")]
+        public async Task<IActionResult> IsDownvoted(int userId, int commentId, int blogId)
+        {
+            var isDownvoted = await _commentVoteService.IsDownvoted(userId, commentId, blogId);
+            return Ok(isDownvoted);
+        }
+        [HttpGet("{blogId}/comment/count")]
+        public async Task<IActionResult> GetTotalCommentCount(int blogId)
+        {
+            var count = await _commentVoteService.GetTotalCommentCount(blogId);
+            return Ok(count);
         }
     }
 }

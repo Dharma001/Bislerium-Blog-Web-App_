@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace backend.Services.Interfaces
+namespace backend.Contract
 {
     public interface IBlogVoteService
     {

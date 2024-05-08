@@ -1,7 +1,7 @@
 using backend.appDbContext;
 using backend.Contract;
 using backend.Services;
-using backend.Services.Interfaces;
+using backend.Contract;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;

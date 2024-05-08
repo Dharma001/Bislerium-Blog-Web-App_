@@ -10,11 +10,13 @@ public class ProfileController : ControllerBase
 {
     private readonly IUserService _ProfileService;
     private readonly IBlogService _blogService;
+    private readonly IUserService _userService;
 
-    public ProfileController(IUserService UserService , IBlogService blogService)
+    public ProfileController(IUserService UserService , IBlogService blogService, IUserService userService)
     {
         _ProfileService = UserService;
         _blogService = blogService;
+        _userService = userService;
     }
 
     [HttpGet("blog/{userId}")]
@@ -54,6 +56,18 @@ public class ProfileController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteUser(int id)
+    {
+        var result = await _userService.RemoveUser(id);
+        if (!result)
+        {
+            return NotFound();
+        }
+        return NoContent();
+    }
+
     [HttpPut("{id}/updatePassword")]
     public async Task<IActionResult> UpdatePassword(int id, UpdateProfilePasswordRequest request)
     {
