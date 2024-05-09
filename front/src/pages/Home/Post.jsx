@@ -145,9 +145,10 @@ const Post = () => {
   };
 
   return (
-    <div className="grid grid-cols-5  gap-4">
-         <div className="flex flex-col justify-end ml-20  overflow-hidden w-[100%]  col-span-3">
-    <div>
+    <div className="grid grid-cols-5  gap-4 ">
+         <div className="flex flex-col justify-end relative ml-20 overflow-hidden w-[100%]  col-span-3">
+
+         <div className=" rounded-xl absolute top-0  mt-2">
               <input
           type="text"
           value={searchQuery} 
@@ -158,6 +159,24 @@ const Post = () => {
           autoComplete="off"
           autoFocus
         />
+                <div className="absolute top-[.7rem] text-[1rem] left-2 z-10 pointer-events-none text-gray-700">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1.4rem"
+            height="1.4rem"
+            className="2xl:w-[1.7rem] 2xl:h-[1.7rem]"
+            viewBox="0 0 50 50"
+          >
+            <path
+              fill="currentColor"
+              d="M23 36c-7.2 0-13-5.8-13-13s5.8-13 13-13s13 5.8 13 13s-5.8 13-13 13m0-24c-6.1 0-11 4.9-11 11s4.9 11 11 11s11-4.9 11-11s-4.9-11-11-11"
+            />
+            <path
+              fill="currentColor"
+              d="m32.682 31.267l8.98 8.98l-1.414 1.414l-8.98-8.98z"
+            />
+          </svg>
+      </div>
 
       <select value={sortBy} onChange={handleSortByChange}>
         <option value="">Sort By</option>
