@@ -1,15 +1,13 @@
 ﻿using backend.Models;
+using backend.Models.Requests;
 
 namespace backend.Contract
 {
     public interface IAdminService
     {
-        int GetAllTimeCumulativeCount();
-        int GetMonthlyCumulativeCount(int month);
-        List<Blog> GetTop10MostPopularPosts();
-        List<User> GetTop10MostActiveBloggers();
-        int GetMonthlyCountOfPosts(int month);
-        int GetAllTimeCountOfPosts();
-       
+        Task<DashboardRequests> GetAllTimeCounts();
+        Task<List<Blog>> GetTopPopularPostsAllTime();
+        Task<List<Blog>> GetTopPopularPostsByMonth(int year, int month);
+        Task<List<User>> GetTopPopularBloggers();
     }
 }

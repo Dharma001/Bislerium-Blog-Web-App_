@@ -5,7 +5,6 @@ import Cookies from "js-cookie";
 
 function CommentPostHistory() {
   const navigate = useNavigate();
-  const { id: blogId } = useParams();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -15,7 +14,7 @@ function CommentPostHistory() {
     const fetchBlogData = async () => {
       setLoading(true);
       try {
-        const response = await fetchWithAuth("get", `Comment/CommentHistory/${userId}/${blogId}`);
+        const response = await fetchWithAuth("get", `Comment/CommentHistory/${userId}`);
         setPosts(response.data);
       } catch (error) {
         setError(error.message);
@@ -25,7 +24,7 @@ function CommentPostHistory() {
     };
 
     fetchBlogData();
-  }, [userId, blogId]);
+  }, [userId]);
 
   const TableHeader = () => (
     <thead>

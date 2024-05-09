@@ -67,13 +67,13 @@ namespace backend.Controllers
 
             return Ok(deletedComment);
         }
-        [HttpGet("CommentHistory/{userId}/{blogId}")]
-        public async Task<ActionResult<List<CommentHistoryWithUserAndBlog>>> GetBlogHistoryWithUserAndBlogByUserId(int userId, int blogId)
+        [HttpGet("CommentHistory/{userId}")]
+        public async Task<IActionResult> GetCommentHistoryByUserId(int userId)
         {
             try
             {
-                var commentHistory = await _commentHistoryService.GetCommentHistoryWithUserAndBlogByUserId(userId, blogId);
-                return Ok(commentHistory);
+                var comments = await _commentHistoryService.GetCommentHistoryWithUserAndBlogByUserId(userId);
+                return Ok(comments);
             }
             catch (Exception ex)
             {
