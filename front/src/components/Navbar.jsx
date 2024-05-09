@@ -1,30 +1,33 @@
 import { Link, useNavigate, useNavigation, Outlet } from "react-router-dom";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import React, { useState, useEffect } from 'react';
-import { fetchWithAuth } from '../Auths/userAuth';
+import React, { useState, useEffect } from "react";
+import { fetchWithAuth } from "../Auths/userAuth";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileOpen, setProfileIsOpen] = useState(false);
 
+  const [isOpen1, setIsOpen1] = useState(false);
+  const [isProfileOpen1, setProfileIsOpen1] = useState(false);
+
   const [userData, setUserData] = useState(null);
 
-  const userId = Cookies.get('userId');
-  
+  const userId = Cookies.get("userId");
+
   useEffect(() => {
-      const fetchUserData = async () => {
-          try {
-              const userResponse = await fetchWithAuth('get', `Profile/${userId}`);
-              setUserData(userResponse.data);
-          } catch (error) {
-              console.error('Failed to fetch user data:', error);
-          }
-      };
-      
-      if (userId) {
-          fetchUserData();
+    const fetchUserData = async () => {
+      try {
+        const userResponse = await fetchWithAuth("get", `Profile/${userId}`);
+        setUserData(userResponse.data);
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
       }
+    };
+
+    if (userId) {
+      fetchUserData();
+    }
   }, [userId]);
   const toggleMenu = () => {
     setTimeout(() => {
@@ -53,6 +56,14 @@ const Navbar = () => {
     setProfileIsOpen(false);
   };
 
+  const toggleDropdown1 = () => {
+    setProfileIsOpen1(!isProfileOpen1);
+  };
+
+  const closeDropdown1 = () => {
+    setProfileIsOpen1(false);
+  };
+
   return (
     <nav className=" border-gray-300 sticky z-50 top-0 bg-white p-2 border-b">
       <div className="grid grid-cols-6 gap-4 justify-between w-full">
@@ -79,7 +90,6 @@ const Navbar = () => {
                           xmlns="http://www.w3.org/2000/svg"
                           width="1.5rem"
                           className="mr-1"
-                         
                           viewBox="0 0 16 16"
                         >
                           <path
@@ -90,11 +100,11 @@ const Navbar = () => {
                         <p className="text-sm">Create</p>
                       </a>
                     </button>
-                    <button className="ml-4">
+                    <button className="ml-4"  onClick={toggleDropdown1}>
+                   
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="1.5rem"
-                       
                         viewBox="0 0 24 24"
                       >
                         <g
@@ -108,7 +118,55 @@ const Navbar = () => {
                           <path d="M15.225 17.986a3.198 3.198 0 0 1-3.263 3.263A3.195 3.195 0 0 1 8.7 17.986" />
                         </g>
                       </svg>
+                    
+                      {isProfileOpen1 && (
+                      <div
+                        className="absolute bg-white shadow-md z-999 space-y-1 z-50  overflow-y-auto rounded-sm "
+                        style={{
+                          top: "130%",
+                          right: "40%",
+                          width: "150%",
+                          padding: "6% 6%",
+                        }}
+                        onClick={closeDropdown1}
+                      >
+                        <button className="w-fit text-start  py-2 px-4 hover:bg-gray-100 ">
+                          <a
+                            href="/history/posthistory"
+                            className="text-gray-800 pl-8 text-xs  flex  "
+                          >
+                            <div className="text-start">
+                              <div>
+                              <p className="text-[10px] text-start text-gray-500">
+                                user added new post
+                              </p>
+                              </div>
+                              
+                             <div>
+                             <p className="text-[10px] text-start text-gray-500">
+                                sumit upvotes your blog 
+                              </p>
+                             </div>
+                           
+                            <div>
+                            <p className="text-[10px] text-start text-gray-500">
+                                sumit comment on your blog
+                              </p>
+                            </div>
+                            
+                            
+
+                            </div>
+                          </a>
+
+                         
+                        </button>
+                        <hr className="m-2" />
+                    
+                      </div>
+                    )}
                     </button>
+                   
                   </div>
 
                   <button
@@ -128,7 +186,7 @@ const Navbar = () => {
                         top: "130%",
                         right: "0%",
                         width: "120%",
-                        padding: "6% 6%"
+                        padding: "6% 6%",
                       }}
                       onClick={closeDropdown}
                     >
@@ -138,12 +196,15 @@ const Navbar = () => {
                           className="text-gray-800 pl-8 text-xs  flex  "
                         >
                           <div>
-                          <p>View Profile</p>
-                         <p className="text-[10px] text-gray-500">{userData ? `${userData.firstName} ${userData.lastName}` : ''}</p> 
+                            <p>View Profile</p>
+                            <p className="text-[10px] text-gray-500">
+                              {userData
+                                ? `${userData.firstName} ${userData.lastName}`
+                                : ""}
+                            </p>
                           </div>
-                        
                         </a>
-                        
+
                         <div className="absolute top-4 pl-2 text-[1rem] left-2 z-10 pointer-events-none text-gray-600">
                           {/* <svg xmlns="http://www.w3.org/2000/svg" width="1.7em" height="1.7em" viewBox="0 0 20 20"><path fill="currentColor" d="M10 2a4 4 0 1 0 0 8a4 4 0 0 0 0-8M7 6a3 3 0 1 1 6 0a3 3 0 0 1-6 0m-1.991 5A2 2 0 0 0 3 13c0 1.691.833 2.966 2.135 3.797c1.05.669 2.398 1.049 3.87 1.165q.014-.153.052-.309l.17-.678c-1.413-.093-2.646-.442-3.554-1.022C4.623 15.283 4 14.31 4 13c0-.553.448-1 1.009-1h7.934l1-1zm5.97 4.377l4.83-4.83a1.87 1.87 0 1 1 2.645 2.646l-4.83 4.829a2.2 2.2 0 0 1-1.02.578l-1.498.374a.89.89 0 0 1-1.079-1.078l.375-1.498a2.2 2.2 0 0 1 .578-1.02"/></svg> */}
                           <img
@@ -152,7 +213,7 @@ const Navbar = () => {
                           />
                         </div>
                       </button>
-                      <hr className="m-2"/>
+                      <hr className="m-2" />
 
                       <button className="w-full text-start py-2 px-4 hover:bg-gray-100 ">
                         <a
@@ -218,7 +279,7 @@ const Navbar = () => {
                         </div>
                       </button>
 
-                      <hr className="m-2"/>
+                      <hr className="m-2" />
                       <button className="w-full text-start  py-2 px-4  hover:bg-gray-100 flex">
                         <a
                           href="#"
@@ -241,8 +302,6 @@ const Navbar = () => {
                           </svg>
                         </div>
                       </button>
-
-                  
                     </div>
                   )}
                 </div>

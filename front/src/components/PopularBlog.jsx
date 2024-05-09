@@ -47,11 +47,12 @@ const PopularBlog = () => {
       </div>
 
          {post.image ? (
-                <div className="mt-4">
+                <div className="mt-4 ">
                   <img
                     src={`${URL}${post.image}`}
                     alt="Blog Image"
                     title={post.title}
+                  
             
                   />
                 </div>
