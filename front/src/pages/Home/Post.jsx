@@ -94,11 +94,12 @@ const Post = () => {
     } catch (error) {}
   };
 
-  const handleDeleteComment = async (commentId) => {
+  const handleDeleteComment = async (commentId,postId) => {
     try {
-      await fetchWithAuth("delete", `Comment/${commentId}/${userId}`, {
+      await fetchWithAuth("delete", `Comment/${commentId}/${userId}/${postId}`, {
         headers: {
           "User-Id": userId,
+          "Blog-Id": postId,
         },
       });
       const updatedComments = { ...comments };
@@ -469,15 +470,13 @@ const Post = () => {
                           commentId={comment.id}
                         />
                       </div>
-                      {comment.userId === userId && (
                         <div>
                           <button
-                            onClick={() => handleDeleteComment(comment.id)}
+                            onClick={() => handleDeleteComment(comment.id,comment.blogId)}
                           >
                             Delete
                           </button>
                         </div>
-                      )}
                     </div>
                   ))}
                 </div>
