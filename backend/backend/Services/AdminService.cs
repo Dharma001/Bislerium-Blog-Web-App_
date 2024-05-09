@@ -21,13 +21,10 @@ namespace backend.Services
 
         public async Task<DashboardRequests> GetAllTimeCounts()
         {
-            // Count total posts, upvotes, downvotes, and comments
             int totalPosts = _context.Blogs.Count();
             int totalUpvotes = _context.BlogVotes.Count(bv => bv.IsUpvote);
             int totalDownvotes = _context.BlogVotes.Count(bv => !bv.IsUpvote);
             int totalComments = _context.Comments.Count();
-
-            // Construct DashboardRequests object
             var dashboardRequests = new DashboardRequests
             {
                 BlogCounts = totalPosts,
@@ -41,7 +38,6 @@ namespace backend.Services
 
         public async Task<List<Blog>> GetTopPopularPostsAllTime()
         {
-            // Retrieve top 10 most popular blog posts of all time based on popularity score
             var topPosts = _context.Blogs
                 .OrderByDescending(blog => (2 * blog.BlogVotes.Count(bv => bv.IsUpvote)) +
                                            (-1 * blog.BlogVotes.Count(bv => !bv.IsUpvote)) +
@@ -68,10 +64,11 @@ namespace backend.Services
         public async Task<List<User>> GetTopPopularBloggers()
         {
             var topBloggers = await _context.Users
-                .OrderByDescending(user => user.Blogs.Sum(blog =>
-                    (2 * blog.BlogVotes.Count(bv => bv.IsUpvote)) +
-                    (-1 * blog.BlogVotes.Count(bv => !bv.IsUpvote)) +
-                    (1 * blog.Comments.Count)))
+                .OrderByDescending(user =>
+                    user.Blogs.Sum(blog =>
+                        (2 * blog.BlogVotes.Count(bv => bv.IsUpvote)) +
+                        (-1 * blog.BlogVotes.Count(bv => !bv.IsUpvote)) +
+                        (1 * blog.Comments.Count)))
                 .Take(10)
                 .ToListAsync();
 
