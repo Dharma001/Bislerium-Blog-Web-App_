@@ -44,16 +44,17 @@ namespace backend.Services
         }
 
         public async Task SendResetPasswordEmailAsync(string email, string resetToken)
+
         {
             try
             {
-                using (SmtpClient smtp = new SmtpClient("smtp.mailgun.org", 587))
+                using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 465))
                 {
-                    smtp.Credentials = new NetworkCredential("demonplays466@gmail.com", "dfsdaaasdasdasdasd");
+                    smtp.Credentials = new NetworkCredential("fabricvr411@gmail.com", "dzpailqdkiuhouty");
                     smtp.EnableSsl = true;
 
                     MailMessage mail = new MailMessage();
-                    mail.From = new MailAddress("demonplays466@gmail.com");
+                    mail.From = new MailAddress("fabricvr411@gmail.com");
                     mail.To.Add(email);
                     mail.Subject = "Password Reset";
                     mail.Body = $"To reset your password, click on the following link: /reset-password/{resetToken}?email={email}";
