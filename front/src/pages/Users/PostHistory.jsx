@@ -49,7 +49,8 @@ function PostHistory() {
         />
       </td>
       <td className="py-4 px-6">{post.blogTitle}</td>
-      <td className="py-4 px-6">{post.blogContent}</td>
+      <td className="py-4 px-6">{post.blogContent.length >40 ? post.blogContent.slice(0, 40) + "...":post.blogContent}</td>
+   
       <td className="py-4 px-6">
         <div className="flex items-center">
           <div>
