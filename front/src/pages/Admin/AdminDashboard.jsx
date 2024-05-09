@@ -6,6 +6,9 @@ function AdminDashboard() {
   const [error, setError] = useState(null);
   const [dashboardData, setDashboardData] = useState(null);
   const [topPosts, setTopPosts] = useState(null);
+  const [year, setYear] = useState(new Date().getFullYear());
+  const [month, setMonth] = useState(new Date().getMonth() + 1); 
+  const [topPostsByMonth, setTopPostsByMonth] = useState(null);
   const URL = "https://localhost:7189/";
 
   useEffect(() => {
@@ -40,6 +43,29 @@ function AdminDashboard() {
     fetchTOPDashboardData();
   }, []);
 
+  const handleYearChange = (event) => {
+    setYear(parseInt(event.target.value));
+  };
+
+  const handleMonthChange = (event) => {
+    setMonth(parseInt(event.target.value));
+  };
+
+
+  useEffect(() => {
+    const fetchTopPostsByMonth = async () => {
+      setLoading(true);
+      try {
+        const response = await fetchApi("get", `Dashboard/top-popular-posts-by-month?year=${year}&month=${month}`);
+        setTopPostsByMonth(response.data);
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTopPostsByMonth();
+  }, [year, month]);
   return (
     <>
       <main className='main py-6 px-4 bg-white rounded-3xl overflow-y-auto h-[95vh]'>
@@ -95,7 +121,6 @@ function AdminDashboard() {
         {topPosts && (
           <section className='content-1 mt-6'>
             <div className='content-list gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
-              {/* Render topPosts data */}
               {topPosts.map((post, index) => (
                 <div key={index} className='flex justify-between bg-gray-100 px-6 items-center rounded-lg hover:scale-105 py-8'>
                   <div>
@@ -106,16 +131,46 @@ function AdminDashboard() {
           alt="Blog Image"
           title={post.title}
         />
-                    {/* Assuming there are other properties you want to display */}
                     <h1 className='font-bold text-4xl tracking-wider'>{post.upvotes}</h1>
                   </div>
-                  {/* Add other rendering logic */}
                 </div>
               ))}
             </div>
           </section>
         )}
 </div>
+<div>
+          <label htmlFor="year">Year:</label>
+          <input type="number" id="year" name="year" value={year} onChange={handleYearChange} />
+        </div>
+        <div>
+          <label htmlFor="month">Month:</label>
+          <input type="number" id="month" name="month" value={month} onChange={handleMonthChange} />
+        </div>
+
+        {loading && <p>Loading...</p>}
+        {error && <p>Error: {error}</p>}
+        {topPostsByMonth && (
+          <section className='content-1 mt-6'>
+            <div className='content-list gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
+              {topPostsByMonth.map((post, index) => (
+                <div key={index} className='flex justify-between bg-gray-100 px-6 items-center rounded-lg hover:scale-105 py-8'>
+                  <div>
+                    <p className='capitalize font-thin'>{post.title}</p>
+                    <img
+          className="h-[82px] w-[82px] rounded-lg object-cover"
+          src={`${URL}${post.image}`}
+          alt="Blog Image"
+          title={post.title}
+        />
+ 
+                    <h1 className='font-bold text-4xl tracking-wider'>{post.upvotes}</h1>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
     </>
   );
