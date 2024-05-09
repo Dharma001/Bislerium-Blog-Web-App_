@@ -277,7 +277,7 @@ function App() {
             }
           />
           <Route
-            path="CommentHistory/:id"
+            path="CommentHistory"
             element={
               <PrivateUserRoute
                 element={<CommentPostHistory />}
