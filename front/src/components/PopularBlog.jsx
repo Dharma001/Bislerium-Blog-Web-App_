@@ -24,7 +24,7 @@ const PopularBlog = () => {
 
   return (
     <>
-<div className="flex mt-4 sticky h-[60vh] top-10  flex-col">
+<div className="flex mt-4  flex-col">
   {posts.map((post, index) => (
     <div key={index} className="w-full  flex mb-6 border-b hover:scale-105  rounded-lg bg-gray-100 p-2 justify-between">
       <div className="">
@@ -33,11 +33,12 @@ const PopularBlog = () => {
           <p> {post.userLastName}</p>
         </div>
         <h2 className="text-md font-semibold text-black  tracking-wider mt-2 mb-1 ">
-          {post.title}
+          {post.title.length > 20 ? post.title.slice(0, 20) + "..." : post.title}
         </h2>
         <p className="text-gray-500 w-52 text-md tracking-wide">
-          {post.content}
-        </p>
+  {post.content.length > 47 ? post.content.slice(0, 47) + "..." : post.content}
+</p>
+
         
         <p className="text-gray-500 mt-2 w-full font-medium">
           {new Date(post.createdAt).toLocaleDateString()}
@@ -45,14 +46,17 @@ const PopularBlog = () => {
       
       </div>
 
-      <div>
-        <img
-          className="h-[82px] w-[82px] rounded-lg object-cover"
-          src={`${URL}${post.image}`}
-          alt="Blog Image"
-          title={post.title}
-        />
-      </div>
+         {post.image ? (
+                <div className="mt-4">
+                  <img
+                    src={`${URL}${post.image}`}
+                    alt="Blog Image"
+                    title={post.title}
+            
+                  />
+                </div>
+              ) : null}
+
     </div>
   ))}
 </div>

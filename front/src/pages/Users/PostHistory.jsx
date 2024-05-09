@@ -49,7 +49,8 @@ function PostHistory() {
         />
       </td>
       <td className="py-4 px-6">{post.blogTitle}</td>
-      <td className="py-4 px-6">{post.blogContent}</td>
+      <td className="py-4 px-6">{post.blogContent.length >40 ? post.blogContent.slice(0, 40) + "...":post.blogContent}</td>
+   
       <td className="py-4 px-6">
         <div className="flex items-center">
           <div>
@@ -59,16 +60,8 @@ function PostHistory() {
             <p className="text-gray-500">Owner</p>
           </div>
           <Link to={`/history/CommentHistory/${post.id}`}>
-                      <button className="bg-green-500 hover:bg-green-700 justify-center text-white px-3 py-2 rounded-sm transition duration-300 ease-in-out flex items-center">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="1em"
-                            height="1em"
-                            viewBox="0 0 1792 1408"
-                          >
-                            <path
-                              fill="currentColor"
-                              d="m888 1056l116-116l-152-152l-116 116v56h96v96zm440-720q-16-16-33 1L945 687q-17 17-1 33t33-1l350-350q17-17 1-33m80 594v190q0 119-84.5 203.5T1120 1408H288q-119 0-203.5-84.5T0 1120V288Q0 169 84.5 84.5T288 0h832q63 0 117 25q15 7 18 23q3 17-9 29l-49 49q-14 14-32 8q-23-6-45-6H288q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113V994q0-13 9-22l64-64q15-15 35-7t20 29m-96-738l288 288l-672 672H640V864zm444 132l-92 92l-288-288l92-92q28-28 68-28t68 28l152 152q28 28 28 68t-28 68"/></svg>
+                      <button className="bg-blue-500 hover:bg-blue-700 rounded-full justify-center text-white px-3 py-2 transition duration-300 ease-in-out flex items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 56 56"><path fill="currentColor" d="M28.01 46.456c16.556 0 27.99-13.38 27.99-17.56c0-4.201-11.454-17.56-27.99-17.56C11.68 11.335 0 24.694 0 28.895c0 4.18 11.659 17.56 28.01 17.56m0-3.238c-13.482 0-24.424-11.434-24.424-14.323c0-2.438 10.942-14.322 24.424-14.322c13.442 0 24.404 11.884 24.404 14.322c0 2.89-10.962 14.323-24.404 14.323m0-2.848c6.373 0 11.495-5.225 11.495-11.475c0-6.413-5.122-11.474-11.495-11.474c-6.413 0-11.556 5.06-11.515 11.474c.02 6.25 5.102 11.475 11.515 11.475m0-7.663c-2.13 0-3.852-1.722-3.852-3.812c0-2.11 1.721-3.81 3.852-3.81c2.11 0 3.832 1.7 3.832 3.81c0 2.09-1.721 3.812-3.832 3.812"/></svg>
                       </button>
             </Link>
         </div>
