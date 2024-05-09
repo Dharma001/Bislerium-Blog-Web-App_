@@ -65,7 +65,7 @@ function PostHistory() {
   );
 
   return (
-    <div className="container w-fit ml-[22%] px-4 ">
+    <div className="container w-[90%] ml-[22%] px-4 ">
       <h1 className="text-2xl font-bold  my-6">Post History</h1>
       {loading? (
         <p>Loading...</p>
