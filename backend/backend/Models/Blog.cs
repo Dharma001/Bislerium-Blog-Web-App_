@@ -25,4 +25,9 @@ public class Blog
         CreatedAt = DateTime.UtcNow;
         UpdatedAt = DateTime.UtcNow;
     }
+
+    internal static object GetAll()
+    {
+        throw new NotImplementedException();
+    }
 }
