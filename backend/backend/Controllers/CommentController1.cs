@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using backend.Models.Requests;
+using backend.Contract;
+using backend.Models;
 
 namespace backend.Controllers
 {
@@ -13,10 +15,12 @@ namespace backend.Controllers
     public class CommentController : ControllerBase
     {
         private readonly ICommentService _commentService;
+        private readonly ICommentHistoryService _commentHistoryService;
 
-        public CommentController(ICommentService commentService)
+        public CommentController(ICommentService commentService, ICommentHistoryService commentHistoryService)
         {
             _commentService = commentService;
+            _commentHistoryService = commentHistoryService;
         }
 
         [HttpPost("{userId}/{blogId}")]
@@ -63,6 +67,18 @@ namespace backend.Controllers
 
             return Ok(deletedComment);
         }
-
+        [HttpGet("CommentHistory/{userId}/{blogId}")]
+        public async Task<ActionResult<List<CommentHistoryWithUserAndBlog>>> GetBlogHistoryWithUserAndBlogByUserId(int userId, int blogId)
+        {
+            try
+            {
+                var commentHistory = await _commentHistoryService.GetCommentHistoryWithUserAndBlogByUserId(userId, blogId);
+                return Ok(commentHistory);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
     }
 }

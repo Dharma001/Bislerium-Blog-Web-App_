@@ -20,12 +20,12 @@ import UserProfile from "./pages/Users/Profile/UserProfile";
 import ProfileLayouts from "./pages/Users/Layouts/ProfileLayouts";
 import UserUpdateLayouts from "./pages/Users/Layouts/UserUpdateLayouts";
 import PostHistory from "./pages/Users/PostHistory";
-import CommentHistory from "./pages/Users/CommentHistory";
 import ChangePassword from "./pages/Users/ChangePassword";
 import DeleteAccount from "./pages/Users/DeleteAccount";
 import AllUsersBlogs from "./pages/Users/AllUsersBlogs";
 import CreatePostProfile from "./components/CreatePostProfile";
 import EditPostProfile from "./components/EditPostProfile";
+import CommentPostHistory from "./pages/Users/CommentPostHistory";
 
 function isAuthenticated() {
   const token = Cookies.get("token");
@@ -276,22 +276,22 @@ function App() {
               />
             }
           />
-        <Route
-            path="postHistory"
+          <Route
+            path="CommentHistory/:id"
             element={
               <PrivateUserRoute
-                element={<PostHistory />}
+                element={<CommentPostHistory />}
                 authenticated={isAuthenticated()}
                 isAuthUser={isAuthUser()}
                 redirectTo="/login"
               />
             }
           />
-                  <Route
-            path="commentHistory"
+        <Route
+            path="postHistory"
             element={
               <PrivateUserRoute
-                element={<CommentHistory />}
+                element={<PostHistory />}
                 authenticated={isAuthenticated()}
                 isAuthUser={isAuthUser()}
                 redirectTo="/login"

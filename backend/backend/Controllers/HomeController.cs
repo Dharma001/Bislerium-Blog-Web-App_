@@ -30,10 +30,17 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Blog>>> GetAllBlogs()
+        public async Task<IActionResult> GetAllBlogs(string? sortBy = null, string? order = null, string? searchQuery = null, int page = 1, int pageSize = 10)
         {
-            var blogs = await _blogService.GetAllBlogsAsync();
-            return Ok(blogs);
+            try
+            {
+                var blogs = await _blogService.GetAllBlogsAsync(sortBy, order, searchQuery, page, pageSize);
+                return Ok(blogs);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
         [HttpGet("{blogId}/upvotes")]
