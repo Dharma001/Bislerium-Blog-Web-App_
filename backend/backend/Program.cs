@@ -23,6 +23,7 @@ builder.Services.AddScoped<IPasswordResetService, PasswordResetService>();
 builder.Services.AddScoped<IBlogHistoryService, BlogHistoryService>();
 builder.Services.AddScoped<ICommentVoteService, CommentVoteService>();
 builder.Services.AddScoped<ICommentHistoryService, CommentHistoryService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
 
 builder.Services.AddControllers();
 builder.Services.AddAuthentication(cfg => {
