@@ -127,13 +127,16 @@ namespace backend.Services
                 .ToListAsync();
         }
 
-        public async Task<Blog> CreateBlogAsync(BlogRequest blogRequest, IFormFile imageFile)
+        public async Task<Blog> CreateBlogAsync(BlogRequest blogRequest, IFormFile? imageFile = null)
         {
             string fileName = null;
+            string imageForHistory = null;
+
             if (imageFile != null && !ValidateImageFile(imageFile))
             {
                 throw new ArgumentException("Invalid image file.");
             }
+
             if (imageFile != null)
             {
                 var uploadsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Public", "Blog");
@@ -147,20 +150,54 @@ namespace backend.Services
                 {
                     await imageFile.CopyToAsync(stream);
                 }
+
+                var uploadsHistoryFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Public", "BlogHistory");
+                var fileHistoryName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+                var fileHistoryPath = Path.Combine(uploadsHistoryFolderPath, fileHistoryName);
+
+                if (!Directory.Exists(uploadsHistoryFolderPath))
+                {
+                    Directory.CreateDirectory(uploadsHistoryFolderPath);
+                }
+
+                using (var stream = new FileStream(fileHistoryPath, FileMode.Create))
+                {
+                    await imageFile.CopyToAsync(stream);
+                }
+                imageForHistory = Path.Combine("Public", "BlogHistory", fileHistoryName);
             }
+
             var blog = new Blog
             {
                 Title = blogRequest.Title,
                 Content = blogRequest.Content,
                 UserId = blogRequest.UserId,
-                Image = Path.Combine("public", "Blog", fileName),
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                Image = fileName != null ? Path.Combine("public", "Blog", fileName) : null
             };
+
             _context.Blogs.Add(blog);
             await _context.SaveChangesAsync();
+
+            if (imageFile != null && imageForHistory != null)
+            {
+                var createHistoryEntry = new BlogHistory
+                {
+                    UserId = blogRequest.UserId,
+                    BlogTitle = blogRequest.Title,
+                    BlogHistoryImage = imageForHistory,
+                    BlogContent = blogRequest.Content,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
+                };
+                _context.BlogHistory.Add(createHistoryEntry);
+                await _context.SaveChangesAsync();
+            }
+
             return blog;
         }
-        public async Task UpdateBlogAsync(int id, BlogRequest blogRequest, IFormFile newImageFile)
+
+        public async Task UpdateBlogAsync(int id, BlogRequest blogRequest, IFormFile? newImageFile = null)
         {
             var blog = await _context.Blogs.FindAsync(id);
             if (blog == null)
@@ -187,7 +224,7 @@ namespace backend.Services
                 var fileName = Guid.NewGuid().ToString() + Path.GetExtension(newImageFile.FileName);
                 var filePath = Path.Combine(uploadsFolderPath, fileName);
 
-                // Create directory if it doesn't exist
+
                 if (!Directory.Exists(uploadsFolderPath))
                 {
                     Directory.CreateDirectory(uploadsFolderPath);
@@ -203,7 +240,6 @@ namespace backend.Services
                 var fileHistoryName = Guid.NewGuid().ToString() + Path.GetExtension(newImageFile.FileName);
                 var fileHistoryPath = Path.Combine(uploadsHistoryFolderPath, fileHistoryName);
 
-                // Create directory if it doesn't exist
                 if (!Directory.Exists(uploadsHistoryFolderPath))
                 {
                     Directory.CreateDirectory(uploadsHistoryFolderPath);

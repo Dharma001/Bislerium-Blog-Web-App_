@@ -40,14 +40,14 @@ namespace backend.Controllers
         }
 
         [HttpPost("user/api/[controller]")]
-        public async Task<ActionResult<Blog>> CreateBlog([FromForm] BlogRequest blogRequest, [FromForm] IFormFile imageFile)
+        public async Task<ActionResult<Blog>> CreateBlog([FromForm] BlogRequest blogRequest, [FromForm] IFormFile? imageFile = null)
         {
             var blog = await _blogService.CreateBlogAsync(blogRequest, imageFile);
             return CreatedAtAction(nameof(GetBlog), new { id = blog.Id }, blog);
         }
 
         [HttpPut("user/api/[controller]/{id}")]
-        public async Task<IActionResult> UpdateBlog(int id, [FromForm] BlogRequest blogRequest, [FromForm] IFormFile imageFile)
+        public async Task<IActionResult> UpdateBlog(int id, [FromForm] BlogRequest blogRequest, [FromForm] IFormFile? imageFile = null)
         {
             await _blogService.UpdateBlogAsync(id, blogRequest, imageFile);
             return NoContent();
