@@ -1,9 +1,10 @@
 ﻿using backend.Contract;
-using backend.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace backend.Controllers
-
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -16,34 +17,64 @@ namespace backend.Controllers
             _adminOverviewService = adminOverviewService;
         }
 
-        [HttpGet("all-time-count")]
-        public IActionResult GetAllTimeCount()
+        [HttpGet("counts")]
+        public async Task<IActionResult> GetOverallCounts()
         {
-            var count = _adminOverviewService.GetAllTimeCountOfPosts();
-            return Ok(count);
+            try
+            {
+                var counts = await _adminOverviewService.GetAllTimeCounts();
+                return Ok(counts);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(500, "An error occurred while retrieving overall counts.");
+            }
         }
 
-        [HttpGet("monthly-count/{month}")]
-        public IActionResult GetMonthlyCount(int month)
+        [HttpGet("top-popular-posts-all-time")]
+        public async Task<IActionResult> GetTopPopularPostsAllTime()
         {
-            var count = _adminOverviewService.GetMonthlyCountOfPosts(month);
-            return Ok(count);
+            try
+            {
+                var posts = await _adminOverviewService.GetTopPopularPostsAllTime();
+                return Ok(posts);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(500, "An error occurred while retrieving top popular posts.");
+            }
         }
 
-        [HttpGet("top-10-posts")]
-        public IActionResult GetTop10Posts()
+        [HttpGet("top-popular-posts-by-month")]
+        public async Task<IActionResult> GetTopPopularPostsByMonth(int year, int month)
         {
-            var topPosts = _adminOverviewService.GetTop10MostPopularPosts();
-            return Ok(topPosts);
+            try
+            {
+                var posts = await _adminOverviewService.GetTopPopularPostsByMonth(year, month);
+                return Ok(posts);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(500, "An error occurred while retrieving top popular posts by month.");
+            }
         }
 
-        [HttpGet("top-10-bloggers")]
-        public IActionResult GetTop10Bloggers()
+        [HttpGet("top-popular-bloggers")]
+        public async Task<IActionResult> GetTopPopularBloggers()
         {
-            var topBloggers = _adminOverviewService.GetTop10MostActiveBloggers();
-            return Ok(topBloggers);
+            try
+            {
+                var bloggers = await _adminOverviewService.GetTopPopularBloggers();
+                return Ok(bloggers);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(500, "An error occurred while retrieving top popular bloggers.");
+            }
         }
     }
-
 }
-

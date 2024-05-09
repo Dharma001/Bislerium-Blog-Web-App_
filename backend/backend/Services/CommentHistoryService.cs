@@ -17,10 +17,10 @@ namespace backend.Services
             _context = context;
         }
 
-        public async Task<List<CommentHistoryWithUserAndBlog>> GetCommentHistoryWithUserAndBlogByUserId(int userId, int blogId)
+        public async Task<List<CommentHistoryWithUserAndBlog>> GetCommentHistoryWithUserAndBlogByUserId(int userId)
         {
             return await _context.CommentHistory
-                .Where(history => history.UserId == userId && history.BlogId == blogId)
+                .Where(history => history.UserId == userId)
                 .Include(history => history.User)
                 .Include(history => history.Blog)
                 .Select(history => new CommentHistoryWithUserAndBlog
@@ -33,5 +33,6 @@ namespace backend.Services
                 })
                 .ToListAsync();
         }
+
     }
 }
