@@ -1,10 +1,12 @@
 import { fetchApi } from "../../Auths/apiWithoutAuth";
 import React, { useState, useEffect } from "react";
+import { useNavigate,Link, useParams } from "react-router-dom";
 import { useNavigate,Link } from "react-router-dom";
 import Cookies from "js-cookie";
 
-function PostHistory() {
+function PostIdHistory() {
   const navigate = useNavigate();
+  const { id: blogId } = useParams();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -99,4 +101,4 @@ function PostHistory() {
   );
 }
 
-export default PostHistory;
+export default PostIdHistory;
