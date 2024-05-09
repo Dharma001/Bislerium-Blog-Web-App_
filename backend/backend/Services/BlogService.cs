@@ -41,7 +41,48 @@ namespace backend.Services
                 })
                 .ToListAsync();
         }
-        public async Task<Blog> GetBlogByIdAsync(int id)
+        public async Task<IEnumerable<BlogWithUserRequest>> GetAllBlogsAsync(string sortBy, string order, string searchQuery, int page, int pageSize)
+        {
+            IQueryable<Blog> query = _context.Blogs
+                .Include(b => b.User)
+                .Include(b => b.BlogVotes)
+                .Include(b => b.Comments); 
+
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                query = query.Where(b => b.Title.Contains(searchQuery) || b.Content.Contains(searchQuery));
+            }
+
+            switch (sortBy)
+            {
+                case "popularity":
+                    query = order == "asc" ? query.OrderBy(b => b.BlogVotes.Count(v => v.IsUpvote)) : query.OrderByDescending(b => b.BlogVotes.Count(v => v.IsUpvote));
+                    break;
+                case "recency":
+                    query = order == "asc" ? query.OrderBy(b => b.CreatedAt) : query.OrderByDescending(b => b.CreatedAt);
+                    break;
+                default:
+                    query = query.OrderByDescending(b => b.CreatedAt);
+                    break;
+            }
+
+            query = query.Skip((page - 1) * pageSize).Take(pageSize);
+
+            return await query
+                .Select(b => new BlogWithUserRequest
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Content = b.Content,
+                    CreatedAt = b.CreatedAt,
+                    Image = b.Image,
+                    UserId = b.UserId,
+                    UserFirstName = b.User.FirstName,
+                    UserLastName = b.User.LastName
+                })
+                .ToListAsync();
+        }
+    public async Task<Blog> GetBlogByIdAsync(int id)
         {
             return await _context.Blogs.FindAsync(id);
         }

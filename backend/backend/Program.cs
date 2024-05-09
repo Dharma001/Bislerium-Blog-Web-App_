@@ -1,7 +1,6 @@
 using backend.appDbContext;
 using backend.Contract;
 using backend.Services;
-using backend.Contract;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +22,7 @@ builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IPasswordResetService, PasswordResetService>();
 builder.Services.AddScoped<IBlogHistoryService, BlogHistoryService>();
 builder.Services.AddScoped<ICommentVoteService, CommentVoteService>();
+builder.Services.AddScoped<ICommentHistoryService, CommentHistoryService>();
 
 builder.Services.AddControllers();
 builder.Services.AddAuthentication(cfg => {
