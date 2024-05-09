@@ -19,7 +19,7 @@ const Post = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const blogsPerPage = 10; // Adjust as needed
+  const blogsPerPage = 10; 
   const userId = Cookies.get("userId");
   const URL = "https://localhost:7189/";
 
@@ -146,20 +146,22 @@ const Post = () => {
 
   return (
     <div className="grid grid-cols-5  gap-4 ">
-         <div className="flex flex-col justify-end relative ml-20 overflow-hidden w-[100%]  col-span-3">
+         <div className="flex flex-col justify-end relative ml-20 overflow-hidden w-[85%]  col-span-3">
 
-         <div className=" rounded-xl absolute top-0  mt-2">
+         <div className=" rounded-xl px-4 relative top-0  mt-2">
+         <div className="flex  space-x-4">
               <input
           type="text"
           value={searchQuery} 
           onChange={handleSearch} 
           name="search"
           placeholder="Search Blogs"
-          className="h-[3rem] pl-12 text-[.8rem] 2xl:text-[.9rem] bg-gray-100 rounded-3xl w-full"
+          className="h-[3rem] pl-12 text-[.8rem]  2xl:text-[.9rem] bg-gray-100 rounded-3xl w-2/3"
           autoComplete="off"
           autoFocus
         />
-                <div className="absolute top-[.7rem] text-[1rem] left-2 z-10 pointer-events-none text-gray-700">
+       
+                <div className="absolute  top-[.7rem] text-[1rem] left-2 z-10 pointer-events-none text-gray-700">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="1.4rem"
@@ -176,19 +178,30 @@ const Post = () => {
               d="m32.682 31.267l8.98 8.98l-1.414 1.414l-8.98-8.98z"
             />
           </svg>
-      </div>
-
+          </div>
+          <div className="flex space-x-2 justify-center items-center">
+            <div className="border-2 rounded-sm px-1 py-1">
       <select value={sortBy} onChange={handleSortByChange}>
         <option value="">Sort By</option>
         <option value="popularity">Popularity</option>
         <option value="recency">Recency</option>
       </select>
-
+      </div>
+      <div className="border-2 rounded-sm px-1 py-1">
       <select value={order} onChange={handleOrderChange}>
         <option value="">Order</option>
         <option value="asc">Ascending</option>
         <option value="desc">Descending</option>
       </select>
+      </div>
+      </div>
+      </div>
+      
+
+     
+
+  
+     
 
       {posts.map((post) => (
        <div key={post.id} className="bg-white p-4 rounded-md shadow-md mt-4 mb-8">
@@ -229,7 +242,7 @@ const Post = () => {
            src={`${URL}${post.image}`}
            alt="Blog Image"
            title={post.title}
-           className="w-full h-full object-cover rounded-md"
+           className="w-full h-80 object-cover rounded-md"
          />
        </div>
        <div className="flex justify-start items-center mt-4 space-x-6">
@@ -395,9 +408,9 @@ const Post = () => {
       </div>
     </div>
     <div className="col-span-2 flex justify-center my-6">
-      <div className=" w-[62%] px-3 py-4 flex justify-center h-full bg-gray-50 rounded-lg">
+      <div className=" w-[62%]  px-3 py-4 flex justify-center h-full bg-gray-50 rounded-lg">
         <div className="">
-        <h1>most popular blogs</h1>
+        <h1 className="">most popular blogs</h1>
         <PopularBlog/>
         </div>
       </div>
