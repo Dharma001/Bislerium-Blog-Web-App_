@@ -27,13 +27,6 @@ namespace backend.Services
             int totalDownvotes = _context.BlogVotes.Count(bv => !bv.IsUpvote);
             int totalComments = _context.Comments.Count();
 
-            // Calculate blog popularity score using custom weightage
-            var blogPopularityScore = _context.Blogs
-                .Select(blog => (2 * blog.BlogVotes.Count(bv => bv.IsUpvote)) +
-                                (-1 * blog.BlogVotes.Count(bv => !bv.IsUpvote)) +
-                                (1 * blog.Comments.Count))
-                .Sum();
-
             // Construct DashboardRequests object
             var dashboardRequests = new DashboardRequests
             {
