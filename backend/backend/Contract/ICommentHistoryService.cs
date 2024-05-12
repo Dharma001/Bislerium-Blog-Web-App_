@@ -4,6 +4,6 @@ namespace backend.Contract
 {
     public interface ICommentHistoryService
     {
-        Task<List<CommentHistoryWithUserAndBlog>> GetCommentHistoryWithUserAndBlogByUserId(int userId, int blogId);
+        Task<List<CommentHistoryWithUserAndBlog>> GetCommentHistoryWithUserAndBlogByUserId(int userId);
     }
 }

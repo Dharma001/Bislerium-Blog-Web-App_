@@ -83,7 +83,7 @@ function EditPostProfile() {
   };
 
   return (
-    <div className=" bg-white rounded-3xl px-4 overflow-hidden h-[100dvh] mx-auto ">
+    <div className=" bg-white rounded-3xl px-4 overflow-hidden h-fit mx-auto ">
       <div className=" ">
         <div className='relative'>
           <h2 className="text-xl text-gray-600 font-semibold my-6 ml-8 mb-8 text-start">Edit Blog</h2>
@@ -124,7 +124,7 @@ function EditPostProfile() {
                 value={formData.content}
                 onChange={handleChange}
                 type="text"
-                className="block pl-8 pb-2 h-6rem pt-5 w-full text-sm text-gray-900 border rounded border-gray-300 appearance-none dark:focus:border-orange-500 focus:outline-none focus:ring-0 focus:border-orange-600 peer"
+                className="block pl-8 pb-2 h-28 pt-5 w-full text-sm text-gray-900 border rounded border-gray-300 appearance-none dark:focus:border-orange-500 focus:outline-none focus:ring-0 focus:border-orange-600 peer"
                 placeholder=""
               ></textarea>
               <div className="absolute  top-5 left-2 z-10 pointer-events-none text-gray-600">

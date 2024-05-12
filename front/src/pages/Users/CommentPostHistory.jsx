@@ -5,7 +5,6 @@ import Cookies from "js-cookie";
 
 function CommentPostHistory() {
   const navigate = useNavigate();
-  const { id: blogId } = useParams();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -15,7 +14,7 @@ function CommentPostHistory() {
     const fetchBlogData = async () => {
       setLoading(true);
       try {
-        const response = await fetchWithAuth("get", `Comment/CommentHistory/${userId}/${blogId}`);
+        const response = await fetchWithAuth("get", `Comment/CommentHistory/${userId}`);
         setPosts(response.data);
       } catch (error) {
         setError(error.message);
@@ -25,33 +24,35 @@ function CommentPostHistory() {
     };
 
     fetchBlogData();
-  }, [userId, blogId]);
+  }, [userId]);
 
   const TableHeader = () => (
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Content</th>
-        <th>Author</th>
+    <thead className="">
+      <tr className="">
+      <th className="py-4 px-6 bg-gray-100 font-bold">Author</th>
+        <th className="py-4 px-6 bg-gray-100 font-bold">Title</th>
+        <th className="py-4 px-6 bg-gray-100 font-bold">Comment</th>
+       
       </tr>
     </thead>
   );
 
   const TableRow = ({ post }) => (
     <tr>
-      <td>{post.blogTitle}</td>
-      <td>{post.commentContent}</td>
-      <td>
-        <div>
+        <td>
+        <div className="py-4 px-6">
           <p>{post.userFirstName} {post.userLastName}</p>
-          <p>Owner</p>
+          
         </div>
       </td>
+      <td className="py-4 px-6">{post.blogTitle.length >30 ? post.blogTitle.slice(0,40)+ "...":post.blogTitle}</td>
+      <td className="py-4 px-6">{post.commentContent.length >30 ? post.commentContent.slice(0,40)+ "...":post.commentContent}</td>
+    
     </tr>
   );
 
   return (
-    <div className="container w-fit ml-[22%] px-4 ">
+    <div className="container w-[90%] ml-[22%] px-4 ">
       <h1 className="text-2xl font-bold  my-6">Comment History</h1>
       {loading ? (
         <p>Loading...</p>

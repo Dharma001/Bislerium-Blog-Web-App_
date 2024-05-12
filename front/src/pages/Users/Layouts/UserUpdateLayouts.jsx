@@ -48,8 +48,8 @@ function UserUpdateLayouts() {
                             </a>
                         </li>
                         <li className="py-2   mr-2"> 
-                            <a href="#" className="text-gray-700 tracking-wider font-black  rounded-full hover:border-4 px-2 py-2 hover:bg-gray-200">
-                                Comments
+                            <a href="/history/CommentHistory" className="text-gray-700 tracking-wider font-black  rounded-full hover:border-4 px-2 py-2 hover:bg-gray-200">
+                                CommentHistory
                             </a>
                         </li>
                         <li className="py-2  mr-2"> 

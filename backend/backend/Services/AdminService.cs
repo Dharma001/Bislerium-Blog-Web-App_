@@ -1,99 +1,78 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using backend.appDbContext;
 using backend.Contract;
 using backend.Models;
+using backend.Models.Requests;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Services
 {
     public class AdminService : IAdminService
     {
-        private readonly applicationContext _dbContext;
+        private readonly applicationContext _context;
 
         public AdminService(applicationContext dbContext)
         {
-            _dbContext = dbContext;
+            _context = dbContext;
         }
 
-        public int GetAllTimeCountOfPosts()
+        public async Task<DashboardRequests> GetAllTimeCounts()
         {
-            return _dbContext.Blogs.Count();
+            int totalPosts = _context.Blogs.Count();
+            int totalUpvotes = _context.BlogVotes.Count(bv => bv.IsUpvote);
+            int totalDownvotes = _context.BlogVotes.Count(bv => !bv.IsUpvote);
+            int totalComments = _context.Comments.Count();
+            var dashboardRequests = new DashboardRequests
+            {
+                BlogCounts = totalPosts,
+                BlogUpVoteCounts = totalUpvotes,
+                BlogDownVoteCounts = totalDownvotes,
+                CommentCounts = totalComments,
+            };
+
+            return dashboardRequests;
         }
 
-        public int GetMonthlyCountOfPosts(int month)
+        public async Task<List<Blog>> GetTopPopularPostsAllTime()
         {
-            // Assuming the month is provided in the format MM (e.g., 01 for January)
-            return _dbContext.Blogs
-                .Where(blog => blog.CreatedAt.Month == month)
-                .Count();
-        }
-
-       
-
-        public List<User> GetTop10MostActiveBloggers()
-        {
-            return _dbContext.Users
-                .OrderByDescending(user => user.Blogs.Count)
+            var topPosts = _context.Blogs
+                .OrderByDescending(blog => (2 * blog.BlogVotes.Count(bv => bv.IsUpvote)) +
+                                           (-1 * blog.BlogVotes.Count(bv => !bv.IsUpvote)) +
+                                           (1 * blog.Comments.Count))
                 .Take(10)
                 .ToList();
+
+            return topPosts;
         }
 
-        private int CalculatePopularity(Blog blog, ICollection<BlogVote> blogVotes, ICollection<Comment> comments)
+        public async Task<List<Blog>> GetTopPopularPostsByMonth(int year, int month)
         {
-            int upvoteWeightage = 2;
-            int downvoteWeightage = -1;
-            int commentWeightage = 1;
+            var topPosts = _context.Blogs
+                .Where(blog => blog.CreatedAt.Year == year && blog.CreatedAt.Month == month)
+                .OrderByDescending(blog => (2 * blog.BlogVotes.Count(bv => bv.IsUpvote)) +
+                                           (-1 * blog.BlogVotes.Count(bv => !bv.IsUpvote)) +
+                                           (1 * blog.Comments.Count))
+                .Take(10)
+                .ToList();
 
-            int totalUpvotes = blogVotes.Count(bv => bv.BlogId == blog.Id && bv.IsUpvote);
-            int totalDownvotes = blogVotes.Count(bv => bv.BlogId == blog.Id && !bv.IsUpvote);
-            int totalComments = comments.Count(c => c.BlogId == blog.Id);
-
-            return upvoteWeightage * totalUpvotes + downvoteWeightage * totalDownvotes + commentWeightage * totalComments;
+            return topPosts;
         }
 
-
-        public List<Blog> GetTop10MostPopularPosts()
+        public async Task<List<User>> GetTopPopularBloggers()
         {
-            // Assuming _dbContext is correctly initialized and has a Blogs property
-            if (_dbContext == null)
-            {
-                throw new InvalidOperationException("Database context is not initialized.");
-            }
+            var topBloggers = await _context.Users
+                .OrderByDescending(user =>
+                    user.Blogs.Sum(blog =>
+                        (2 * blog.BlogVotes.Count(bv => bv.IsUpvote)) +
+                        (-1 * blog.BlogVotes.Count(bv => !bv.IsUpvote)) +
+                        (1 * blog.Comments.Count)))
+                .Take(10)
+                .ToListAsync();
 
-            // Fetch blogs from the database context
-            var blogs = _dbContext.Blogs.ToList();
-
-            // Assuming BlogVote and Comment entities are correctly related to Blogs
-            // Fetch blogVotes and comments from the database context
-            var blogVotes = _dbContext.BlogVotes.ToList();
-            var comments = _dbContext.Comments.ToList();
-
-            // Calculate popularity for each blog
-            var blogsWithPopularity = blogs.Select(blog => new
-            {
-                Blog = blog,
-                Popularity = CalculatePopularity(blog, blogVotes, comments)
-            }).ToList();
-
-            // Order by popularity and take the top 10
-            var top10Blogs = blogsWithPopularity.OrderByDescending(blog => blog.Popularity)
-                                                .Select(blog => blog.Blog)
-                                                .Take(10)
-                                                .ToList();
-
-            return top10Blogs;
+            return topBloggers;
         }
-
-        public int GetAllTimeCumulativeCount()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int GetMonthlyCumulativeCount(int month)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }
