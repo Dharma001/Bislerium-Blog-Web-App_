@@ -48,16 +48,17 @@ namespace backend.Services
         {
             try
             {
-                using (SmtpClient smtp = new SmtpClient("sandbox.smtp.mailtrap.io", 465))
+                using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                 {
-                    smtp.Credentials = new NetworkCredential("761b703bb705be", "5c3e59840d2512");
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new NetworkCredential("fabricvr411@gmail.com", "oumwtosxxjlvxmgt");
                     smtp.EnableSsl = true;
-
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                     MailMessage mail = new MailMessage();
                     mail.From = new MailAddress("fabricvr411@gmail.com");
                     mail.To.Add(email);
                     mail.Subject = "Password Reset";
-                    mail.Body = $"To reset your password, click on the following link: /reset-password/{resetToken}?email={email}";
+                    mail.Body = $"To reset your password, click on the following link: http://localhost:5173/forgotPassword";
 
                     await smtp.SendMailAsync(mail);
                 }

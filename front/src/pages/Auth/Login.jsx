@@ -87,13 +87,13 @@ function Login() {
                 autoFocus="on"
               />
               <label htmlFor="email" className="absolute bg-transparent text-sm  duration-300 transform -translate-y-4 scale-75 top-2  origin-[0] bg-white px-2 mx-10 peer-focus:px-2 peer-focus:text-orange-600 peer-focus:dark:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4">Email</label>
-            
+
               <div className="absolute inset-y-0 pl-2 ml-2 flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="2rem" viewBox="0 0 24 24">
                   <path fill="currentColor" d="m15.489 21.27l-3.558-3.558l.708-.708l2.85 2.85l5.688-5.688l.708.707zM12 11l7.692-5H4.308zm0 1.116L4 6.885v10.5q0 .269.173.442t.443.173H9.4l1 1H3V5h18v6.542l-1 1V6.885zm0 0" />
                 </svg>
               </div>
-              </div>
+            </div>
             {errors.email && (
               <p className="mt-1 text-xs text-red-500">{errors.email}</p>
             )}
@@ -153,7 +153,7 @@ function Login() {
           </div>
           <div className="flex text-center mt-1">
             <span className="text-sm text-gray-500 p-1">
-              <a href="/forgot-password" className="px-1 text-sm  hover:text-blue-500 font-bold">Forgot Password?</a></span>
+              <a href="/forgotPassword" className="px-1 text-sm  hover:text-blue-500 font-bold">Forgot Password?</a></span>
           </div>
           <button type="submit" className="mt-4 w-full px-5 py-3 text-white bg-orange-400 rounded hover:bg-orange-600 border-gray-500">Login</button>
           <div className="flex items-center justify-center mt-2">

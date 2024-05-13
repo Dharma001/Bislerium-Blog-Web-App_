@@ -21,6 +21,7 @@ import ProfileLayouts from "./pages/Users/Layouts/ProfileLayouts";
 import UserUpdateLayouts from "./pages/Users/Layouts/UserUpdateLayouts";
 import PostHistory from "./pages/Users/PostHistory";
 import ChangePassword from "./pages/Users/ChangePassword";
+import ForgetPassword from "./pages/Auth/ForgotPassword";
 import DeleteAccount from "./pages/Users/DeleteAccount";
 import AllUsersBlogs from "./pages/Users/AllUsersBlogs";
 import CreatePostProfile from "./components/CreatePostProfile";
@@ -65,7 +66,9 @@ function App() {
     <>
       {location.pathname !== "/login" && location.pathname !== "/register"}
       <Routes>
+
         <Route path="/" element={<HomePageLayout />}>
+          <Route path="/forgotPassword" element={<ForgetPassword />} />
           <Route path="/" element={<Post />} />
           <Route
             path="/login"
@@ -87,7 +90,9 @@ function App() {
               />
             }
           />
+
         </Route>
+
         <Route
           path="/admin"
           element={
@@ -99,6 +104,7 @@ function App() {
             />
           }
         >
+
           <Route
             path="dashboard"
             element={
@@ -207,7 +213,7 @@ function App() {
               />
             }
           />
-                                         <Route
+          <Route
             path="EditComment/:id/:id"
             element={
               <PrivateUserRoute
@@ -218,100 +224,102 @@ function App() {
               />
             }
           />
-        <Route path="/profile" element={<ProfileLayouts />}>
-        <Route
-            path="userProfile"
-            element={
-              <PrivateUserRoute
-                element={<UserProfile />}
-                authenticated={isAuthenticated()}
-                isAuthUser={isAuthUser()}
-                redirectTo="/login"
-              />
-            }
-          />
-                  <Route
-            path="deleteAccount"
-            element={
-              <PrivateUserRoute
-                element={<DeleteAccount />}
-                authenticated={isAuthenticated()}
-                isAuthUser={isAuthUser()}
-                redirectTo="/login"
-              />
-            }
-          />
-        <Route
-            path="changePassword"
-            element={
-              <PrivateUserRoute
-                element={<ChangePassword />}
-                authenticated={isAuthenticated()}
-                isAuthUser={isAuthUser()}
-                redirectTo="/login"
-              />
-            }
-          />
-        </Route>
-        
-        <Route path="/history" element={<UserUpdateLayouts />}>
-        <Route
-            path="allUserBlogs"
-            element={
-              <PrivateUserRoute
-                element={<AllUsersBlogs />}
-                authenticated={isAuthenticated()}
-                isAuthUser={isAuthUser()}
-                redirectTo="/login"
-              />
-            }
-          />
-           <Route
-            path="CreateBlogProfile"
-            element={
-              <PrivateUserRoute
-                element={<CreatePostProfile />}
-                authenticated={isAuthenticated()}
-                isAuthUser={isAuthUser()}
-                redirectTo="/login"
-              />
-            }
-          />
-                     <Route
-            path="EditBlogProfile/:id"
-            element={
-              <PrivateUserRoute
-                element={<EditPostProfile />}
-                authenticated={isAuthenticated()}
-                isAuthUser={isAuthUser()}
-                redirectTo="/login"
-              />
-            }
-          />
+          <Route path="/profile" element={<ProfileLayouts />}>
+            <Route
+              path="userProfile"
+              element={
+                <PrivateUserRoute
+                  element={<UserProfile />}
+                  authenticated={isAuthenticated()}
+                  isAuthUser={isAuthUser()}
+                  redirectTo="/login"
+                />
+              }
+            />
+            <Route
+              path="deleteAccount"
+              element={
+                <PrivateUserRoute
+                  element={<DeleteAccount />}
+                  authenticated={isAuthenticated()}
+                  isAuthUser={isAuthUser()}
+                  redirectTo="/login"
+                />
+              }
+            />
+            <Route
+              path="changePassword"
+              element={
+                <PrivateUserRoute
+                  element={<ChangePassword />}
+                  authenticated={isAuthenticated()}
+                  isAuthUser={isAuthUser()}
+                  redirectTo="/login"
+                />
+              }
+            />
 
-          <Route
-            path="CommentHistory"
-            element={
-              <PrivateUserRoute
-                element={<CommentPostHistory />}
-                authenticated={isAuthenticated()}
-                isAuthUser={isAuthUser()}
-                redirectTo="/login"
-              />
-            }
-          />
-        <Route
-            path="postHistory"
-            element={
-              <PrivateUserRoute
-                element={<PostHistory />}
-                authenticated={isAuthenticated()}
-                isAuthUser={isAuthUser()}
-                redirectTo="/login"
-              />
-            }
-          />
-        </Route>
+
+          </Route>
+
+          <Route path="/history" element={<UserUpdateLayouts />}>
+            <Route
+              path="allUserBlogs"
+              element={
+                <PrivateUserRoute
+                  element={<AllUsersBlogs />}
+                  authenticated={isAuthenticated()}
+                  isAuthUser={isAuthUser()}
+                  redirectTo="/login"
+                />
+              }
+            />
+            <Route
+              path="CreateBlogProfile"
+              element={
+                <PrivateUserRoute
+                  element={<CreatePostProfile />}
+                  authenticated={isAuthenticated()}
+                  isAuthUser={isAuthUser()}
+                  redirectTo="/login"
+                />
+              }
+            />
+            <Route
+              path="EditBlogProfile/:id"
+              element={
+                <PrivateUserRoute
+                  element={<EditPostProfile />}
+                  authenticated={isAuthenticated()}
+                  isAuthUser={isAuthUser()}
+                  redirectTo="/login"
+                />
+              }
+            />
+
+            <Route
+              path="CommentHistory"
+              element={
+                <PrivateUserRoute
+                  element={<CommentPostHistory />}
+                  authenticated={isAuthenticated()}
+                  isAuthUser={isAuthUser()}
+                  redirectTo="/login"
+                />
+              }
+            />
+            <Route
+              path="postHistory"
+              element={
+                <PrivateUserRoute
+                  element={<PostHistory />}
+                  authenticated={isAuthenticated()}
+                  isAuthUser={isAuthUser()}
+                  redirectTo="/login"
+                />
+              }
+            />
+          </Route>
         </Route>
       </Routes>
 
