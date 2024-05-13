@@ -59,5 +59,20 @@ namespace backend.Services
 
             return null;
         }
+
+        public async Task<bool> ChangeUserPassword(string email, string newPassword)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+            if (user != null)
+            {
+                user.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+
+                await _context.SaveChangesAsync();
+                return true; 
+            }
+
+            return false;
+        }
     }
 }
