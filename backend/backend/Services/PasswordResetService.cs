@@ -48,9 +48,9 @@ namespace backend.Services
         {
             try
             {
-                using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 465))
+                using (SmtpClient smtp = new SmtpClient("sandbox.smtp.mailtrap.io", 465))
                 {
-                    smtp.Credentials = new NetworkCredential("fabricvr411@gmail.com", "dzpailqdkiuhouty");
+                    smtp.Credentials = new NetworkCredential("761b703bb705be", "5c3e59840d2512");
                     smtp.EnableSsl = true;
 
                     MailMessage mail = new MailMessage();
