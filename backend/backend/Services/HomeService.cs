@@ -60,19 +60,20 @@ namespace backend.Services
             return null;
         }
 
-        public async Task<bool> ChangeUserPassword(string email, string newPassword)
+        public async Task<bool> ChangeUserPassword(ChangePasswordModel model)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
 
             if (user != null)
             {
-                user.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+                user.Password = BCrypt.Net.BCrypt.HashPassword(model.NewPassword);
 
                 await _context.SaveChangesAsync();
-                return true; 
+                return true;
             }
 
             return false;
         }
+
     }
 }

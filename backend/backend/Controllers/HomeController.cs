@@ -30,9 +30,9 @@ namespace backend.Controllers
         }
 
         [HttpPost("ChangeUserPassword")]
-        public async Task<IActionResult> ChangeUserPassword([FromForm] string email, [FromForm] string newPassword)
+        public async Task<IActionResult> ChangeUserPassword([FromBody] ChangePasswordModel model)
         {
-            var result = await _homeService.ChangeUserPassword(email, newPassword);
+            var result = await _homeService.ChangeUserPassword(model);
             if (result)
             {
                 return Ok("Password changed successfully.");
