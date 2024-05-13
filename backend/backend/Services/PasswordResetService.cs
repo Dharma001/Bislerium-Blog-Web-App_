@@ -4,16 +4,23 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using backend.appDbContext;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace backend.Services
 {
     public class PasswordResetService : IPasswordResetService
     {
         private readonly Dictionary<string, string> _passwordResetTokens;
+        private readonly applicationContext _context;
 
-        public PasswordResetService()
+
+        public PasswordResetService(applicationContext context)
         {
             _passwordResetTokens = new Dictionary<string, string>();
+            _context = context;
+
         }
 
         public async Task<string> GeneratePasswordResetTokenAsync(string email)
@@ -44,23 +51,32 @@ namespace backend.Services
         }
 
         public async Task SendResetPasswordEmailAsync(string email, string resetToken)
-
         {
             try
             {
-                using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
-                {
-                    smtp.UseDefaultCredentials = false;
-                    smtp.Credentials = new NetworkCredential("fabricvr411@gmail.com", "oumwtosxxjlvxmgt");
-                    smtp.EnableSsl = true;
-                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    MailMessage mail = new MailMessage();
-                    mail.From = new MailAddress("fabricvr411@gmail.com");
-                    mail.To.Add(email);
-                    mail.Subject = "Password Reset";
-                    mail.Body = $"To reset your password, click on the following link: http://localhost:5173/forgotPassword";
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
 
-                    await smtp.SendMailAsync(mail);
+                if (user != null)
+                {
+                    using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                    {
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = new NetworkCredential("fabricvr411@gmail.com", "oumwtosxxjlvxmgt");
+                        smtp.EnableSsl = true;
+                        smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        MailMessage mail = new MailMessage();
+                        mail.From = new MailAddress("fabricvr411@gmail.com");
+                        mail.To.Add(email);
+                        mail.Subject = "Password Reset";
+                        mail.Body = $"To reset your password, click on the following link: http://localhost:5173/forgotPassword";
+
+                        await smtp.SendMailAsync(mail);
+                    }
+                }
+                else
+                {
+                    // User with the email address doesn't exist, handles this scenario
+                    Console.WriteLine($"User with email '{email}' does not exist.");
                 }
             }
             catch (Exception ex)
