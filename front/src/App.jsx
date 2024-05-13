@@ -28,6 +28,7 @@ import CreatePostProfile from "./components/CreatePostProfile";
 import EditPostProfile from "./components/EditPostProfile";
 import CommentPostHistory from "./pages/Users/CommentPostHistory";
 import EditComment from "./pages/EditComment";
+import EmailPassword from "./pages/Auth/EmailPassword";
 
 function isAuthenticated() {
   const token = Cookies.get("token");
@@ -69,6 +70,7 @@ function App() {
 
         <Route path="/" element={<HomePageLayout />}>
           <Route path="/forgotPassword" element={<ForgetPassword />} />
+          <Route path="/sendEmail" element={<EmailPassword />} />
           <Route path="/" element={<Post />} />
           <Route
             path="/login"
