@@ -10,6 +10,7 @@ namespace backend.Contract
     {
         Task<IEnumerable<Blog>> GetAllBlogsAsync();
         Task<User> GetUserById(int id);
+        Task<bool> ChangeUserPassword(string email, string newPassword);
         Task<User> UpdateUserProfile(int id, ProfileUserRequest userRequest);
     }
 }

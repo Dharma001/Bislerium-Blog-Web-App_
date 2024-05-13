@@ -29,6 +29,20 @@ namespace backend.Controllers
 
         }
 
+        [HttpPost("ChangeUserPassword")]
+        public async Task<IActionResult> ChangeUserPassword([FromForm] string email, [FromForm] string newPassword)
+        {
+            var result = await _homeService.ChangeUserPassword(email, newPassword);
+            if (result)
+            {
+                return Ok("Password changed successfully.");
+            }
+            else
+            {
+                return NotFound("User not found.");
+            }
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAllBlogs(string? sortBy = null, string? order = null, string? searchQuery = null, int page = 1, int pageSize = 10)
         {

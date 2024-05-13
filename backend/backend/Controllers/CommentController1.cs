@@ -10,7 +10,7 @@ using backend.Models;
 
 namespace backend.Controllers
 {
-    [Route("user/api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CommentController : ControllerBase
     {
@@ -76,6 +76,27 @@ namespace backend.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+        [HttpGet("{commentId}")]
+        public async Task<IActionResult> GetComment(int commentId, int userId, int blogId)
+        {
+            try
+            {
+                var comment = await _commentService.GetComment(commentId, userId, blogId);
+
+                if (comment == null)
+                {
+                    return NotFound(); // Or return an appropriate error response
+                }
+
+                return Ok(comment);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it appropriately
+                // Example: logger.LogError(ex, "Error occurred while getting comment.");
+                return StatusCode(500, "An error occurred while processing your request.");
             }
         }
     }
