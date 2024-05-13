@@ -26,6 +26,7 @@ import AllUsersBlogs from "./pages/Users/AllUsersBlogs";
 import CreatePostProfile from "./components/CreatePostProfile";
 import EditPostProfile from "./components/EditPostProfile";
 import CommentPostHistory from "./pages/Users/CommentPostHistory";
+import EditComment from "./pages/EditComment";
 
 function isAuthenticated() {
   const token = Cookies.get("token");
@@ -206,6 +207,17 @@ function App() {
               />
             }
           />
+                                         <Route
+            path="EditComment/:id/:id"
+            element={
+              <PrivateUserRoute
+                element={<EditComment />}
+                authenticated={isAuthenticated()}
+                isAuthUser={isAuthUser()}
+                redirectTo="/login"
+              />
+            }
+          />
         <Route path="/profile" element={<ProfileLayouts />}>
         <Route
             path="userProfile"
@@ -276,6 +288,7 @@ function App() {
               />
             }
           />
+
           <Route
             path="CommentHistory"
             element={

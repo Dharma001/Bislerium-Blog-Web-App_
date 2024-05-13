@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { fetchWithAuth } from "../../Auths/userAuth";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 function AllUsersBlogs() {
   const [blogs, setBlogs] = useState([]);
@@ -44,9 +45,11 @@ function AllUsersBlogs() {
       await fetchWithAuth("delete", `Blog/${blogId}`);
       setBlogs(blogs.filter((blog) => blog.id !== blogId));
       setFilteredBlogs(filteredBlogs.filter((blog) => blog.id !== blogId));
+      toast.success("deleted successfully")
       toggleModal();
     } catch (error) {
-      setError(error.message);
+      toast.warning("Cascad delete")
+      toggleModal();
     }
   };
 
