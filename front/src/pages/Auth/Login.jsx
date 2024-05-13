@@ -153,7 +153,7 @@ function Login() {
           </div>
           <div className="flex text-center mt-1">
             <span className="text-sm text-gray-500 p-1">
-              <a href="/forgotPassword" className="px-1 text-sm  hover:text-blue-500 font-bold">Forgot Password?</a></span>
+              <a href="/sendEmail" className="px-1 text-sm  hover:text-blue-500 font-bold">Forgot Password?</a></span>
           </div>
           <button type="submit" className="mt-4 w-full px-5 py-3 text-white bg-orange-400 rounded hover:bg-orange-600 border-gray-500">Login</button>
           <div className="flex items-center justify-center mt-2">
