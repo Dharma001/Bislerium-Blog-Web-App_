@@ -27,7 +27,7 @@ namespace backend.Services
                     existingVote.IsUpvote = true;
                     existingVote.UpdatedAt = DateTime.UtcNow;
                 }
-            }   
+            }
             else
             {
                 var newVote = new CommentVote
