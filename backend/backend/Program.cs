@@ -8,6 +8,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<applicationContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
@@ -24,7 +25,7 @@ builder.Services.AddScoped<IBlogHistoryService, BlogHistoryService>();
 builder.Services.AddScoped<ICommentVoteService, CommentVoteService>();
 builder.Services.AddScoped<ICommentHistoryService, CommentHistoryService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
-
+builder.Services.AddSignalR();
 builder.Services.AddControllers();
 builder.Services.AddAuthentication(cfg => {
     cfg.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

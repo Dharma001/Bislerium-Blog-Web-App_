@@ -31,7 +31,6 @@ namespace backend.Controllers
         }
 
         [HttpPatch("{commentId}/{userId}/{blogId}")]
-        [Authorize]
         public async Task<IActionResult> PatchComment(int commentId, int userId, int blogId, [FromBody] CommentRequest commentRequest)
         {
             if (commentRequest == null)
@@ -56,7 +55,6 @@ namespace backend.Controllers
 
 
         [HttpDelete("{commentId}/{userId}/{blogId}")]
-        [Authorize]
         public async Task<IActionResult> DeleteComment(int commentId, int userId, int blogId)
         {
             var deletedComment = await _commentService.DeleteComment(commentId, userId, blogId);
