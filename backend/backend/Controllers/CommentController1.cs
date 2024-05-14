@@ -10,7 +10,7 @@ using backend.Models;
 
 namespace backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("user/api/[controller]")]
     [ApiController]
     public class CommentController : ControllerBase
     {
